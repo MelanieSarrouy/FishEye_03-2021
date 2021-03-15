@@ -1,9 +1,9 @@
 html {
-  font-size: $font-size-default;
   body {
     font-family: $font-family-texte;
     max-width: 1440px;
     margin: auto;
+    padding: 2.5rem 7vw;
     @import "../layout/header";
 
     @import "../layout/main";

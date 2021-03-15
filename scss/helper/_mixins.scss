@@ -1,13 +1,13 @@
 /* media queries */ 
 
 @mixin respond-to($media) {
-  @if $media == medium-screen {
-    @media all and (min-width: $medium-screen) {
+  @if $media == small-screen {
+    @media all and (max-width: $small-screen) {
       @content;
     }
   }
-  @if $media == large-screen {
-    @media all and (min-width: $large-screen) {
+  @if $media == medium-screen {
+    @media all and (max-width: $large-screen) {
       @content;
     }
   }

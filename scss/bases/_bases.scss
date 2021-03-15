@@ -1,6 +1,7 @@
 /* Styles principaux */
 body {
   font-family: $font-family-texte;
+  font-size: $font-size-default;
   color: black;
   margin: auto;
 }
@@ -14,24 +15,17 @@ a {
   color: black;
 }
 h1 {
-  font-weight: bold;
   font-size: 1.6rem;
-  @include respond-to(medium-screen) {
-    font-size: 1.8rem;
-  }
+  color: $color-primary;
+  font-weight: 500;
 }
 h2 {
-  font-weight: bold;
+  font-weight: 500;
+  color: $color-secondary;
   font-size: 1.4rem;
-  @include respond-to(medium-screen) {
-    font-size: 1.6rem;
-  }
 }
 h3 {
   font-size: 1.1rem;
-  @include respond-to(medium-screen) {
-    font-size: 1.3rem;
-  }
 }
 .bold {
   font-weight: bold;
