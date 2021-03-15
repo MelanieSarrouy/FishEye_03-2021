@@ -1,0 +1,38 @@
+/* Styles principaux */
+body {
+  font-family: $font-family-texte;
+  color: black;
+  margin: auto;
+}
+img {
+  width: 100%;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+h1 {
+  font-weight: bold;
+  font-size: 1.6rem;
+  @include respond-to(medium-screen) {
+    font-size: 1.8rem;
+  }
+}
+h2 {
+  font-weight: bold;
+  font-size: 1.4rem;
+  @include respond-to(medium-screen) {
+    font-size: 1.6rem;
+  }
+}
+h3 {
+  font-size: 1.1rem;
+  @include respond-to(medium-screen) {
+    font-size: 1.3rem;
+  }
+}
+.bold {
+  font-weight: bold;
+}
