@@ -18,35 +18,42 @@
 
   <body>
 
-    <header class="header">
-      <a href="index.html" class="header__link" aria-label="Fishey Home page">
-        <img class="header__img" src="./images/logoFisheye.svg" alt="logo Fisheye" />
-      </a>
-      <nav class="nav" aria-label="catégories de photographes">
-        <ul class="nav__liste">
-          <li class="nav__liste__item">#Portrait</li>
-          <li class="nav__liste__item">#Art</li>
-          <li class="nav__liste__item">#Fashion</li>
-          <li class="nav__liste__item">#Architecture</li>
-          <li class="nav__liste__item">#Travel</li>
-          <li class="nav__liste__item">#Sport</li>
-          <li class="nav__liste__item">#Animals</li>
-          <li class="nav__liste__item">#Events</li>
-        </ul>
-      </nav>
-      <p class="hidden">Nos_Photographes</p>
-    </header>
+    <div class="bloc_page">
 
-    <main class="main">
+      <header role="banner">
+        <div class="contenu">
+          <a href="#" class="contenu__link">Passer au contenu</a>
+        </div>
+        <div class="header">
+          <a href="index.html" class="header__link" alt="Fishey Home page">
+            <img class="header__img" src="./images/logoFisheye.svg" alt="logo Fisheye"/>
+          </a>
+          <nav class="nav" role="navigation" aria-label="catégories de photographes">
+            <ul class="nav__liste" role="list">
+              <li class="nav__liste__item" role="listitem"><a class="nav__liste__link" href="#" aria-label="tag portrait">#Portrait</a></li>
+              <li class="nav__liste__item" role="listitem"><a class="nav__liste__link" href="#" aria-label="tag art">#Art</a></li>
+              <li class="nav__liste__item" role="listitem"><a class="nav__liste__link" href="#" aria-label="tag mode">#Fashion</a></li>
+              <li class="nav__liste__item" role="listitem"><a class="nav__liste__link" href="#" aria-label="tag architecture">#Arhitecture</a></li>
+              <li class="nav__liste__item" role="listitem"><a class="nav__liste__link" href="#" aria-label="tag voyage">#Travel</a></li>
+              <li class="nav__liste__item" role="listitem"><a class="nav__liste__link" href="#" aria-label="tag sport">#Sport</a></li>
+              <li class="nav__liste__item" role="listitem"><a class="nav__liste__link" href="#" aria-label="tag animaux">#Animals</a></li>
+              <li class="nav__liste__item" role="listitem"><a class="nav__liste__link" href="#" aria-label="tag évènements">#Events</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
-      <h1>Nos Photographes</h1>
+      <main class="main" role="main">
 
-      <section class="photographers"></section>
+        <h1>Nos Photographes</h1>
 
-    </main>
+        <section class="photographers" role="region"></section>
 
+      </main>
+    
+    </div>
 
-  <script src=""></script>
+    <script src=""></script>
   </body>
 
 </html>

@@ -1,11 +1,10 @@
-html {
-  body {
+body {
     font-family: $font-family-texte;
     max-width: 1440px;
     margin: auto;
-    padding: 2.5rem 7vw;
-    @import "../layout/header";
-
-    @import "../layout/main";
-  }
+}
+.bloc_page {
+  padding: 0.5rem 7vw 2.5rem;
+  @import "../layout/header";
+  @import "../layout/main";
 }
