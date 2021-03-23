@@ -3,11 +3,70 @@
 }
 h1 {
   position: absolute;
-  top: -4.4rem;
-  right: 0;
+  top: -7rem;
+  right: 1.5rem;
 }
-#photographers {
-  display: flex; 
+#photographersCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;  
   justify-content: space-between;
-  flex-wrap: wrap;
+  padding-top: 3rem;
+
+}
+.photographer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem;
+  &__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+  }
+  &__figure {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-color: white;
+    overflow: hidden;
+    margin: 0 1.5rem 1.5rem;
+  }
+  &__img {
+      width: 263px;
+      box-sizing: border-box;
+  }
+  &__location {
+    color: $color-primary;
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+  }
+  &__tagline {
+    padding-bottom: 0.5rem;
+  }
+  &__price {
+    color: $color-tertiary-txt;
+    padding-bottom: 0.5rem;
+  }
+}
+.list {
+  display: flex;
+  margin-bottom: 0.8rem;
+  &__item {
+    margin: 0.9rem 0.25rem 0.9rem;
+  }
+  &__link {
+    color: $color-primary;
+    font-weight: 500;
+    padding: 0.3rem;
+    border: solid 0.1rem $color-tertiary-txt;
+    border-radius: 1.5rem;
+    &:hover, &:focus {
+      outline: none;
+      color: white;
+      background-color: $color-primary;
+      border: solid 0.1rem $color-primary;
+    }
+  }
 }
