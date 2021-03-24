@@ -8,9 +8,9 @@ h1 {
 }
 #photographersCards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;  
-  justify-content: space-between;
+  grid-template-columns: repeat(3, 1fr);
   padding-top: 3rem;
+  column-gap: 5rem;
 
 }
 .photographer {
@@ -18,6 +18,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   padding-bottom: 2rem;
+  max-width: 300px;
   &__link {
     display: flex;
     flex-direction: column;
@@ -32,10 +33,15 @@ h1 {
     background-color: white;
     overflow: hidden;
     margin: 0 1.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
   }
   &__img {
       width: 263px;
       box-sizing: border-box;
+  }
+  &__name {
+    text-align: center;
   }
   &__location {
     color: $color-primary;
@@ -44,6 +50,8 @@ h1 {
   }
   &__tagline {
     padding-bottom: 0.5rem;
+    text-align: center;
+    line-height: 1.5rem;
   }
   &__price {
     color: $color-tertiary-txt;
@@ -52,6 +60,8 @@ h1 {
 }
 .list {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 0.8rem;
   &__item {
     margin: 0.9rem 0.25rem 0.9rem;

@@ -5,7 +5,7 @@
       "id": 243,
       "city": "London",
       "country": "UK",
-      "tags": ["portrait", "events", "travel", "animals"],
+      "tags": ["portrait", "évènements", "voyage", "animaux"],
       "tagline": "Voir le beau dans le quotidien",
       "price": 400,
       "portrait": "MimiKeel.jpg"
@@ -15,7 +15,7 @@
       "id": 930,
       "city": "Paris",
       "country": "France",
-      "tags": ["sports", "architecture"],
+      "tags": ["sport", "architecture"],
       "tagline": "Capturer des compositions complexes",
       "price": 250,
       "portrait": "EllieRoseWilkens.jpg"
@@ -25,7 +25,7 @@
       "id": 82,
       "city": "Montreal",
       "country": "Canada",
-      "tags": ["art", "fashion", "events"],
+      "tags": ["art", "mode", "évènements"],
       "tagline": "Photographe freelance",
       "price": 500,
       "portrait": "TracyGalindo.jpg"
@@ -35,7 +35,7 @@
       "id": 527,
       "city": "Mexico City",
       "country": "Mexico",
-      "tags": ["travel", "portrait"],
+      "tags": ["voyage", "portrait"],
       "tagline": "Toujours aller de l'avant",
       "price": 350,
       "portrait": "NabeelBrandford.jpg"
@@ -45,7 +45,7 @@
       "id": 925,
       "city": "Barcelona",
       "country": "Spain",
-      "tags": ["sport", "fashion", "events", "animals"],
+      "tags": ["sport", "mode", "évènements", "animaux"],
       "tagline": "Je crée des souvenirs",
       "price": 275,
       "portrait": "RhodeDubois.jpg"
@@ -55,7 +55,7 @@
       "id": 195,
       "city": "Berlin",
       "country": "Germany",
-      "tags": ["travel", "architecture"],
+      "tags": ["voyage", "architecture"],
       "tagline": "Toujours à la recherche de LA photo",
       "price": 300,
       "portrait": "MarcelNikolic.jpg"
@@ -293,7 +293,7 @@
       "id": 34513453,
       "photographerId": 527,
       "image": "Portrait_Shaw.jpg",
-      "tags": ["portait"],
+      "tags": ["portrait"],
       "likes": 52,
       "date": "2017-04-21",
       "price": 45
@@ -302,7 +302,7 @@
       "id": 23523533,
       "photographerId": 527,
       "image": "Portrait_Alexandra.jpg",
-      "tags": ["portait"],
+      "tags": ["portrait"],
       "likes": 95,
       "date": "2018-11-02",
       "price": 45
@@ -311,7 +311,7 @@
       "id": 525834234,
       "photographerId": 527,
       "image": "Portrait_AfternoonBreak.jpg",
-      "tags": ["portait"],
+      "tags": ["portrait"],
       "likes": 25,
       "date": "2019-01-02",
       "price": 45
