@@ -1,31 +1,89 @@
-// Requête objet JSON
-let source = '../data.json';
+// Requête objet JSON _____________________________________________________________________________________
+const source = `../data.json`;
+
+let xhr = new XMLHttpRequest(); 
+xhr.open('GET', source);
+xhr.responseType = 'json';
+xhr.send();
+xhr.onload = function() {
+  let data = xhr.response;
+  let photographers = data.photographers;
+  let media = data.media;
+  showPhotographers(photographers);
+  photographerSort(photographers);
+}
+
+// DOM ___________________________________________________________________________________________________
 let photographersCards = document.getElementById('photographersCards');
 
-fetch(source)
-  .then(response => response.json())
-  .then(data => {return data.photographers;})
-  .then(photographers => {
-    for (i = 0; i < photographers.length; i++) {
-      photographersCards.innerHTML += `
-        <article class="photographer">
-          <a href="photographer.html" class="photographer__link">
-            <picture class="photographer__figure">
-              <img src="./images/sample_photos/photographers_ID_photos/${photographers[i].portrait}" class="photographer__img" />
-            </picture>
-            <h2 class="photographer__name">${photographers[i].name}</h2>
-          </a>
-          <p class="photographer__location">${photographers[i].city}, ${photographers[i].country}</p>
-          <p class="photographer__tagline">${photographers[i].tagline}</p>
-          <p class="photographer__price">${photographers[i].price}€/jour</p>
-          <ul class="list" id="id${photographers[i].id}" role="list"></ul>
-        </article>`;
-        for (t = 0; t < photographers[i].tags.length; t++) {
-          document.querySelector('#id' + photographers[i].id).innerHTML += `
-          <li class="list__item" role="listitem">
-            <a class="list__link" href="#">#${photographers[i].tags[t]}</a>
-          </li>`;
-        }
-      }
-    })
-  ;
+// Affichage des photographes //
+function showPhotographers(photographers) {
+  for (i = 0; i < photographers.length; i++) {
+    createAcard(photographers[i]);
+    displayTags(photographers[i]);
+  }
+}
+
+// Création d'une carte photographe ______________________________________________________________________
+function createAcard(photographer) {
+  let img = document.createElement('img');
+  img.classList.add('photographer__img');
+  let picture = document.createElement('picture');
+  picture.classList.add('photographer__figure');
+  let h2 = document.createElement('h2');
+  h2.classList.add('photographer__name');
+  let pLocation = document.createElement('p');
+  pLocation.classList.add('photographer__location');
+  let pTagline = document.createElement('p');
+  pTagline.classList.add('photographer__tagline');
+  let pPrice = document.createElement('p');
+  pPrice.classList.add('photographer__price');
+  let ul = document.createElement('ul');
+  ul.classList.add('list');
+  ul.setAttribute("role", "list");
+  let anchor = document.createElement('a');
+  anchor.classList.add('photographer__link');
+  anchor.setAttribute("href", "photographer.html");
+  let article = document.createElement('article');
+  article.classList.add('photographer');
+  picture.appendChild(img);
+  anchor.appendChild(picture);
+  anchor.appendChild(h2);
+  article.appendChild(anchor);
+  article.appendChild(pLocation);
+  article.appendChild(pTagline);
+  article.appendChild(pPrice);
+  article.appendChild(ul);
+  photographersCards.appendChild(article);
+  // Contenu des cartes photographes 
+  img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
+  h2.innerHTML = `${photographer.name}`;
+  pLocation.innerHTML = `${photographer.city}, ${photographer.country}`;
+  pTagline.innerHTML = `${photographer.tagline}`;
+  pPrice.innerHTML = `${photographer.price}€/jour`;
+  pPrice.innerHTML = `${photographer.price}€/jour`;
+  ul.setAttribute("id", `id${photographer.id}`);
+}
+
+// Affichage des tags de chaque photographe ______________________________________________________________
+function displayTags(photographer) {
+  for (tag = 0; tag < photographer.tags.length; tag++) {
+    document.querySelector('#id' + photographer.id).innerHTML += `
+    <li class="list__item" role="listitem">
+      <a class="list__link" href="#">#${photographer.tags[tag]}</a>
+    </li>`;
+  }
+}
+
+
+let portrait = document.getElementById('portrait');
+portrait.addEventListener('click', photographerSort());
+
+function photographerSort(photographers) {
+  for (i = 0; i < photographers.length; i++) {
+    let index = photographers.tags.indexOf('portrait');
+    if (index > -1) {
+      array.splice(index, 1);
+    }
+  }
+}
