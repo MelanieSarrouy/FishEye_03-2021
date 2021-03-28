@@ -1,17 +1,41 @@
 // Requête objet JSON _____________________________________________________________________________________
 const source = `../data.json`;
+// let photographers, media = [], 
+//     mainObj = {};
 
-let xhr = new XMLHttpRequest(); 
-xhr.open('GET', source);
-xhr.responseType = 'json';
-xhr.send();
-xhr.onload = function() {
-  let data = xhr.response;
-  let photographers = data.photographers;
-  let media = data.media;
-  showPhotographers(photographers);
-  photographerSort(photographers);
-}
+const myFetch = fetch(source)
+.then(resp => {return resp.json()});
+
+const allPhotographers = myFetch
+  .then((responseJson) => {
+    showPhotographers(responseJson.photographers);
+    console.log(responseJson.photographers);
+    return responseJson.photographers
+  })
+let selectPhotographers = myFetch
+  .then((responseJson) => {
+    photographerSort(responseJson.photographers);
+  });
+
+// fetch(source)
+//   .then(resp => {return resp.json()})
+//   .then(data => {
+//     console.log(data); 
+//     photographers = data.photographers;
+//     media = data.media;
+//     mainObj = data;
+//     // getData();
+//     showPhotographers(photographers);
+//     photographerSort();
+//   })
+//   .catch(error => {
+//     console.error ('il y a un probleme');
+//     console.error(error);
+//   });
+
+
+console.log(allPhotographers)
+
 
 // DOM ___________________________________________________________________________________________________
 let photographersCards = document.getElementById('photographersCards');
@@ -55,6 +79,7 @@ function createAcard(photographer) {
   article.appendChild(pPrice);
   article.appendChild(ul);
   photographersCards.appendChild(article);
+
   // Contenu des cartes photographes 
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
   h2.innerHTML = `${photographer.name}`;
@@ -63,6 +88,7 @@ function createAcard(photographer) {
   pPrice.innerHTML = `${photographer.price}€/jour`;
   pPrice.innerHTML = `${photographer.price}€/jour`;
   ul.setAttribute("id", `id${photographer.id}`);
+  article.setAttribute("id", `${photographer.id}`);
 }
 
 // Affichage des tags de chaque photographe ______________________________________________________________
@@ -77,13 +103,21 @@ function displayTags(photographer) {
 
 
 let portrait = document.getElementById('portrait');
+
+
+myFetch.then((responseJson) => {
+  photographerSort(responseJson.photographers);
+  console.log(responseJson.photographers)
+});
 portrait.addEventListener('click', photographerSort());
 
-function photographerSort(photographers) {
-  for (i = 0; i < photographers.length; i++) {
-    let index = photographers.tags.indexOf('portrait');
-    if (index > -1) {
-      array.splice(index, 1);
+function photographerSort(allPhotographers) {
+//let articles = document.getElementsByClassName('photographer');
+//articles.style.display = 'block';  
+  for (i = 0; i < allPhotographers.length; i++) {
+    if (photographers.tags.indexOf('portrait') == -1) {
+      photographerId.style.display = none;
     }
   }
 }
+console.log(articles);
