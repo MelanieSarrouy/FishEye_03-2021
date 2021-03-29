@@ -1,9 +1,9 @@
 // Requête objet JSON _____________________________________________________________________________________
-const source = `../data.json`;
+const source = '../data.json';
 // let photographers, media = [], 
 //     mainObj = {};
-const myFetch = fetch(source);
-myFetch.then(resp => {
+fetch(source)
+  .then(resp => {
   return resp.json().then(json => getData(json))});
 
 function getData(json) {
