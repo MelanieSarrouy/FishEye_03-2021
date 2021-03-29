@@ -3,38 +3,20 @@ const source = `../data.json`;
 // let photographers, media = [], 
 //     mainObj = {};
 
-const myFetch = fetch(source)
-.then(resp => {return resp.json()});
+const myFetch = fetch(source);
 
-const allPhotographers = myFetch
-  .then((responseJson) => {
-    showPhotographers(responseJson.photographers);
-    console.log(responseJson.photographers);
-    return responseJson.photographers
-  })
-let selectPhotographers = myFetch
-  .then((responseJson) => {
-    photographerSort(responseJson.photographers);
-  });
+myFetch.then(resp => {
+  return resp.json().then(json => getData(json))});
 
-// fetch(source)
-//   .then(resp => {return resp.json()})
-//   .then(data => {
-//     console.log(data); 
-//     photographers = data.photographers;
-//     media = data.media;
-//     mainObj = data;
-//     // getData();
-//     showPhotographers(photographers);
-//     photographerSort();
-//   })
-//   .catch(error => {
-//     console.error ('il y a un probleme');
-//     console.error(error);
-//   });
-
-
-console.log(allPhotographers)
+function getData(json) {
+  const DATA = json;
+  console.log(DATA);
+  const allPhotographers = DATA.photographers;
+  console.log(allPhotographers);
+  const allMedias = DATA.media;
+  console.log(allMedias);
+  showPhotographers(allPhotographers);
+}
 
 
 // DOM ___________________________________________________________________________________________________
@@ -46,6 +28,7 @@ function showPhotographers(photographers) {
     createAcard(photographers[i]);
     displayTags(photographers[i]);
   }
+  photographerSort(photographers);
 }
 
 // Création d'une carte photographe ______________________________________________________________________
@@ -101,23 +84,19 @@ function displayTags(photographer) {
   }
 }
 
-
 let portrait = document.getElementById('portrait');
 
-
-myFetch.then((responseJson) => {
-  photographerSort(responseJson.photographers);
-  console.log(responseJson.photographers)
-});
 portrait.addEventListener('click', photographerSort());
 
-function photographerSort(allPhotographers) {
-//let articles = document.getElementsByClassName('photographer');
-//articles.style.display = 'block';  
-  for (i = 0; i < allPhotographers.length; i++) {
-    if (photographers.tags.indexOf('portrait') == -1) {
-      photographerId.style.display = none;
-    }
+function photographerSort(photographers) {
+  console.log(photographers.length);
+  for (i = 0; i < photographers.length; i++) {
+    console.log(photographers[i].tags);
+    console.log(photographers[i].tags.indexOf('portrait') == -1);
+
+    // if (photographers[i].tags.indexOf('portrait') == -1) {
+    //   let index = photographers.indexOf(photographers[i].tags.indexOf('portrait'));
+    //   photographers.splice(index, 1);
+    // }
   }
 }
-console.log(articles);
