@@ -1,7 +1,5 @@
 // Requête objet JSON _____________________________________________________________________________________
 const source = './data.json';
-// let photographers, media = [], 
-//     mainObj = {};
 fetch(source)
   .then(resp => {
   return resp.json().then(json => getData(json))});
@@ -14,10 +12,8 @@ function getData(json) {
   const allMedias = DATA.media;
   console.log(allMedias);
   showPhotographers(allPhotographers);
-  // listenTag(allPhotographers);
-
+  hashChanged(allPhotographers);
 }
-
 
 // DOM ___________________________________________________________________________________________________
 let photographersCards = document.getElementById('photographersCards');
@@ -50,7 +46,7 @@ function createAcard(photographer) {
   ul.setAttribute("role", "list");
   let anchor = document.createElement('a');
   anchor.classList.add('photographer__link');
-  anchor.setAttribute("href", "photographer.html");
+  anchor.setAttribute("href", `photographer-page.html`);
   let article = document.createElement('article');
   article.classList.add('photographer');
   picture.appendChild(img);
@@ -64,7 +60,6 @@ function createAcard(photographer) {
   photographersCards.appendChild(article);
 
   // Contenu des cartes photographes 
-  // article.style.display = 'flex';
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
   h2.innerHTML = `${photographer.name}`;
   pLocation.innerHTML = `${photographer.city}, ${photographer.country}`;
@@ -81,43 +76,29 @@ function displayTags(photographer) {
   for (tag = 0; tag < photographer.tags.length; tag++) {
     document.querySelector('#id' + photographer.id).innerHTML += `
     <li class="list__item" role="listitem">
-      <a class="list__link" href="#">#${photographer.tags[tag]}</a>
+      <a class="list__link" href="index.html#${photographer.tags[tag]}">#${photographer.tags[tag]}</a>
     </li>`;
   }
 }
-function listenTag(photographers) {
-  portrait.addEventListener('click', photographerSort(photographers));
-  art.addEventListener('click', photographerSort(photographers));
 
-} 
+// Affichage des photographes par tag _____________________________________________________________________
+const arrayTags = ['portrait', 'art', 'mode', 'architecture', 'voyage', 'sport', 'animaux', 'evenements'];
+const anchorNav = document.getElementsByClassName('nav__liste__item');
 
-function photographerSort(photographers) {
-  console.log(photographers.length);
-  let arrayPhotographers = photographers;
+// anchorNav.addEventListener('click', hashChanged());
+window.addEventListener('hashchange', hashChanged());
+function hashChanged(photographers) {
 
-  for (i = 0; i < arrayPhotographers.length; i++) {
-    let article = document.getElementById(`${arrayPhotographers[i].id}`);
-    const arrayTag = arrayPhotographers[i].tags;
-    const index = arrayTag.indexOf('portrait');
-    if (!(index > -1)) {
-      article.style.display = 'none';
+  for (tag of arrayTags) {
+    if (location.hash === `#${tag}`) {
+      for (let i = 0; i < photographers.length; i++) {
+        let article = document.getElementById(`${photographers[i].id}`);
+        const arrayTagPhotographer = photographers[i].tags;
+        const index = arrayTagPhotographer.indexOf(tag);
+        if (!(index > -1)) {
+          article.style.display = 'none';
+        }
+      }
     }
   }
-}
-
-// function photographerSort(photographers) {
-//   console.log(photographers.length);
-//   let arrayPhotographers = [];
-
-//   for (i = 0; i < photographers.length; i++) {
-//     // let article = document.getElementById(`${arrayPhotographers[i].id}`);
-//     const arrayTag = photographers[i].tags;
-//     const index = arrayTag.indexOf('portrait');
-//     if ((index > -1)) {
-//       arrayPhotographers.push(`${photographers[i]}`);
-//     }
-//   }
-//   showPhotographers(arrayPhotographers);
-//   console.log(arrayPhotographers);
-// }
-
+};

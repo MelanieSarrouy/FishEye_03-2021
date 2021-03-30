@@ -5,7 +5,7 @@
       "id": 243,
       "city": "London",
       "country": "UK",
-      "tags": ["portrait", "évènements", "voyage", "animaux"],
+      "tags": ["portrait", "evenements", "voyage", "animaux"],
       "tagline": "Voir le beau dans le quotidien",
       "price": 400,
       "portrait": "MimiKeel.jpg"
@@ -25,7 +25,7 @@
       "id": 82,
       "city": "Montreal",
       "country": "Canada",
-      "tags": ["art", "mode", "évènements"],
+      "tags": ["art", "mode", "evenements"],
       "tagline": "Photographe freelance",
       "price": 500,
       "portrait": "TracyGalindo.jpg"
@@ -45,7 +45,7 @@
       "id": 925,
       "city": "Barcelona",
       "country": "Spain",
-      "tags": ["sport", "mode", "évènements", "animaux"],
+      "tags": ["sport", "mode", "evenements", "animaux"],
       "tagline": "Je crée des souvenirs",
       "price": 275,
       "portrait": "RhodeDubois.jpg"

@@ -1,0 +1,15 @@
+.header2 {
+  display: flex;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  &__link {
+    display: flex;
+    justify-content: center;
+  }
+  &__img {
+    max-width: 10rem;
+    object-fit: contain;
+    display: flex;
+    align-self: start;
+  }
+}
