@@ -1,5 +1,5 @@
 // Requête objet JSON _____________________________________________________________________________________
-const source = '../data.json';
+const source = './data.json';
 // let photographers, media = [], 
 //     mainObj = {};
 fetch(source)
