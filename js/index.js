@@ -1,19 +1,46 @@
 // Requête objet JSON _____________________________________________________________________________________
 const source = './data.json';
+//_________________________________________________________________________________________________________
 fetch(source)
-  .then(resp => {
-  return resp.json().then(json => getData(json))});
+  .then(res => {
+    if(res.ok) {
+      return res.json().then(json => getPhotographers(json))
+    } else {
+      console.log ('erreur');
+    }
+  });
 
-function getData(json) {
-  const DATA = json;
-  console.log(DATA);
-  const allPhotographers = DATA.photographers;
-  console.log(allPhotographers);
-  const allMedias = DATA.media;
-  console.log(allMedias);
-  showPhotographers(allPhotographers);
-  hashChanged(allPhotographers);
+  fetch(source)
+  .then(res => {
+    if(res.ok) {
+      return res.json().then(json => getMedia(json))
+    } else {
+      console.log ('erreur');
+    }
+  });
+
+
+let photographers = [];
+function getPhotographers(json) {
+  const PHOTOGRAPHERS = json.photographers;
+  for (photographer of PHOTOGRAPHERS) {
+    photographers.push(photographer);
+  }
+  showPhotographers(photographers);
+  window.addEventListener('hashchange', hashChanged(photographers));
 }
+console.log(photographers);
+
+let media = [];
+function getMedia(json) {
+  const MEDIA = json.media;
+  for (medium of MEDIA) {
+    media.push(medium);
+  }
+}
+console.log(media);
+
+
 
 // DOM ___________________________________________________________________________________________________
 let photographersCards = document.getElementById('photographersCards');
@@ -86,8 +113,7 @@ const arrayTags = ['portrait', 'art', 'mode', 'architecture', 'voyage', 'sport',
 const anchorNav = document.getElementsByClassName('nav__liste__item');
 
 // anchorNav.addEventListener('click', hashChanged());
-window.addEventListener('hashchange', hashChanged());
-function hashChanged(photographers) {
+function hashChanged() {
 
   for (tag of arrayTags) {
     if (location.hash === `#${tag}`) {
