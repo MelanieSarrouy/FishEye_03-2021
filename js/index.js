@@ -7,20 +7,40 @@ const anchorNav = document.getElementsByClassName("nav__liste__item");
 // Requête objet JSON ____________________________________________________________________________________
 const source = "./data.json";
 
-fetch(source).then((res) => {
-  if (res.ok) {
-    return res.json().then((json) => {
-      getPhotographers(json)
-      getMedia(json)
-    });
-  } else {
-    console.log("erreur");
-  }
-});
-
+function myFetch() {
+  fetch(source).then((res) => {
+    if (res.ok) {
+      return res.json().then((json) => {
+        getPhotographersWithMedia(json)
+      });
+    } else {
+      console.log("erreur");
+    }
+  });
+}
+myFetch();
 // Récupération des données // ___________________________________________________________________________
-
 let photographers = [];
+let media = [];
+
+function getPhotographersWithMedia(json) {
+  getPhotographers(json);
+  getMedia(json);
+  for (photographer of photographers) {
+    let mediaList = [];
+    Object.defineProperty(photographer, 'media', {
+      value: mediaList,
+      writable: true 
+    });
+    for (medium of media) {
+      if (photographer.id == medium.photographerId) {
+        mediaList.push(medium);
+      }
+    }
+  }
+  console.log(photographers);
+}
+console.log(photographers);
 
 function getPhotographers(json) {
   const PHOTOGRAPHERS = json.photographers;
@@ -28,11 +48,7 @@ function getPhotographers(json) {
     photographers.push(photographer);
   }
   showPhotographers(photographers);
-  window.addEventListener('hashchange', () => hashChanged(photographers));}
-
-console.log(photographers);
-
-let media = [];
+}
 
 function getMedia(json) {
   const MEDIA = json.media;
@@ -40,23 +56,6 @@ function getMedia(json) {
     media.push(medium);
   }
 }
-
-console.log(media);
-
-// function getPhotographersWithMedia() {
-//   console.log(photographers);
-//   for (photographer of photographers) {
-//     Object.defineProperty(photographer, 'media', {
-//       value: [1, 2, 3],
-//       writable: true 
-//     });
-//   }
-//   console.log(photographers);
-
-// }
-// getPhotographersWithMedia();
-// console.log(photographers);
-
 // Affichage des photographes // _________________________________________________________________________
 function showPhotographers(photographers) {
   for (i = 0; i < photographers.length; i++) {
@@ -84,7 +83,6 @@ function createAcard(photographer) {
   ul.setAttribute("role", "list");
   let anchor = document.createElement("a");
   anchor.classList.add("photographer__link");
-  anchor.setAttribute("href", "photographer-page.html?id=" + `${photographer.id}`);
   let article = document.createElement("article");
   article.classList.add("photographer");
   picture.appendChild(img);
@@ -98,10 +96,8 @@ function createAcard(photographer) {
   photographersCards.appendChild(article);
 
   // Contenu des cartes photographes
-  img.setAttribute(
-    "src",
-    `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`
-  );
+  img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
+  anchor.setAttribute("href", "photographer-page.html?id=" + `${photographer.id}`);
   h2.innerHTML = `${photographer.name}`;
   pLocation.innerHTML = `${photographer.city}, ${photographer.country}`;
   pTagline.innerHTML = `${photographer.tagline}`;
@@ -132,8 +128,7 @@ const arrayTags = [
   "animaux",
   "evenements",
 ];
-
-// anchorNav.addEventListener('click', hashChanged());
+window.addEventListener('hashchange', () => hashChanged(photographers));
 function hashChanged() {
   for (tag of arrayTags) {
     if (location.hash === `#${tag}`) {
@@ -144,9 +139,12 @@ function hashChanged() {
         if (!(index > -1)) {
           article.style.display = "none";
         } else {
-          article.style.display = 'block';
+          article.style.display = 'flex';
         }
       }
     }
   }
 }
+console.log(photographers);
+
+// Page photographer ! gerer les imports exports !!!

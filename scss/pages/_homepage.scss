@@ -5,6 +5,7 @@ body {
 }
 .bloc_page {
   padding: 0.5rem 7vw 2.5rem;
+  max-width: 1240px;
 
   @import "../layout/header";
   @import "../layout/main";
