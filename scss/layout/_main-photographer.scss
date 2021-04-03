@@ -1,0 +1,134 @@
+.photographer {
+  background-color: $color-tertiary-bg;
+  display: flex;
+  padding: 2rem 2rem;
+  position: relative;
+  &__informations {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 2rem;
+    &__name {
+      color: $color-secondary-txt;
+      font-size: 2.5rem;
+      font-weight: 400;
+      padding-bottom: 1rem;
+    }
+    &__location {
+      color: $color-primary;
+      font-weight: 500;
+      padding-bottom: 0.5rem;
+
+    }
+    &__tagline {
+      color: #525252;
+      padding-bottom: 0.5rem;
+
+    }
+  }
+  &__picture {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    right: 2rem;
+    display: flex;
+    align-self: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  }
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-left: -0.3rem;
+  padding-top: 1rem;
+  &__tag {
+    padding: 0rem 0.2rem 1rem;
+    &__link {
+      color: $color-primary;
+      font-weight: 500;
+      padding: 0.15rem 0.3rem;
+      border: solid 0.05rem #c4c4c4 ;
+      border-radius: 1.5rem;
+      &:hover, &:focus {
+        outline: none;
+        color: white;
+        background-color: $color-primary;
+        border: solid 0.1rem $color-primary;
+      }
+    }
+  }
+}
+.button {
+  position: relative;
+  &__contact {
+    font-family: $font-family-texte;
+    border: none;
+    background-color: $color-primary;
+    color: white;
+    padding: 0.8rem 0.5rem;
+    border-radius: 0.3rem;
+  }
+}
+.filters {
+  display: flex;
+  padding: 2.5rem 0 2.5rem;
+  & > p {
+    font-weight: bold;
+    padding-right: 2rem;
+  } 
+}
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-primary;
+  color: white;
+  border-radius: 0.3rem;
+  padding: 0 0.7rem;
+  & span {
+    padding: 1rem 0;
+    &:first-child {
+      border-bottom: solid 0.05rem white;
+    }
+    &:last-child {
+      border-top: solid 0.05rem white;
+    }
+
+  
+  }
+}
+
+.media {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+.article {
+  width: 350px;
+  height: 350px;
+  &__link {
+    width: 350px;
+    height: 300px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  &__informations {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;;
+    &__likes {
+      display: flex;
+      & p {
+        padding: 0 0.5rem;
+      }
+      & i {
+        color: $color-primary;
+      }
+    }
+  }
+}

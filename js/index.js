@@ -145,6 +145,5 @@ function hashChanged() {
     }
   }
 }
-console.log(photographers);
 
 // Page photographer ! gerer les imports exports !!!
