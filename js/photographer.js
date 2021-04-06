@@ -118,38 +118,10 @@ function displayPhotographer() {
     </li>`;
   }
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
+  folderName();
+  console.log(firstName);
 }
 
-// _____________________________________________________________________________________________________________________
-// function FactoryMedia(media) { 
-//   let article = document.createElement('article');
-//   sectionMedia.appendChild(article);
-//   article.classList.add('article');
-//   let image = document.createElement('img');
-//   image.setAttribute("src", `./images/sample_photos/${firstName}/${medium.image}`);
-//   let anchor = document.createElement('a');
-//   anchor.appendChild(image);
-//   anchor.classList.add('article__link');
-//   article.appendChild(anchor);
-//   let divCaption = document.createElement('div');
-//   article.appendChild(divCaption);
-//   let pTitle = document.createElement('p');
-//   divCaption.appendChild(pTitle);
-//   pTitle.innerHTML = `${medium.title}`;
-//   let pPrice = document.createElement('p');
-//   pPrice.innerHTML = `${medium.price} €`;
-//   let divLikes = document.createElement('div');
-//   divLikes.appendChild(pPrice);
-//   divCaption.appendChild(divLikes);
-//   let pNumberLikes = document.createElement('p');
-//   divLikes.appendChild(pNumberLikes);
-//   pNumberLikes.innerHTML = `${medium.likes}`;
-//   let heart = document.createElement('i');
-//   divLikes.appendChild(heart);
-//   heart.classList.add('fas', 'fa-heart');
-//   divCaption.classList.add('article__informations');
-//   divLikes.classList.add('article__informations__likes');
-// }
 // ____________________________________________________________________________________________________________________
 
 function folderName() {
@@ -162,7 +134,6 @@ function folderName() {
 // ____________________________________________________________________________________________________________________
 
 function FactoryMedia(media) {
-  folderName();
   for (medium of media) {
     let string = `${medium.image}`;
     let index = string.indexOf('.jpg');
@@ -174,41 +145,59 @@ function FactoryMedia(media) {
   }
 }
 
-function makeAPictureCard(medium) {
-  makeACard(medium);
-  makeAPicture(medium);
-}
-function makeAPicture(medium) {
-  let image = document.createElement('img');
-  let divMedia = document.querySelector('.article__link');
-  divMedia.appendChild(image);
-  image.setAttribute(
-    "src", `./images/sample_photos/${firstName}/${medium.image}`, 
-    "alt", `${medium.title}`,
-    "id", `${medium.id}`)
-}
-
 function makeAVideoCard(medium) {
-  makeACard(medium);
-  makeAVideo(medium);
-}
-function makeAVideo(medium) {
+  let article = document.createElement('article');
+  sectionMedia.appendChild(article);
+  article.classList.add('article');
+  // DOM élément <figure> - conteneur
+  let figure = document.createElement('figure');
+  article.appendChild(figure);
+  // DOM élément <div> - conteneur du media
+  let divMedia = document.createElement('div');
+  figure.appendChild(divMedia);
+  divMedia.classList.add('article__link');
+  // DOM élément <figcaption> - conteneur des informations
+  let figcaption = document.createElement('figcaption');
+  figure.appendChild(figcaption);
+  figcaption.classList.add('article__informations');
+  // DOM élément <p> - titre de l'image
+  let pTitle = document.createElement('p');
+  figcaption.appendChild(pTitle);
+  pTitle.innerHTML = `${medium.title}`;
+  // DOM élément <div> - conteneur prix et likes
+  let divLikes = document.createElement('div');
+  figcaption.appendChild(divLikes);
+  divLikes.classList.add('article__informations__likes');
+  // DOM élément <p> - prix
+  let pPrice = document.createElement('p');
+  divLikes.appendChild(pPrice);
+  pPrice.innerHTML = `${medium.price} €`;
+  // DOM élément <p> - nombre de likes
+  let pNumberLikes = document.createElement('p');
+  divLikes.appendChild(pNumberLikes);
+  pNumberLikes.innerHTML = `${medium.likes}`;
+  // DOM élément <i> - coeur
+  let heart = document.createElement('i');
+  divLikes.appendChild(heart);
+  heart.classList.add('fas', 'fa-heart');
+
   let image = document.createElement('img');
-  let divMedia = document.querySelector('.article__link');
   divMedia.appendChild(image);
   image.setAttribute("src", "./images/play.png");
+  image.classList.add('logoPlay');
   let video = document.createElement('video');
   divMedia.appendChild(video);
   let source = document.createElement('source');
   video.appendChild(source);
-  source.setAttribute(
-    "src", `./images/sample_photos/${firstName}/${medium.image}`,
-    "alt", `${medium.title}`,
-    "id", `${medium.id}`,
-    "type", "video/mp4"
-  )
+  console.log(medium);
+
+  source.setAttribute("src", `./images/sample_photos/${firstName}/${medium.video}`);
+  source.setAttribute("alt", `${medium.title}`);
+  source.setAttribute("id", `${medium.id}`);
+  source.setAttribute("type", "video/mp4");
 }
-function makeACard(medium) {
+
+function makeAPictureCard(medium) {
   // DOM élément <article>
   let article = document.createElement('article');
   sectionMedia.appendChild(article);
@@ -244,5 +233,11 @@ function makeACard(medium) {
   let heart = document.createElement('i');
   divLikes.appendChild(heart);
   heart.classList.add('fas', 'fa-heart');
+
+  let image = document.createElement('img');
+  divMedia.appendChild(image);
+  image.setAttribute("src", `./images/sample_photos/${firstName}/${medium.image}`); 
+  image.setAttribute("alt", `${medium.title}`);
+  image.setAttribute("id", `${medium.id}`);
 }
 
