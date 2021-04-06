@@ -1,11 +1,10 @@
 // DOM ___________________________________________________________________________________________________
 let photographersCards = document.getElementById("photographersCards");
-let portrait = document.getElementById("portrait");
-let art = document.getElementById("art");
-const anchorNav = document.getElementsByClassName("nav__liste__item");
 
 // Requête objet JSON ____________________________________________________________________________________
 const source = "./data.json";
+
+// Récupération des données // ___________________________________________________________________________
 
 function myFetch() {
   fetch(source).then((res) => {

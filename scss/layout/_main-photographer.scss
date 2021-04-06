@@ -109,6 +109,8 @@
 .article {
   width: 350px;
   height: 350px;
+  position: relative;
+  padding-bottom: 0.9rem;
   &__link {
     width: 350px;
     height: 300px;
@@ -116,19 +118,29 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
+    cursor: pointer;
   }
   &__informations {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;;
+    padding: 0.8rem 0;
+    color: $color-primary; 
+    font-weight: 400;
+    font-size: 1.2rem;
     &__likes {
       display: flex;
-      & p {
-        padding: 0 0.5rem;
+      & p:first-child {
+        padding: 0 0.7rem;
       }
-      & i {
-        color: $color-primary;
+      & p:nth-child(2) {
+        padding: 0 0.3rem 0 0;
       }
+
     }
   }
+}
+.logoPlay {
+  position: absolute;
+  width: 25%;
+  top: 32%;
 }
