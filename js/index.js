@@ -37,9 +37,9 @@ function getPhotographersWithMedia(json) {
       }
     }
   }
-  console.log(photographers);
+  // console.log(photographers);
+  // creatAPhotographer(photographers);
 }
-console.log(photographers);
 
 function getPhotographers(json) {
   const PHOTOGRAPHERS = json.photographers;
@@ -55,6 +55,7 @@ function getMedia(json) {
     media.push(medium);
   }
 }
+
 // Affichage des photographes // _________________________________________________________________________
 function showPhotographers(photographers) {
   for (i = 0; i < photographers.length; i++) {
@@ -129,6 +130,7 @@ const arrayTags = [
 ];
 window.addEventListener('hashchange', () => hashChanged(photographers));
 function hashChanged() {
+  console.log(photographers);
   for (tag of arrayTags) {
     if (location.hash === `#${tag}`) {
       for (let i = 0; i < photographers.length; i++) {

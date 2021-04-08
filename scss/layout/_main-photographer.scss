@@ -74,6 +74,7 @@
 }
 .filters {
   display: flex;
+  align-items: baseline;
   padding: 2.5rem 0 2.5rem;
   & > p {
     font-weight: bold;
@@ -87,18 +88,39 @@
   color: white;
   border-radius: 0.3rem;
   padding: 0 0.7rem;
-  & span {
-    padding: 1rem 0;
-    &:first-child {
-      border-bottom: solid 0.05rem white;
+  margin-top: 0.8rem;
+  cursor: pointer;
+  &__option {
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    & div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 3rem;
+      height: 2rem;
     }
-    &:last-child {
+    &:nth-child(2) {
+      border-bottom: solid 0.05rem white;
       border-top: solid 0.05rem white;
     }
-
-  
   }
 }
+#option2, #option3 {
+  display: none;
+}
+.fa-chevron-down {
+  color: white;
+  padding: 0 0.5rem 0 1.5rem;
+}
+.fa-chevron-up {
+  color: white;
+  padding: 0 0.5rem 0 1.5rem;
+  display: none;
+}
+
 
 .media {
   display: flex;
@@ -125,7 +147,7 @@
     justify-content: space-between;
     padding: 0.8rem 0;
     color: $color-primary; 
-    font-weight: 400;
+    font-weight: 500;
     font-size: 1.2rem;
     &__likes {
       display: flex;
@@ -143,4 +165,26 @@
   position: absolute;
   width: 25%;
   top: 32%;
+}
+
+.infos {
+  position: fixed;
+  bottom: 0;
+  right: 2.5rem;
+  background-color: $color-secondary-bg;
+  font-size: 1.3rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.4rem 1.8rem 1.2rem;
+  width: 300px;
+  border-radius: 0.5rem 0.5rem 0 0;
+  &__likes{
+    display: flex;
+    &__icone {
+      padding: 0 0.8rem;
+    }
+
+  }
+
 }
