@@ -25,13 +25,13 @@ let media = [];
 function getPhotographersWithMedia(json) {
   getPhotographers(json);
   getMedia(json);
-  for (photographer of photographers) {
+  for (const photographer of photographers) {
     let mediaList = [];
     Object.defineProperty(photographer, 'media', {
       value: mediaList,
       writable: true 
     });
-    for (medium of media) {
+    for (const medium in media) {
       if (photographer.id == medium.photographerId) {
         mediaList.push(medium);
       }
@@ -43,22 +43,21 @@ function getPhotographersWithMedia(json) {
 
 function getPhotographers(json) {
   const PHOTOGRAPHERS = json.photographers;
-  for (photographer of PHOTOGRAPHERS) {
-    photographers.push(photographer);
+  for ( let i = 0; i < PHOTOGRAPHERS.length; i++ ) {
+    photographers.push(PHOTOGRAPHERS[i]);
   }
   showPhotographers(photographers);
 }
-
 function getMedia(json) {
   const MEDIA = json.media;
-  for (medium of MEDIA) {
+  for (const medium in MEDIA) {
     media.push(medium);
   }
 }
 
 // Affichage des photographes // _________________________________________________________________________
 function showPhotographers(photographers) {
-  for (i = 0; i < photographers.length; i++) {
+  for (let i = 0; i < photographers.length; i++) {
     createAcard(photographers[i]);
     displayTags(photographers[i]);
   }
@@ -109,7 +108,7 @@ function createAcard(photographer) {
 
 // Affichage des tags de chaque photographe ______________________________________________________________
 function displayTags(photographer) {
-  for (tag = 0; tag < photographer.tags.length; tag++) {
+  for (let tag = 0; tag < photographer.tags.length; tag++) {
     document.querySelector("#id" + photographer.id).innerHTML += `
     <li class="list__item" role="listitem">
       <a class="list__link" href="index.html#${photographer.tags[tag]}">#${photographer.tags[tag]}</a>
@@ -130,7 +129,6 @@ const arrayTags = [
 ];
 window.addEventListener('hashchange', () => hashChanged(photographers));
 function hashChanged() {
-  console.log(photographers);
   for (tag of arrayTags) {
     if (location.hash === `#${tag}`) {
       for (let i = 0; i < photographers.length; i++) {

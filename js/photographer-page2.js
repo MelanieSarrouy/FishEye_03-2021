@@ -7,6 +7,7 @@ const pTagline = document.querySelector('#tagline');
 const button = document.querySelector('aside > button');
 const img = document.querySelector('aside > picture > img');
 const sectionMedia = document.querySelector('.media');
+const rate = document.querySelector('.infos__price');
 
 // Requête objet JSON __________________________________________________________________________________________________
 
@@ -122,6 +123,7 @@ function displayPhotographer() {
   pLocation.innerHTML = photographer.city + ', ' + photographer.country;
   pTagline.innerHTML = photographer.tagline;
   let tags = photographer.tags;
+  rate.innerHTML = photographer.price + ' € / jour'
   for (tag of tags) {
     listTags.innerHTML += `
     <li class="tags__tag" role="listitem">
@@ -136,100 +138,32 @@ function displayPhotographer() {
 class MediaFactory {
   constructor() {
     this.createMedia = (type) => {
+      createDOMElements();
       let med;
       if (type === 'image') {
         med = new Image();
       } else if (type === 'video') {
         med = new Video();
       }
-      // med.card = () => {
-      //   return `${this._type} fonctionne`;
-      // }
       return med;
     }
   }
 }
 class Image {
   createAnImageCard() {
-    let article = document.createElement('article');
-    sectionMedia.appendChild(article);
-    article.classList.add('article');
-    // DOM élément <figure> - conteneur
-    let figure = document.createElement('figure');
-    article.appendChild(figure);
-    // DOM élément <div> - conteneur du media
-    let divMedia = document.createElement('div');
-    figure.appendChild(divMedia);
-    divMedia.classList.add('article__link');
-    // DOM élément <figcaption> - conteneur des informations
-    let figcaption = document.createElement('figcaption');
-    figure.appendChild(figcaption);
-    figcaption.classList.add('article__informations');
-    // DOM élément <p> - titre de l'image
-    let pTitle = document.createElement('p');
-    figcaption.appendChild(pTitle);
-    pTitle.innerHTML = `${medium.title}`;
-    // DOM élément <div> - conteneur prix et likes
-    let divLikes = document.createElement('div');
-    figcaption.appendChild(divLikes);
-    divLikes.classList.add('article__informations__likes');
-    // DOM élément <p> - prix
-    let pPrice = document.createElement('p');
-    divLikes.appendChild(pPrice);
-    pPrice.innerHTML = `${medium.price} €`;
-    // DOM élément <p> - nombre de likes
-    let pNumberLikes = document.createElement('p');
-    divLikes.appendChild(pNumberLikes);
-    pNumberLikes.innerHTML = `${medium.likes}`;
-    // DOM élément <i> - coeur
-    let heart = document.createElement('i');
-    divLikes.appendChild(heart);
-    heart.classList.add('fas', 'fa-heart');
-  
+    let divMedia = document.getElementById(`${medium.id}`);
+
     let image = document.createElement('img');
     divMedia.appendChild(image);
     image.setAttribute("src", `./images/sample_photos/${firstName}/${medium.image}`); 
     image.setAttribute("alt", `${medium.title}`);
-    image.setAttribute("id", `${medium.id}`);
+    image.setAttribute("id", `id${medium.id}`);
   }
 }
 class Video {
   createAVideoCard() {
-    let article = document.createElement('article');
-    sectionMedia.appendChild(article);
-    article.classList.add('article');
-    // DOM élément <figure> - conteneur
-    let figure = document.createElement('figure');
-    article.appendChild(figure);
-    // DOM élément <div> - conteneur du media
-    let divMedia = document.createElement('div');
-    figure.appendChild(divMedia);
-    divMedia.classList.add('article__link');
-    // DOM élément <figcaption> - conteneur des informations
-    let figcaption = document.createElement('figcaption');
-    figure.appendChild(figcaption);
-    figcaption.classList.add('article__informations');
-    // DOM élément <p> - titre de l'image
-    let pTitle = document.createElement('p');
-    figcaption.appendChild(pTitle);
-    pTitle.innerHTML = `${medium.title}`;
-    // DOM élément <div> - conteneur prix et likes
-    let divLikes = document.createElement('div');
-    figcaption.appendChild(divLikes);
-    divLikes.classList.add('article__informations__likes');
-    // DOM élément <p> - prix
-    let pPrice = document.createElement('p');
-    divLikes.appendChild(pPrice);
-    pPrice.innerHTML = `${medium.price} €`;
-    // DOM élément <p> - nombre de likes
-    let pNumberLikes = document.createElement('p');
-    divLikes.appendChild(pNumberLikes);
-    pNumberLikes.innerHTML = `${medium.likes}`;
-    // DOM élément <i> - coeur
-    let heart = document.createElement('i');
-    divLikes.appendChild(heart);
-    heart.classList.add('fas', 'fa-heart');
-  
+    let divMedia = document.getElementById(`${medium.id}`)
+
     let icone = document.createElement('img');
     divMedia.appendChild(icone);
     icone.setAttribute("src", "./images/play.png");
@@ -248,10 +182,12 @@ class Video {
 }
 const factory = new MediaFactory();
 function testFactory(media) {
+  sectionMedia.innerHTML = '';
   for (medium of media) {
     if (medium.image !== undefined) {
       let card = factory.createMedia('image');
       card.createAnImageCard();
+
     } else {
       let card = factory.createMedia('video');
       card.createAVideoCard();
@@ -280,3 +216,90 @@ function drop() {
     options[2].style.display = 'none';
   }
 }
+function createDOMElements() {
+  let article = document.createElement('article');
+  sectionMedia.appendChild(article);
+  article.classList.add('article');
+  // DOM élément <figure> - conteneur
+  let figure = document.createElement('figure');
+  article.appendChild(figure);
+  // DOM élément <div> - conteneur du media
+  let divMedia = document.createElement('div');
+  figure.appendChild(divMedia);
+  divMedia.classList.add('article__link');
+  divMedia.setAttribute('id', `${medium.id}`)
+
+  // DOM élément <figcaption> - conteneur des informations
+  let figcaption = document.createElement('figcaption');
+  figure.appendChild(figcaption);
+  figcaption.classList.add('article__informations');
+  // DOM élément <p> - titre de l'image
+  let pTitle = document.createElement('p');
+  figcaption.appendChild(pTitle);
+  pTitle.innerHTML = `${medium.title}`;
+  // DOM élément <div> - conteneur prix et likes
+  let divLikes = document.createElement('div');
+  figcaption.appendChild(divLikes);
+  divLikes.classList.add('article__informations__likes');
+  // DOM élément <p> - prix
+  let pPrice = document.createElement('p');
+  divLikes.appendChild(pPrice);
+  pPrice.innerHTML = `${medium.price} €`;
+  // DOM élément <p> - nombre de likes
+  let pNumberLikes = document.createElement('p');
+  divLikes.appendChild(pNumberLikes);
+  pNumberLikes.innerHTML = medium.likes;
+  pNumberLikes.setAttribute('id', `${medium.id+'Like'}`);
+  // DOM élément <i> - coeur
+  let heart = document.createElement('i');
+  divLikes.appendChild(heart);
+  heart.classList.add('fas', 'fa-heart');
+  heart.addEventListener('click', () => addLikes(medium.likes));
+  console.log(medium.likes);
+}
+let popularity = document.getElementById('option1');
+popularity.addEventListener('click', () => popularitySort(photographer.media));
+function popularitySort(media) {
+  function tri(a,b) {
+    return ((a.likes < b.likes) ? 1 : (a.likes == b.likes) ? 0 : -1);
+  }
+  media.sort(tri);
+  testFactory(media);
+
+}
+let date = document.getElementById('option2');
+date.addEventListener('click', () => dateSort(photographer.media));
+function dateSort(media) {
+  function tri(a,b) {
+    dateA = new Date(a.date);
+    dateB = new Date(b.date);
+    return ((dateA < dateB) ? 1 : (dateA == dateB) ? 0 : -1);
+  }
+  media.sort(tri);
+  testFactory(media);
+}
+let title = document.getElementById('option3');
+title.addEventListener('click', () => titleSort(photographer.media));
+function titleSort(media) {
+  function tri(a,b) {
+    titleA = a.title.split(" ").join('');
+    a = titleA.toLowerCase();
+    titleB = b.title.split(" ").join('');
+    b = titleB.toLowerCase();
+    return (a < b) ? -1 : 1;
+  }
+  media.sort(tri);
+  testFactory(media);
+}
+
+function addLikes(likes) {
+  let number = medium.likes;
+  number += 1;
+  console.log(medium.likes);
+
+
+}
+
+
+
+
