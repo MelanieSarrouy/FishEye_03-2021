@@ -68,9 +68,39 @@
 
         </section>
 
+        <div class="modal-background">
+          <div class="modal-content">
+            <span class="close" id="close"></span>
+            <div class="modal">
+              <h2 class="modal__title">Contactez-moi</br>Nom du Photographe</h2>
+              <form name="contact" method="GET" action="photographer.page.html" class="modal__form" id="form" onsubmit="return validate(event)">
+                <div class="modal__form__formData">
+                  <label for="firstname" class="modal__form__formData__label">Prénom</label>
+                  <input type="text" class="modal__form__formData__input" id="firstname" required />
+                </div>
+                <div class="modal__form__formData">
+                  <label for="lastname" class="modal__form__formData__label">Nom</label>
+                  <input type="text" class="modal__form__formData__input" id="lastname" required />
+                </div>
+                <div class="modal__form__formData">
+                  <label for="email" class="modal__form__formData__label">Email</label>
+                  <input type="email" class="modal__form__formData__input" id="email" required />
+                </div>
+                <div class="modal__form__formData">
+                  <label for="message" class="modal__form__formData__labelArea">Votre message</label>
+                  <textarea name="textarea" id="message" class="modal__form__formData__textarea"
+                  minlength="10" maxlength="350" required>
+                  </textarea>
+                </div>
+                <input id="button" class="buttonSend" type="submit" value="Envoyer" />
+              </form>
+            </div>
+          </div>
+        </div>
+
         <div class="infos">
           <div class="infos__likes">
-            <p class="infos__likes__number">297 081</p>
+            <p class="infos__likes__number"></p>
             <i class="infos__likes__icone fas fa-heart"></i>
           </div>
           <p class="infos__price"></p>

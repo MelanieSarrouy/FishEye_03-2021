@@ -8,6 +8,11 @@ const button = document.querySelector('aside > button');
 const img = document.querySelector('aside > picture > img');
 const sectionMedia = document.querySelector('.media');
 const rate = document.querySelector('.infos__price');
+const totalLikesNb = document.querySelector('.infos__likes__number');
+const modal = document.querySelector('.modal-background');
+const contact = document.querySelector('.button__contact');
+const contactTitle = document.querySelector('.modal__title');
+const close = document.querySelector('.close');
 
 // Requête objet JSON __________________________________________________________________________________________________
 
@@ -111,9 +116,9 @@ function getPhotographer(photographers) {
 function folderName(photographer) {
   let name = photographer.name.toLowerCase().replace('-', '_');
   let i = name.indexOf(" ");
-  firstName = i == -1 ? name : name.substring(0, i);
-  console.log(firstName);
-  return firstName;
+  nickName = i == -1 ? name : name.substring(0, i);
+  console.log(nickName);
+  return nickName;
 }
 
 // Affichage de la "carte d'identité" du photographe // ________________________________________________________________
@@ -131,14 +136,22 @@ function displayPhotographer() {
     </li>`;
   }
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
+  totalLikes(photographer.media);
 }
-
+function totalLikes(media) {
+  let number = 0;
+  for (let i = 0; i < media.length; i++) {
+    number += media[i].likes;
+  }
+  totalLikesNb.innerHTML = number;
+}
 // Affichage des cartes media du photographe // ________________________________________________________________
 
 class MediaFactory {
   constructor() {
     this.createMedia = (type) => {
       createDOMElements();
+  
       let med;
       if (type === 'image') {
         med = new Image();
@@ -151,18 +164,25 @@ class MediaFactory {
 }
 class Image {
   createAnImageCard() {
-    let divMedia = document.getElementById(`${medium.id}`);
+    let divMedia = document.getElementById(`idImage${medium.id}`);
 
     let image = document.createElement('img');
     divMedia.appendChild(image);
-    image.setAttribute("src", `./images/sample_photos/${firstName}/${medium.image}`); 
+    image.setAttribute("src", `./images/sample_photos/${nickName}/${medium.image}`); 
     image.setAttribute("alt", `${medium.title}`);
     image.setAttribute("id", `id${medium.id}`);
+
+    // let heart = document.getElementById(`heart${medium.id}`);
+    // let number = document.getElementById(`Likes${medium.id}`); 
+    // heart.onclick = () => {
+    //   number.innerHTML = medium.likes + 1; 
+    // }
+    // // heart.addEventListener('click', () => getLikes(medium.likes));
   }
 }
 class Video {
   createAVideoCard() {
-    let divMedia = document.getElementById(`${medium.id}`)
+    let divMedia = document.getElementById(`idImage${medium.id}`)
 
     let icone = document.createElement('img');
     divMedia.appendChild(icone);
@@ -174,7 +194,7 @@ class Video {
     let source = document.createElement('source');
     video.appendChild(source);
   
-    source.setAttribute("src", `./images/sample_photos/${firstName}/${medium.video}`);
+    source.setAttribute("src", `./images/sample_photos/${nickName}/${medium.video}`);
     source.setAttribute("alt", `${medium.title}`);
     source.setAttribute("id", `${medium.id}`);
     source.setAttribute("type", "video/mp4");
@@ -187,13 +207,71 @@ function testFactory(media) {
     if (medium.image !== undefined) {
       let card = factory.createMedia('image');
       card.createAnImageCard();
-
     } else {
       let card = factory.createMedia('video');
       card.createAVideoCard();
     }
   }
 }
+function createDOMElements() {
+  let article = document.createElement('article');
+  sectionMedia.appendChild(article);
+  article.classList.add('article');
+  article.setAttribute('id', `${medium.id}`);
+  // DOM élément <figure> - conteneur
+  let figure = document.createElement('figure');
+  article.appendChild(figure);
+  // DOM élément <div> - conteneur du media
+  let divMedia = document.createElement('div');
+  figure.appendChild(divMedia);
+  divMedia.classList.add('article__link');
+  divMedia.setAttribute('id', `idImage${medium.id}`)
+
+  // DOM élément <figcaption> - conteneur des informations
+  let figcaption = document.createElement('figcaption');
+  figure.appendChild(figcaption);
+  figcaption.classList.add('article__informations');
+  // DOM élément <p> - titre de l'image
+  let pTitle = document.createElement('p');
+  figcaption.appendChild(pTitle);
+  pTitle.innerHTML = `${medium.title}`;
+  // DOM élément <div> - conteneur prix et likes
+  let divLikes = document.createElement('div');
+  figcaption.appendChild(divLikes);
+  divLikes.classList.add('article__informations__likes');
+  // DOM élément <p> - prix
+  let pPrice = document.createElement('p');
+  divLikes.appendChild(pPrice);
+  pPrice.innerHTML = `${medium.price} €`;
+  // DOM élément <p> - nombre de likes
+  let pNumberLikes = document.createElement('p');
+  divLikes.appendChild(pNumberLikes);
+  pNumberLikes.innerHTML = medium.likes;
+  pNumberLikes.setAttribute('id', `Likes${medium.id}`);
+  pNumberLikes.classList.add('likes');
+  // DOM élément <i> - coeur
+  let heart = document.createElement('i');
+  divLikes.appendChild(heart);
+  heart.classList.add('fas', 'fa-heart');
+  heart.setAttribute('id', `heart${medium.id}`);
+  heart.setAttribute('onclick', 'addLikes()');
+  
+
+  // let heartOne = document.getElementById(`heart${medium.id}`);
+  // heartOne.addEventListener('click', () => addLikes(`${medium.likes}`));
+}
+function addLikes() {
+  let number = document.getElementById(`Likes${medium.id}`);
+  let likes = parseInt(number.textContent, 10);
+  let totalLikes = parseInt(totalLikesNb.textContent, 10);
+  console.log(medium.likes);
+  likes++;
+  totalLikes++;
+  number.innerHTML = likes;
+  totalLikesNb.innerHTML = totalLikes;
+  console.log(likes);
+}
+
 
 // Dropdown // _______________________________________________________________________________
 let dropDown = document.getElementById('dropdown');
@@ -216,47 +294,8 @@ function drop() {
     options[2].style.display = 'none';
   }
 }
-function createDOMElements() {
-  let article = document.createElement('article');
-  sectionMedia.appendChild(article);
-  article.classList.add('article');
-  // DOM élément <figure> - conteneur
-  let figure = document.createElement('figure');
-  article.appendChild(figure);
-  // DOM élément <div> - conteneur du media
-  let divMedia = document.createElement('div');
-  figure.appendChild(divMedia);
-  divMedia.classList.add('article__link');
-  divMedia.setAttribute('id', `${medium.id}`)
+// Tri par popularité ________________________________________________________________________ 
 
-  // DOM élément <figcaption> - conteneur des informations
-  let figcaption = document.createElement('figcaption');
-  figure.appendChild(figcaption);
-  figcaption.classList.add('article__informations');
-  // DOM élément <p> - titre de l'image
-  let pTitle = document.createElement('p');
-  figcaption.appendChild(pTitle);
-  pTitle.innerHTML = `${medium.title}`;
-  // DOM élément <div> - conteneur prix et likes
-  let divLikes = document.createElement('div');
-  figcaption.appendChild(divLikes);
-  divLikes.classList.add('article__informations__likes');
-  // DOM élément <p> - prix
-  let pPrice = document.createElement('p');
-  divLikes.appendChild(pPrice);
-  pPrice.innerHTML = `${medium.price} €`;
-  // DOM élément <p> - nombre de likes
-  let pNumberLikes = document.createElement('p');
-  divLikes.appendChild(pNumberLikes);
-  pNumberLikes.innerHTML = medium.likes;
-  pNumberLikes.setAttribute('id', `${medium.id+'Like'}`);
-  // DOM élément <i> - coeur
-  let heart = document.createElement('i');
-  divLikes.appendChild(heart);
-  heart.classList.add('fas', 'fa-heart');
-  heart.addEventListener('click', () => addLikes(medium.likes));
-  console.log(medium.likes);
-}
 let popularity = document.getElementById('option1');
 popularity.addEventListener('click', () => popularitySort(photographer.media));
 function popularitySort(media) {
@@ -266,6 +305,7 @@ function popularitySort(media) {
   media.sort(tri);
   testFactory(media);
 
+// Tri par date ________________________________________________________________________ 
 }
 let date = document.getElementById('option2');
 date.addEventListener('click', () => dateSort(photographer.media));
@@ -278,6 +318,9 @@ function dateSort(media) {
   media.sort(tri);
   testFactory(media);
 }
+
+// Tri par tire ________________________________________________________________________ 
+
 let title = document.getElementById('option3');
 title.addEventListener('click', () => titleSort(photographer.media));
 function titleSort(media) {
@@ -292,14 +335,130 @@ function titleSort(media) {
   testFactory(media);
 }
 
-function addLikes(likes) {
-  let number = medium.likes;
-  number += 1;
+// incrémentation du nombre de likes ____________________________________________________
+function getLikes(likes) {
+  // let heart = document.getElementById(`heart${medium.id}`);
+  // heart.addEventListener('click',() => {
   console.log(medium.likes);
+  let number = document.getElementById(`Likes${medium.id}`); 
+  console.log(number);
+  console.log(medium);
 
+  number.innerHTML = medium.likes + 1; 
 
 }
 
+contact.addEventListener('click', () => launchModal());
 
+function launchModal() {
+  modal.style.display = 'block';
+  // contactTitle.innerHTML = `Contactez_moi ${photographer.name}`;
+
+}
+
+close.addEventListener('click', () => closeModal());
+function closeModal() {
+  modal.style.display = 'none';
+}
+
+// function testFirstName ______________________________________________
+const formData = document.getElementsByClassName("modal__form__formData"); // Toutes les div formData avec input
+const pErrorFirstName = document.createElement("p"); // creation du p error FirstName
+const pErrorLastName = document.createElement("p"); // creation du p error LastName
+const pErrorEmail = document.createElement("p"); // creation du p error Email
+const firstName = document.getElementById("firstname"); // ajout input firstname dans le DOM
+const lastName = document.getElementById("lastname"); // ajout input lastname dans le DOM
+const eMail = document.getElementById("email"); // ajout input email dans le DOM
+let goButton = document.getElementById("button"); // bouton validation
+const form = document.getElementById("form"); // le formulaire
+
+formData[0].appendChild(pErrorFirstName);
+pErrorFirstName.classList.add("pError");
+let regexFirstName = /^[a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ]+([ \-'][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ]+)?$/;
+
+firstName.addEventListener("blur", testFirstName);
+goButton.addEventListener("mousedown", testFirstName);
+
+function testFirstName() {
+  if ((firstName.value.length < 2) || 
+     (firstName.value.length >= 30) ||
+     (!regexFirstName.test(firstName.value)) || 
+     (firstName.value == "")) {
+    firstName.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
+    pErrorFirstName.textContent = "Veuillez saisir votre prénom (min 2 caractères)"; // message d'erreur sur paragraphe pError;
+    firstName.addEventListener("input", testFirstName);
+    return false;
+  } else {
+    firstName.classList.remove("inputError");
+    pErrorFirstName.textContent = "";
+    return true;
+  }
+}
+// function testLastName _______________________________________________
+
+formData[1].appendChild(pErrorLastName);
+pErrorLastName.classList.add("pError");
+let regexLastName = regexFirstName;
+
+lastName.addEventListener("blur", testLastName);
+goButton.addEventListener("mousedown", testLastName);
+
+function testLastName() {
+  if ((lastName.value.length < 2) || 
+     (lastName.value.length >= 30) ||
+     (!regexLastName.test(lastName.value)) || 
+     (lastName.value == "")) {
+    lastName.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
+    pErrorLastName.textContent = "Veuillez saisir votre nom (min 2 caractères)"; // message d'erreur sur paragraphe pError;
+    lastName.addEventListener("input", testLastName);
+    return false;
+  } else {
+    lastName.classList.remove("inputError");
+    pErrorLastName.textContent = "";
+    return true;
+  }
+}
+// function testEmail __________________________________________________
+formData[2].appendChild(pErrorEmail);
+pErrorEmail.classList.add("pError");
+let regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+eMail.addEventListener("blur", testEmail);
+goButton.addEventListener("mousedown", testEmail);
+
+function testEmail() {
+  if ((eMail.value.length < 5) || 
+     (eMail.value.length >= 30) ||
+     (!regexEmail.test(eMail.value)) || 
+     (eMail.value == "")) {
+    eMail.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
+    pErrorEmail.textContent = "Adresse mail incorrecte"; // message d'erreur sur paragraphe pError;
+    eMail.addEventListener("input", testEmail);
+    return false;
+  } else {
+    eMail.classList.remove("inputError");
+    pErrorEmail.textContent = "";
+    return true;
+  }
+}
+// function submit __________________________________________________
+
+form.addEventListener("submit", validate());
+const textArea = document.querySelector('#message');
+console.log(textArea);
+
+function validate(event) {
+  event.preventDefault();
+  if ((testFirstName() == true) && 
+      (testLastName() == true) &&
+      (testEmail() == true)) {
+    console.log(firstName.value);
+    console.log(lastName.value);
+    console.log(eMail.value);
+    // console.log(textArea.textContent);
+    goButton.addEventListener("click", closeModal);    
+    closeModal();
+  }
+}
 
 
