@@ -1,0 +1,71 @@
+.media {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 350px));
+  column-gap: 1rem;
+  justify-content: space-between;
+  @include respond-to(small-screen) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 3.5rem;
+  }
+}
+
+// classes ajoutées avec js
+.article {
+  position: relative;
+  padding-bottom: 0.9rem;
+  display: flex;
+  justify-content: center;
+  &__link {
+    max-height: 300px;
+    max-width: 350px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    @include respond-to(small-screen) {
+      height: 190px;
+      width: 335px;
+    }
+    @include respond-to(verysmall-screen) {
+      max-height: 190px;
+      max-width: 270px;
+    }
+  }
+  &__informations {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    color: $color-primary; 
+    font-weight: 500;
+    font-size: 1.2rem;
+    @include respond-to(small-screen) {
+      font-weight: 400;
+      font-size: 1rem;
+      }
+    &__likes {
+      display: flex;
+      & p:first-child {
+        padding: 0 0.7rem;
+      }
+      & p:nth-child(2) {
+        padding: 0 0.3rem 0 0;
+      }
+      & .fa-heart {
+        cursor: pointer;
+      }
+    }
+  }
+}
+// .logoPlay {
+//   position: absolute;
+//   width: 25%;
+//   top: 32%;
+//   @include respond-to(small-screen) {
+//     // width: 10%;
+//     top: 22%;
+//   }
+// }

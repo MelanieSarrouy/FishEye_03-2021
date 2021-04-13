@@ -1,0 +1,39 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-primary;
+  color: white;
+  border-radius: 0.3rem;
+  padding: 0 0.7rem;
+  margin-top: 0.8rem;
+  cursor: pointer;
+  position: relative;
+  &__option {
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    width: 9.25rem;
+    &:nth-child(2) {
+      border-bottom: solid 0.05rem white;
+      border-top: solid 0.05rem white;
+    }
+  }
+}
+.arrows {
+  position: absolute;
+  top: 1.2rem;
+  right: 0.6rem;
+}
+#option2, #option3 {
+  display: none;
+}
+.fa-chevron-down {
+  color: white;
+  padding: 0 0.5rem 0 1.5rem;
+}
+.fa-chevron-up {
+  color: white;
+  padding: 0 0.5rem 0 1.5rem;
+  display: none;
+}
