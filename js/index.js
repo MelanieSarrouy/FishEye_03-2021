@@ -61,6 +61,7 @@ function showPhotographers(photographers) {
     createAcard(photographers[i]);
     displayTags(photographers[i]);
   }
+  hashChanged(photographers);
 }
 
 // Création d'une carte photographe ______________________________________________________________________
@@ -148,10 +149,9 @@ function hashChanged() {
 // Page photographer ! gerer les imports exports !!!
 const scroll = document.querySelector('.contenu__link');
 let y = window.scrollY;
-console.log(window.scrollY);
 window.addEventListener('scroll', () => content());
 function content() {
-  if ( window.scrollY > 300 ) {
+  if ( window.scrollY > 250 ) {
     scroll.style.display = 'block';
   } else {
     scroll.style.display = 'none';

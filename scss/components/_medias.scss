@@ -38,14 +38,27 @@
   &__informations {
     display: flex;
     justify-content: space-between;
-    padding: 0.8rem 0;
+    padding: 0.8rem 0 0.4rem;
+    height: 1.5rem;
     color: $color-primary; 
     font-weight: 500;
     font-size: 1.2rem;
+    max-width: 350px;
+    overflow: hidden;
+    & p:first-child {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
     @include respond-to(small-screen) {
       font-weight: 400;
       font-size: 1rem;
-      }
+      max-width: 335px;
+    }
+    @include respond-to(verysmall-screen) {
+      max-width: 270px;
+    }
+
     &__likes {
       display: flex;
       & p:first-child {
@@ -60,12 +73,11 @@
     }
   }
 }
-// .logoPlay {
-//   position: absolute;
-//   width: 25%;
-//   top: 32%;
-//   @include respond-to(small-screen) {
-//     // width: 10%;
-//     top: 22%;
-//   }
-// }
+.logoPlay {
+  position: absolute;
+  width: 5rem;
+  top: 32%;
+  @include respond-to(small-screen) {
+    top: 22%;
+  }
+}

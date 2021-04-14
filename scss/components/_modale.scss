@@ -7,6 +7,7 @@
   height: 5000px;
   width: 100vw;
   background-color: rgba(196, 196, 196, 0.4);
+  z-index: 5;
 }
 .modal-content {
   margin: 4% auto;
@@ -76,8 +77,10 @@
         outline-style: none;
         font-size: 1.5rem;
         height: 10rem;
-        text-align: left;
+        text-align: justify;
         padding: 0.5rem;
+        font-family: $font-family-texte;
+        resize: none;
       }
     }
   }

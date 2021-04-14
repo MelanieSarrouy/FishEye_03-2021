@@ -1,5 +1,6 @@
 .header2 {
   display: flex;
+  justify-content: space-between;
   padding-top: 3rem;
   padding-bottom: 5rem;
   @include respond-to(small-screen) {
@@ -17,5 +18,18 @@
     @include respond-to(small-screen) {
       max-width: 9.4rem;
     }
+  }
+}
+.up {
+  color: #c4c4c4;
+  font-size: 2rem;
+  cursor: pointer;
+  position: fixed;
+  bottom: 50vh;
+  right: 2rem;
+  z-index: 3;
+  @include respond-to(small-screen) {
+    bottom: 2.7rem;
+    right: 0.5rem;
   }
 }
