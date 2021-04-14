@@ -3,22 +3,54 @@
 }
 h1 {
   position: absolute;
-  top: -7rem;
-  right: 1.5rem;
+  top: -6.6rem;
+  right: 0rem;
+  font-size: 2.2rem;
+  @include respond-to(small-screen) {
+    font-size: 1rem;
+    font-weight: 400;
+    top: -9.6rem;
+  }
+  @include respond-to(verysmall-screen) {
+    top: -9.5rem;
+  }
+}
+h2 {
+  font-size: 2.2rem;
 }
 #photographersCards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding-top: 5rem;
+  justify-content: center;
+  padding-top: 2rem;
   column-gap: 12%;
-
+  @include respond-to(medium-screen) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    // grid-template-columns: repeat(2, 1fr);
+    padding-top: 4rem;
+  }
+  @include respond-to(small-screen) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+  }
+  @include respond-to(verysmall-screen) {
+    padding-top: 4rem;
+  }
 }
 .photographer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
   max-width: 300px;
+  @include respond-to(small-screen) {
+    padding-bottom: 1.5rem;
+  }
+
   &__link {
     display: flex;
     flex-direction: column;
@@ -27,8 +59,8 @@ h1 {
     cursor: pointer;
   }
   &__figure {
-    width: 10rem;
-    height: 10rem;
+    width: 12.5rem;
+    height: 12.5rem;
     border-radius: 50%;
     overflow: hidden;
     margin: 0 1.5rem 1.5rem;
@@ -66,7 +98,7 @@ h1 {
     color: $color-primary;
     font-weight: 500;
     padding: 0.15rem 0.3rem;
-    border: solid 0.1rem $color-tertiary-txt;
+    border: solid 0.1rem #c4c4c4;
     border-radius: 1.5rem;
     &:hover, &:focus {
       outline: none;

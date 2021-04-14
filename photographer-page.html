@@ -29,7 +29,7 @@
 
       </header>
 
-      <main>
+      <main class="main2" id="main2" role="main">
 
         <aside class="photographer">
           <div class="photographer__informations">
@@ -39,9 +39,7 @@
             <ul class="tags">
             </ul>
           </div>
-          <div class="button">
-            <button class="button__contact" title="Contactez-moi">Contactez-moi</button>
-          </div>
+          <button class="button__contact" title="Contactez-moi">Contactez-moi</button>
           <picture class="photographer__picture">
             <img class="photographer__picture__img" src="./images/sample_photos/photographers_ID_photos/MimiKeel.jpg" alt="photo portrait du photographe"/>
           </picture>
@@ -65,12 +63,11 @@
         
         <section class="media">
 
-
         </section>
 
         <div class="modal-background">
           <div class="modal-content">
-            <span class="close" id="close"></span>
+            <span class="close closeModal" id="closeModal"></span>
             <div class="modal">
               <h2 class="modal__title">Contactez-moi</br>Nom du Photographe</h2>
               <form name="contact" method="GET" action="photographer.page.html" class="modal__form" id="form" onsubmit="return validate(event)">
@@ -95,6 +92,17 @@
                 <input id="button" class="buttonSend" type="submit" value="Envoyer" />
               </form>
             </div>
+          </div>
+        </div>
+
+        <div class="lightbox-background">
+          <div class="lightbox-content">
+            <span class="close closeLightbox" id="closeLightbox"></span>
+            <i class="arrowLeft fas fa-chevron-left"></i>
+            <div class="lightbox">
+
+            </div>
+            <i class="arrowRight fas fa-chevron-right"></i>
           </div>
         </div>
 

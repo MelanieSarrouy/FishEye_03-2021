@@ -12,7 +12,7 @@ const totalLikesNb = document.querySelector('.infos__likes__number');
 const modal = document.querySelector('.modal-background');
 const contact = document.querySelector('.button__contact');
 const contactTitle = document.querySelector('.modal__title');
-const close = document.querySelector('.close');
+const closeContact = document.querySelector('#closeModal');
 
 // Requête objet JSON __________________________________________________________________________________________________
 
@@ -136,6 +136,7 @@ function displayPhotographer() {
     </li>`;
   }
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
+  contactTitle.innerHTML = `Contactez-moi </br>${photographer.name}`;
   totalLikes(photographer.media);
 }
 function totalLikes(media) {
@@ -145,13 +146,13 @@ function totalLikes(media) {
   }
   totalLikesNb.innerHTML = number;
 }
-// Affichage des cartes media du photographe // ________________________________________________________________
+// Display medias - FACTORY METHOD // __________// Display medias - FACTORY METHOD // ______________________________________________________
 
 class MediaFactory {
   constructor() {
     this.createMedia = (type) => {
       createDOMElements();
-  
+      // likes(medium);
       let med;
       if (type === 'image') {
         med = new Image();
@@ -165,35 +166,25 @@ class MediaFactory {
 class Image {
   createAnImageCard() {
     let divMedia = document.getElementById(`idImage${medium.id}`);
-
     let image = document.createElement('img');
     divMedia.appendChild(image);
     image.setAttribute("src", `./images/sample_photos/${nickName}/${medium.image}`); 
     image.setAttribute("alt", `${medium.title}`);
     image.setAttribute("id", `id${medium.id}`);
-
-    // let heart = document.getElementById(`heart${medium.id}`);
-    // let number = document.getElementById(`Likes${medium.id}`); 
-    // heart.onclick = () => {
-    //   number.innerHTML = medium.likes + 1; 
-    // }
-    // // heart.addEventListener('click', () => getLikes(medium.likes));
   }
 }
 class Video {
   createAVideoCard() {
     let divMedia = document.getElementById(`idImage${medium.id}`)
-
-    let icone = document.createElement('img');
-    divMedia.appendChild(icone);
-    icone.setAttribute("src", "./images/play.png");
-    icone.classList.add('logoPlay');
-  
+    // let icone = document.createElement('img');
+    // divMedia.appendChild(icone);
+    // icone.setAttribute("src", "./images/play.png");
+    // icone.classList.add('logoPlay');
     let video = document.createElement('video');
     divMedia.appendChild(video);
     let source = document.createElement('source');
     video.appendChild(source);
-  
+    // video.setAttribute("controls");
     source.setAttribute("src", `./images/sample_photos/${nickName}/${medium.video}`);
     source.setAttribute("alt", `${medium.title}`);
     source.setAttribute("id", `${medium.id}`);
@@ -210,6 +201,7 @@ function testFactory(media) {
     } else {
       let card = factory.createMedia('video');
       card.createAVideoCard();
+
     }
   }
 }
@@ -247,33 +239,34 @@ function createDOMElements() {
   let pNumberLikes = document.createElement('p');
   divLikes.appendChild(pNumberLikes);
   pNumberLikes.innerHTML = medium.likes;
-  pNumberLikes.setAttribute('id', `Likes${medium.id}`);
+  pNumberLikes.setAttribute('id', `likes${medium.id}`);
   pNumberLikes.classList.add('likes');
   // DOM élément <i> - coeur
   let heart = document.createElement('i');
   divLikes.appendChild(heart);
   heart.classList.add('fas', 'fa-heart');
   heart.setAttribute('id', `heart${medium.id}`);
-  heart.setAttribute('onclick', 'addLikes()');
-  
-
-  // let heartOne = document.getElementById(`heart${medium.id}`);
-  // heartOne.addEventListener('click', () => addLikes(`${medium.likes}`));
+  // heart.setAttribute('onclick', `addLikes(medium)`);
+  heart.addEventListener('click', () => addLikes(medium));
 }
-function addLikes() {
-  let number = document.getElementById(`Likes${medium.id}`);
-  let likes = parseInt(number.textContent, 10);
-  let totalLikes = parseInt(totalLikesNb.textContent, 10);
+function addLikes(medium) {
   console.log(medium.likes);
-  likes++;
+  let number = document.getElementById(`likes${medium.id}`);
+  let numberOfLikes = parseInt(number.textContent, 10);
+  let totalLikes = parseInt(totalLikesNb.textContent, 10);
+  numberOfLikes++;
   totalLikes++;
-  number.innerHTML = likes;
+  number.innerHTML = numberOfLikes;
   totalLikesNb.innerHTML = totalLikes;
-  console.log(likes);
 }
+// function likes(medium) {
+//   let heart = document.getElementById(`heart${medium.id}`);
+//   heart.addEventListener('click', () => addLikes(medium));
+// }
 
 
-// Dropdown // _______________________________________________________________________________
+// DROPDOWN // _____// DROPDOWN //__________// DROPDOWN //________// DROPDOWN //________________________________________________________
+
 let dropDown = document.getElementById('dropdown');
 let arrowDown = document.querySelector('.fa-chevron-down');
 let arrowUp = document.querySelector('.fa-chevron-up');
@@ -295,7 +288,6 @@ function drop() {
   }
 }
 // Tri par popularité ________________________________________________________________________ 
-
 let popularity = document.getElementById('option1');
 popularity.addEventListener('click', () => popularitySort(photographer.media));
 function popularitySort(media) {
@@ -304,7 +296,6 @@ function popularitySort(media) {
   }
   media.sort(tri);
   testFactory(media);
-
 // Tri par date ________________________________________________________________________ 
 }
 let date = document.getElementById('option2');
@@ -318,7 +309,6 @@ function dateSort(media) {
   media.sort(tri);
   testFactory(media);
 }
-
 // Tri par tire ________________________________________________________________________ 
 
 let title = document.getElementById('option3');
@@ -335,18 +325,7 @@ function titleSort(media) {
   testFactory(media);
 }
 
-// incrémentation du nombre de likes ____________________________________________________
-function getLikes(likes) {
-  // let heart = document.getElementById(`heart${medium.id}`);
-  // heart.addEventListener('click',() => {
-  console.log(medium.likes);
-  let number = document.getElementById(`Likes${medium.id}`); 
-  console.log(number);
-  console.log(medium);
-
-  number.innerHTML = medium.likes + 1; 
-
-}
+// MODALE // _____// MODALE //_______// MODALE //______// MODALE // _________________________________
 
 contact.addEventListener('click', () => launchModal());
 
@@ -356,7 +335,7 @@ function launchModal() {
 
 }
 
-close.addEventListener('click', () => closeModal());
+closeContact.addEventListener('click', () => closeModal());
 function closeModal() {
   modal.style.display = 'none';
 }
@@ -442,8 +421,7 @@ function testEmail() {
   }
 }
 // function submit __________________________________________________
-
-form.addEventListener("submit", validate());
+form.addEventListener("submit", validate(event));
 const textArea = document.querySelector('#message');
 console.log(textArea);
 
@@ -455,10 +433,11 @@ function validate(event) {
     console.log(firstName.value);
     console.log(lastName.value);
     console.log(eMail.value);
-    // console.log(textArea.textContent);
     goButton.addEventListener("click", closeModal);    
     closeModal();
   }
 }
+
+// lightbox ____________________________________________________________________________________
 
 

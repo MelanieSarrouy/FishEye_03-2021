@@ -2,14 +2,20 @@
   display: flex;
   padding-top: 3rem;
   padding-bottom: 5rem;
+  @include respond-to(small-screen) {
+    padding: 2.5rem 0rem 2rem;
+  }
   &__link {
     display: flex;
     justify-content: center;
   }
   &__img {
-    max-width: 10rem;
+    max-width: 12.5rem;
     object-fit: contain;
     display: flex;
     align-self: start;
+    @include respond-to(small-screen) {
+      max-width: 9.4rem;
+    }
   }
 }
