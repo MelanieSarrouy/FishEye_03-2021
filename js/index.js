@@ -97,6 +97,9 @@ function createAcard(photographer) {
 
   // Contenu des cartes photographes
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
+  img.setAttribute('alt', `portrait du photographe ${photographer.name}`);
+  img.setAttribute('width', `200`);
+  img.setAttribute('height', `200`);
   anchor.setAttribute("href", "photographer-page.html?id=" + `${photographer.id}`);
   h2.innerHTML = `${photographer.name}`;
   pLocation.innerHTML = `${photographer.city}, ${photographer.country}`;

@@ -24,7 +24,7 @@
       <header class="header2">
 
         <a href="index.html" class="header2__link" aria-label="Fishey Home page">
-          <img class="header2__img" src="./images/logoFisheye.svg" alt="logo Fisheye renvoi page d'accueil" />
+          <img class="header2__img" src="./images/logoFisheye.svg" alt="logo Fisheye renvoi page d'accueil" width="200" height="52"/>
         </a>
         <a href="#" class="header2__anchor" aria-label="remonter au début de la page">
           <i class="up fas fa-arrow-circle-up"></i>
@@ -65,7 +65,6 @@
         </div>
         
         <section class="media" id="media">
-
         </section>
 
         <div class="modal-background">
@@ -98,14 +97,19 @@
           </div>
         </div>
 
-        <div class="lightbox-background">
-          <div class="lightbox-content">
-            <span class="close closeLightbox" id="closeLightbox"></span>
-            <i class="arrowLeft fas fa-chevron-left"></i>
-            <div class="lightbox">
-
+        <div class="lightbox">
+          <div class="lightbox__container">
+            <span class="closeLightbox" id="closeLightbox"></span>
+            <div class="buttonArrow" id="left">
+              <i class="arrow fas fa-chevron-left"></i>
             </div>
-            <i class="arrowRight fas fa-chevron-right"></i>
+            <div class="lightbox__container__medias">
+              <div class="mediasLightbox">
+              </div>
+            </div>
+            <div class="buttonArrow" id="right">
+              <i class="arrow fas fa-chevron-right"></i>
+            </div>
           </div>
         </div>
 

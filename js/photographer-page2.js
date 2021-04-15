@@ -131,7 +131,10 @@ function displayPhotographer() {
       <a class="tags__tag__link" href="index.html#${tag}">#${tag}</a>
     </li>`;
   }
-  img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
+  img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/small/${photographer.portrait}`);
+  img.setAttribute('alt', `portrait du photographe ${photographer.name}`);
+  img.setAttribute('width', `200`);
+  img.setAttribute('height', `200`);
   contactTitle.innerHTML = `Contactez-moi </br>${photographer.name}`;
   totalLikes(photographer.media);
 }
@@ -164,10 +167,12 @@ class Image {
     let divMedia = document.getElementById(`idImage${medium.id}`);
     let image = document.createElement('img');
     divMedia.appendChild(image);
-    image.setAttribute("src", `./images/sample_photos/${nickName}/${medium.image}`); 
-    image.setAttribute("alt", `${medium.title}`);
+    image.setAttribute("src", `./images/sample_photos/${nickName}/light/${medium.image}`); 
+    image.setAttribute("alt", `${medium.alt}`);
     image.setAttribute("id", `id${medium.id}`);
-
+    image.setAttribute('width', `350`);
+    image.setAttribute('height', `300`);
+  
   }
 }
 class Video {
@@ -177,15 +182,14 @@ class Video {
     divMedia.appendChild(icone);
     icone.setAttribute("src", "./images/play.png");
     icone.classList.add('logoPlay');
-    let video = document.createElement('video');
-    divMedia.appendChild(video);
-    let source = document.createElement('source');
-    video.appendChild(source);
-    video.setAttribute('controls', 'true');
-    source.setAttribute("src", `./images/sample_photos/${nickName}/${medium.video}`);
-    source.setAttribute("alt", `${medium.title}`);
-    source.setAttribute("id", `${medium.id}`);
-    source.setAttribute("type", "video/mp4");
+    let image = document.createElement('img');
+    divMedia.appendChild(image);
+    let captureImage = medium.video.replace('mp4', 'jpg');
+    image.setAttribute("src", `./images/sample_photos/${nickName}/light/${captureImage}`); 
+    image.setAttribute("alt", `Video ${medium.alt}`);
+    image.setAttribute("id", `id${medium.id}`);
+    image.setAttribute('width', `350`);
+    image.setAttribute('height', `300`);
   }
 }
 const factory = new MediaFactory();
@@ -215,7 +219,8 @@ function createDOMElements() {
   divMedia.classList.add('article__link');
   divMedia.setAttribute('id', `idImage${medium.id}`)
 
-  // DOM élément <figcaption> - conteneur des informations
+  divMedia.addEventListener('click', () => lightbox()); 
+
   let figcaption = document.createElement('figcaption');
   figure.appendChild(figcaption);
   figcaption.classList.add('article__informations');
@@ -244,14 +249,14 @@ function createDOMElements() {
   heart.classList.add('heart', 'fas', 'fa-heart');
   heart.setAttribute('id', `heart${medium.id}`);
   // heart.setAttribute('onclick', `addLikes(medium)`);
-  heart.addEventListener('click', () => addLikes(event));
+  heart.addEventListener('click', () => addLikes());
 }
 
-// LIKES // ________// LIKES //__________// LIKES //________// LIKES //______________// LIKES //_________________________________________________
+// LIKES // ________// LIKES //__________// LIKES //________// LIKES //______________// LIKES //_________________________________________
 
 function addLikes() {
   if (document.addEventListener) {
-    let heart = event.target;
+    let heart = window.event.target;
     let idHeart = heart.getAttribute('id');
     let idLikes = idHeart.replace('heart', 'likes');
     let number = document.getElementById(idLikes);
@@ -271,6 +276,129 @@ function addLikes() {
       totalLikesNb.innerHTML = totalLikes;
     }
   }
+}
+
+// LIGHTBOX // ___________// LIGHTBOX // _____________// LIGHTBOX // _______________// LIGHTBOX // _____________________________________
+let lightBox = document.querySelector('.lightbox'); // la lightbox
+let divMediasLightbox = document.querySelector('.mediasLightbox'); // le conteneur d'image de la lightbox
+let closeLightbox = document.getElementById('closeLightbox'); // le bouton de fermeture de la lightbox
+let previous = document.getElementById('left'); // bouton "précédent"
+let next = document.getElementById('right'); // buoton "suivant"
+
+function lightbox() {
+  if (document.addEventListener) {
+    let picture = window.event.target;
+    let divMedia = picture.parentNode;
+    let idDivMedia = divMedia.getAttribute('id');
+    let id = idDivMedia.replace('idImage', '');
+    lightBox.style.display = 'flex';
+    dynamicLightbox(id);
+  }
+}
+function dynamicLightbox(id) {
+  divMediasLightbox.innerHTML = '';
+  let media = photographer.media;
+  for ( theMedia of media ) {
+    if (id == theMedia.id) {
+      let myMedia = theMedia;
+      FactoryLightbox(myMedia);
+      previous.addEventListener('click', () => showPrevious(id));
+      next.addEventListener('click', () => showNext(id));
+    }
+  }
+}
+function showPrevious(id) {
+  let article = document.getElementById(id);
+  let previousArticle = article.previousSibling;
+  if (previousArticle.tagName == 'ARTICLE') {
+    id = previousArticle.getAttribute('id');
+    dynamicLightbox(id);
+  } else {
+    previousArticle = sectionMedia.lastChild;
+    id = previousArticle.getAttribute('id');
+    dynamicLightbox(id);
+  }
+}
+function showNext(id) {
+  let article = document.getElementById(id);
+  let nextArticle = article.nextSibling;
+  if (nextArticle.tagName == 'ARTICLE') {
+    id = nextArticle.getAttribute('id');
+    dynamicLightbox(id);
+  } else {;
+    nextArticle = sectionMedia.firstChild;
+    id = nextArticle.getAttribute('id');
+    dynamicLightbox(id);
+  }
+}
+class LightboxFactory {
+  constructor() {
+    this.createPicture = (type) => {
+      let med;
+      if (type === 'image') {
+        med = new ImageLightbox();
+      } else if (type === 'video') {
+        med = new VideoLightbox();
+      }
+      return med;
+    }
+  }
+}
+class ImageLightbox {
+  createAnImage(media) {
+    let medium = media.image;
+    let figure = document.createElement('figure');
+    divMediasLightbox.appendChild(figure);
+    let image = document.createElement('img');
+    figure.appendChild(image);
+    figure.classList.add('figureLightbox');
+    image.setAttribute('src', `../images/sample_photos/${nickName}/${medium}`)
+    image.classList.add('imageLightbox');
+    let figcaption = document.createElement('figcaption');
+    figure.appendChild(figcaption);
+    figcaption.classList.add('titleLightbox');
+    figcaption.innerText = `${media.alt}`;
+  }
+}
+class VideoLightbox {
+  createAVideo(media) {
+    let medium = media.video;
+    let video = document.createElement('video');
+    divMediasLightbox.appendChild(video);
+    video.setAttribute('controls', 'true');
+    video.setAttribute('width', '1050');
+    video.classList.add('videoLightbox');
+
+    let source = document.createElement('source');
+    video.appendChild(source);
+    source.setAttribute('src', `./images/sample_photos/${nickName}/${media.video}`);
+    source.setAttribute('alt', `${media.alt}`);
+    source.setAttribute("id", `video${media.id}`);
+    source.setAttribute("type", "video/mp4");
+    source.classList.add('imageLightbox');
+
+    let pInfos = document.createElement('p');
+    divMediasLightbox.appendChild(pInfos);
+    pInfos.classList.add('titleLightbox');
+    pInfos.innerText = `${media.alt}`;
+
+
+  }
+}
+const factoryLigthbox = new LightboxFactory();
+function FactoryLightbox(media) {
+  // sectionMedia.innerHTML = '';
+  if (media.image !== undefined) {
+    let picture = factoryLigthbox.createPicture('image');
+    picture.createAnImage(media);
+  } else {
+    let picture = factoryLigthbox.createPicture('video');
+    picture.createAVideo(media);
+  }
+}
+closeLightbox.addEventListener('click', () => closeBox());
+function closeBox() {
+  lightBox.style.display = 'none';
 }
 
 // DROPDOWN // _____// DROPDOWN //__________// DROPDOWN //________// DROPDOWN //________________________________________________________
@@ -341,6 +469,7 @@ contact.addEventListener('click', () => launchModal());
 
 function launchModal() {
   modal.style.display = 'block';
+  contact.style.display = 'none';
 }
 
 closeContact.addEventListener('click', () => closeModal());
