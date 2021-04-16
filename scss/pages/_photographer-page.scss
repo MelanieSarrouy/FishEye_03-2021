@@ -2,7 +2,12 @@
   font-family: $font-family-texte;
   max-width: 1440px;
   margin: auto;
+  
 }
+.no-scroll {
+  overflow: hidden;
+}
+
 .bloc_page-photographer {
   padding: 0.5rem 7vw 2.5rem;
   max-width: 1240px;

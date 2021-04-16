@@ -13,6 +13,7 @@ const modal = document.querySelector('.modal-background');
 const contact = document.querySelector('.button__contact');
 const contactTitle = document.querySelector('.modal__title');
 const closeContact = document.querySelector('#closeModal');
+const main = document.getElementById('main2');
 
 // Requête objet JSON __________________________________________________________________________________________________
 
@@ -279,58 +280,97 @@ function addLikes() {
 }
 
 // LIGHTBOX // ___________// LIGHTBOX // _____________// LIGHTBOX // _______________// LIGHTBOX // _____________________________________
-let lightBox = document.querySelector('.lightbox'); // la lightbox
+let lightBox = document.querySelector('.lightbox-background'); // la lightbox
 let divMediasLightbox = document.querySelector('.mediasLightbox'); // le conteneur d'image de la lightbox
 let closeLightbox = document.getElementById('closeLightbox'); // le bouton de fermeture de la lightbox
 let previous = document.getElementById('left'); // bouton "précédent"
 let next = document.getElementById('right'); // buoton "suivant"
+let body = document.querySelector('.bodyPhotographer');
+let items = document.querySelectorAll('.lightbox-item');
+
+let currentItemPosition = 0
+let carouselInterval;
 
 function lightbox() {
+  divMediasLightbox.innerHTML = '';
+  let media = photographer.media;
   if (document.addEventListener) {
     let picture = window.event.target;
     let divMedia = picture.parentNode;
     let idDivMedia = divMedia.getAttribute('id');
     let id = idDivMedia.replace('idImage', '');
     lightBox.style.display = 'flex';
-    dynamicLightbox(id);
+    lightBox.setAttribute('aria-hidden', 'false');
+    main2.setAttribute('aria-hidden', 'true');
+  }
+  let firstItem = document.getElementById(`item${media.id}`);
+  console.log(firstItem);
+  for (med of media) {
+    FactoryLightbox(med);
+    // if (id == med.id) {
+    //   currentItem
+    // }
+  }
+
+  return id;
+  // dynamicLightbox(id);
+}
+
+const showNext = () => {
+  if (currentItemPosition + 1 >= items.length) {
+     
+      const lastItem = `.item-${currentItemPosition}`
+
+      currentItemPosition = 0
+      const currentItem = `.item-${currentItemPosition}`
+     
+      setNodeAttributes(lastItem, currentItem)
+  } else {
+      currentItemPosition += 1
+      const lastItem = `.item-${currentItemPosition - 1}`
+      const currentItem = `.item-${currentItemPosition}`
+     
+      setNodeAttributes(lastItem, currentItem)
   }
 }
+
+const showPrevious = () => {
+  if (currentItemPosition - 1 >=  0) {
+      currentItemPosition -= 1
+      const currentItem = `.item-${currentItemPosition}`
+      const lastItem = `.item-${currentItemPosition + 1}`
+
+      setNodeAttributes(lastItem, currentItem)
+  } else {
+      const lastItem = `.item-${currentItemPosition}`
+     
+      currentItemPosition = 2
+      const currentItem = `.item-${currentItemPosition}`
+     
+      setNodeAttributes(lastItem, currentItem)
+  }
+}
+
+const setNodeAttributes = (lastItem, currentItem) => {
+  lastItem.style.display = 'none';
+  currentItem.style.display = 'block';
+  lastItem.setAttribute('aria-hidden', 'true');
+  currentItem.setAttribute('aria-hidden', 'false');
+}
+previous.addEventListener('click', () => showPrevious());
+next.addEventListener('click', () => showNext());
+
 function dynamicLightbox(id) {
-  divMediasLightbox.innerHTML = '';
   let media = photographer.media;
   for ( theMedia of media ) {
     if (id == theMedia.id) {
       let myMedia = theMedia;
-      FactoryLightbox(myMedia);
       previous.addEventListener('click', () => showPrevious(id));
       next.addEventListener('click', () => showNext(id));
     }
   }
 }
-function showPrevious(id) {
-  let article = document.getElementById(id);
-  let previousArticle = article.previousSibling;
-  if (previousArticle.tagName == 'ARTICLE') {
-    id = previousArticle.getAttribute('id');
-    dynamicLightbox(id);
-  } else {
-    previousArticle = sectionMedia.lastChild;
-    id = previousArticle.getAttribute('id');
-    dynamicLightbox(id);
-  }
-}
-function showNext(id) {
-  let article = document.getElementById(id);
-  let nextArticle = article.nextSibling;
-  if (nextArticle.tagName == 'ARTICLE') {
-    id = nextArticle.getAttribute('id');
-    dynamicLightbox(id);
-  } else {;
-    nextArticle = sectionMedia.firstChild;
-    id = nextArticle.getAttribute('id');
-    dynamicLightbox(id);
-  }
-}
+
 class LightboxFactory {
   constructor() {
     this.createPicture = (type) => {
@@ -346,13 +386,17 @@ class LightboxFactory {
 }
 class ImageLightbox {
   createAnImage(media) {
-    let medium = media.image;
+    let li = document.createElement('li');
+    li.classList.add('lightbox-item');
+    li.setAttribute('id', `item${media.id}`);
+    li.setAttribute('aria-hidden', 'true');
+    divMediasLightbox.appendChild(li);
     let figure = document.createElement('figure');
-    divMediasLightbox.appendChild(figure);
+    figure.classList.add('figureLightbox');
+    li.appendChild(figure);
     let image = document.createElement('img');
     figure.appendChild(image);
-    figure.classList.add('figureLightbox');
-    image.setAttribute('src', `../images/sample_photos/${nickName}/${medium}`)
+    image.setAttribute('src', `../images/sample_photos/${nickName}/${media.image}`)
     image.classList.add('imageLightbox');
     let figcaption = document.createElement('figcaption');
     figure.appendChild(figcaption);
@@ -362,13 +406,16 @@ class ImageLightbox {
 }
 class VideoLightbox {
   createAVideo(media) {
-    let medium = media.video;
+    let li = document.createElement('li');
+    li.classList.add('lightbox-item');
+    li.setAttribute('id', `item${media.id}`);
+    li.setAttribute('aria-hidden', 'true');
+    divMediasLightbox.appendChild(li);
     let video = document.createElement('video');
-    divMediasLightbox.appendChild(video);
+    li.appendChild(video);
     video.setAttribute('controls', 'true');
     video.setAttribute('width', '1050');
     video.classList.add('videoLightbox');
-
     let source = document.createElement('source');
     video.appendChild(source);
     source.setAttribute('src', `./images/sample_photos/${nickName}/${media.video}`);
@@ -376,18 +423,14 @@ class VideoLightbox {
     source.setAttribute("id", `video${media.id}`);
     source.setAttribute("type", "video/mp4");
     source.classList.add('imageLightbox');
-
     let pInfos = document.createElement('p');
-    divMediasLightbox.appendChild(pInfos);
+    li.appendChild(pInfos);
     pInfos.classList.add('titleLightbox');
     pInfos.innerText = `${media.alt}`;
-
-
   }
 }
 const factoryLigthbox = new LightboxFactory();
 function FactoryLightbox(media) {
-  // sectionMedia.innerHTML = '';
   if (media.image !== undefined) {
     let picture = factoryLigthbox.createPicture('image');
     picture.createAnImage(media);
@@ -399,6 +442,8 @@ function FactoryLightbox(media) {
 closeLightbox.addEventListener('click', () => closeBox());
 function closeBox() {
   lightBox.style.display = 'none';
+  lightBox.setAttribute('aria-hidden', 'true');
+  main2.setAttribute('aria-hidden', 'false');
 }
 
 // DROPDOWN // _____// DROPDOWN //__________// DROPDOWN //________// DROPDOWN //________________________________________________________
@@ -469,12 +514,17 @@ contact.addEventListener('click', () => launchModal());
 
 function launchModal() {
   modal.style.display = 'block';
+  modal.setAttribute('aria-hidden', 'false');
   contact.style.display = 'none';
+  main2.setAttribute('aria-hidden', 'true');
 }
 
 closeContact.addEventListener('click', () => closeModal());
 function closeModal() {
   modal.style.display = 'none';
+  modal.setAttribute('aria-hidden', 'true')
+  contact.style.display = 'block';
+  main2.setAttribute('aria-hidden', 'false');
 }
 
 // function testFirstName ______________________________________________
@@ -611,3 +661,4 @@ function content() {
     scroll.style.display = 'none';
   }
 }
+

@@ -32,7 +32,7 @@
 
       </header>
 
-      <main class="main2" id="main2" role="main">
+      <main class="main2" id="main2" role="main" aria-hidden="false">
 
         <aside class="photographer">
           <div class="photographer__informations">
@@ -67,51 +67,6 @@
         <section class="media" id="media">
         </section>
 
-        <div class="modal-background">
-          <div class="modal-content">
-            <span class="close closeModal" id="closeModal"></span>
-            <div class="modal">
-              <h2 class="modal__title">Contactez-moi</br>Nom du Photographe</h2>
-              <form name="contact" method="GET" action="#" class="modal__form" id="form" onsubmit="return validate()">
-                <div class="modal__form__formData">
-                  <label for="firstname" class="modal__form__formData__label">Prénom</label>
-                  <input type="text" class="modal__form__formData__input" id="firstname" required />
-                </div>
-                <div class="modal__form__formData">
-                  <label for="lastname" class="modal__form__formData__label">Nom</label>
-                  <input type="text" class="modal__form__formData__input" id="lastname" required />
-                </div>
-                <div class="modal__form__formData">
-                  <label for="email" class="modal__form__formData__label">Email</label>
-                  <input type="email" class="modal__form__formData__input" id="email" required />
-                </div>
-                <div class="modal__form__formData">
-                  <label for="message" class="modal__form__formData__labelArea">Votre message</label>
-                  <textarea name="message" id="message" class="modal__form__formData__textarea"
-                  minlength="10" maxlength="200" required>
-                  </textarea>
-                </div>
-                <input id="button" class="buttonSend" type="submit" value="Envoyer" />
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="lightbox">
-          <div class="lightbox__container">
-            <span class="closeLightbox" id="closeLightbox"></span>
-            <div class="buttonArrow" id="left">
-              <i class="arrow fas fa-chevron-left"></i>
-            </div>
-            <div class="lightbox__container__medias">
-              <div class="mediasLightbox">
-              </div>
-            </div>
-            <div class="buttonArrow" id="right">
-              <i class="arrow fas fa-chevron-right"></i>
-            </div>
-          </div>
-        </div>
 
         <div class="infos">
           <div class="infos__likes">
@@ -122,6 +77,58 @@
         </div>
     
       </main>
+      <div class="modal-background" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+          <span class="close closeModal" id="closeModal"></span>
+          <div class="modal">
+            <h2 class="modal__title">Contactez-moi</br>Nom du Photographe</h2>
+            <form name="contact" method="GET" action="#" class="modal__form" id="form" onsubmit="return validate()">
+              <div class="modal__form__formData">
+                <label for="firstname" class="modal__form__formData__label">Prénom</label>
+                <input type="text" class="modal__form__formData__input" id="firstname" required />
+              </div>
+              <div class="modal__form__formData">
+                <label for="lastname" class="modal__form__formData__label">Nom</label>
+                <input type="text" class="modal__form__formData__input" id="lastname" required />
+              </div>
+              <div class="modal__form__formData">
+                <label for="email" class="modal__form__formData__label">Email</label>
+                <input type="email" class="modal__form__formData__input" id="email" required />
+              </div>
+              <div class="modal__form__formData">
+                <label for="message" class="modal__form__formData__labelArea">Votre message</label>
+                <textarea name="message" id="message" class="modal__form__formData__textarea"
+                minlength="10" maxlength="200" required>
+                </textarea>
+              </div>
+              <input id="button" class="buttonSend" type="submit" value="Envoyer" />
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="lightbox-background" role="dialog" aria-hidden="true">
+        <div class="lightbox-content">
+          <div class="lightbox">
+            <div role="button" class="controls" id="left">
+              <span class="img previous-img">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+              </span>
+              <p class="sr-only">Précédent</p>
+            </div>
+            <div class="lightbox__medias">
+              <span class="closeLightbox" id="closeLightbox"></span>
+              <p class="sr-only">fermer</p>
+              <ul class="mediasLightbox" aria-label="photos et videos"></ul>
+            </div>
+            <div role="button" class="controls" id="right">
+              <span class="img next-img" aria-hidden="true">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     </div>
