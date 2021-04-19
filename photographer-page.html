@@ -107,31 +107,24 @@
         </div>
       </div>
 
-      <div class="lightbox-background" role="dialog" aria-hidden="true">
-        <div class="lightbox-content">
-          <div class="lightbox">
-            <div role="button" class="controls" id="left">
-              <span class="img previous-img">
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>
-              </span>
-              <p class="sr-only">Précédent</p>
-            </div>
-            <div class="lightbox__medias">
-              <span class="closeLightbox" id="closeLightbox"></span>
-              <p class="sr-only">fermer</p>
-              <ul class="mediasLightbox" aria-label="photos et videos"></ul>
-            </div>
-            <div role="button" class="controls" id="right">
-              <span class="img next-img" aria-hidden="true">
-                <i class="fas fa-chevron-right"></i>
-              </span>
-            </div>
-          </div>
-        </div>
+      <div class="lightbox" role="dialog" aria-hidden="true">
+        <button class="lightbox__close" id="closeLightbox">
+          <p class="sr-only">fermer</p>
+        </button>
+        <button class="lightbox__next" id="right">
+          <p class="sr-only">Suivant</p>
+        </button>
+        <button class="lightbox__prev" id="left">
+          <p class="sr-only">Précédent</p>
+        </button>
+        <ul class="lightbox__container">
+        </ul>
       </div>
 
 
     </div>
+
+    
     <script src="js/photographer-page2.js"></script>
 
   </body>

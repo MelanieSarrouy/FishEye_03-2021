@@ -1,82 +1,9 @@
-.lightbox-background {
-  display: none;
-  position: absolute;
-  justify-content: center;
-  // align-items: center;
-  background-color: white;
-  top: 0;
-  left: 0;
-  height: 3000px;
-  width: 100vw;
-  z-index: 5;
-}
-.lightbox-content {
-  background-color: white;
-  margin: 3% auto;
-  width: 87vw;
-  // border: .5rem solid white;
 
-}
-.lightbox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 2rem;
-  &__medias {
-    margin: 0 1.5rem;
-    position: relative;
-  }
-}
-.mediasLightbox {
-  display: flex;
-}
-// CLOSE // ___________________________________
-.closeLightbox {
-  position: absolute;
-  right: -3rem;
-  top: 1rem;  
-  color: $color-primary;
-  font-size: 3rem;
-  opacity: 1;
-  transform: scale(1.2);
-  cursor: pointer;
-}
-.closeLightbox:before,
-.closeLightbox:after {
-  position: absolute;
-  content: " ";
-  height: 33px;
-  width: 4px;
-  background-color: $color-primary;
-}
-.closeLightbox:before {
-  transform: rotate(45deg);
-}
-.closeLightbox:after {
-  transform: rotate(-45deg);
-}
-// ARROWS //___________________________________
-.controls {
-  width: 3rem;
-  height: 40rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $color-primary;
-  font-size: 3rem;
-}
-// Classes ajoutées : img, video et txt________
 .titleLightbox {
   color: $color-primary;
   padding: 0.8rem 0;
   font-size: 1.5rem;
-}
-.figureLightbox {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  text-align: left;
 }
 
 .imageLightbox {
@@ -87,5 +14,83 @@
   max-width: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
+}
 
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 10;
+  overflow: auto;
+  animation: lightbox2In 0.5s;
+  &__close {
+    width: 30px;
+    height: 30px;
+    background: url(../../images/times-solid.svg) center center / 100% 100% no-repeat;
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    border: none;
+    z-index: 12;
+  }
+}
+
+.lightbox__next,
+.lightbox__prev {
+  background: url(../../images/chevron-left-solid.svg) center center / 32px 56px no-repeat;
+  width: 50px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  // margin: -14px;
+  z-index: 11;
+  opacity: 0.5;
+  margin: 0 2rem;
+}
+.lightbox__next:hover, 
+.lightbox__prev:hover {
+  opacity: 1;
+}
+.lightbox__next {
+  left: auto;
+  right: 0;
+  transform: rotate(180deg);
+}
+.lightbox > button {
+  border: none;
+  outline: none;
+  opacity: .5;
+  cursor: pointer;
+  transition: opacity .3s;
+  text-indent: -3000px;
+}
+.lightbox button:hover {
+  opacity: 1;
+}
+.lifhtbox__container li img {
+  max-width: 100%;
+  height: auto;
+  animation: lightbox2In 0.5s;
+}
+.lightbox__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 5rem;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.lightbox-item {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+@keyframes lightbox2In {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

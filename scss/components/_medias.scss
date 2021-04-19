@@ -24,6 +24,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
+    align-items: center;
     cursor: pointer;
     @include respond-to(small-screen) {
       height: 190px;
