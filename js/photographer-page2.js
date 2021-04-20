@@ -72,7 +72,6 @@ function getMedia(json) {
 
 let str = window.location.href;
 let url = new URL(str);
-// let = window.location.search;
 let login = url.searchParams.get('id');
 
 // Récupération du photographe de la page // ___________________________________________________________________________
@@ -294,7 +293,6 @@ let prev = document.getElementById('left'); // bouton "précédent"
 let next = document.getElementById('right'); // buoton "suivant"
 
 
-let currentItemPosition = 0
 let carouselInterval;
 
 function lightbox(e) {
@@ -318,34 +316,45 @@ function lightbox(e) {
     item.classList.add(`item-${items.indexOf(item)}`);
   })
   let currentItem = document.getElementById(`item${id}`);
+  let position;
+  researchPosition(currentItem);
   currentItem.style.display = 'flex';
   currentItem.setAttribute('aria-hidden', 'false');
   next.addEventListener('click', () => goToNextSlide(items));
   prev.addEventListener('click', () => goToPreviousSlide(items));
 }
+function researchPosition(currentItem) {
+  let cName = currentItem.className;
+  let i = cName.lastIndexOf("-");
+  position = cName.substr(i+1);
+  return position;
+}
 function goToNextSlide(items) {
-  if (currentItemPosition + 1 >=  items.length) {
-      const lastItem = document.querySelector(`.item-${currentItemPosition}`);
-      currentItemPosition = 0;
-      const currentItem = document.querySelector(`.item-${currentItemPosition}`);
+  if (position + 1 >=  items.length) {
+      const lastItem = document.querySelector(`.item-${position}`);
+      position = 0;
+      const currentItem = document.querySelector(`.item-${position}`);
       setNodeAttributes(lastItem, currentItem);
   } else {
-      currentItemPosition += 1;
-      const lastItem = document.querySelector(`.item-${currentItemPosition - 1}`);
-      const currentItem = document.querySelector(`.item-${currentItemPosition}`);
+      position += 1;
+      const lastItem = document.querySelector(`.item-${position - 1}`);
+      const currentItem = document.querySelector(`.item-${position}`);
       setNodeAttributes(lastItem, currentItem);
   }
 }
 function goToPreviousSlide(items) {
-  if (currentItemPosition - 1 >=  0) {
-      currentItemPosition -= 1;
-      const currentItem = document.querySelector(`.item-${currentItemPosition}`);
-      const lastItem = document.querySelector(`.item-${currentItemPosition + 1}`);
+  console.log(position);
+
+  if (position - 1 >= 0) {
+      position -= 1;
+      const currentItem = document.querySelector(`.item-${position}`);
+      const lastItem = document.querySelector(`.item-${position + 1}`);
       setNodeAttributes(lastItem, currentItem);
+
   } else {
-      const lastItem = document.querySelector(`.item-${currentItemPosition}`);
-      currentItemPosition = 2;
-      const currentItem = document.querySelector(`.item-${currentItemPosition}`);
+      const lastItem = document.querySelector(`.item-${position}`);
+      position = items.length - 1;
+      const currentItem = document.querySelector(`.item-${position}`);
       setNodeAttributes(lastItem, currentItem);
   }
 }
