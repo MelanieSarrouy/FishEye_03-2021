@@ -20,21 +20,19 @@ h2 {
 }
 #photographersCards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, auto));
   justify-content: center;
-  padding-top: 2rem;
+  padding: 2rem 1rem 0;
   column-gap: 12%;
   @include respond-to(medium-screen) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    // grid-template-columns: repeat(2, 1fr);
     padding-top: 4rem;
   }
   @include respond-to(small-screen) {
+    padding-top: 0.5rem;
+  }
+  @include respond-to(mobile-screen) {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     padding-top: 0.5rem;
   }
   @include respond-to(verysmall-screen) {

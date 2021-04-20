@@ -130,6 +130,7 @@ function displayPhotographer() {
     listTags.innerHTML += `
     <li class="tags__tag" role="listitem">
       <a class="tags__tag__link" href="index.html#${tag}">#${tag}</a>
+      <span class="sr-only">Tag ${tag}</span>
     </li>`;
   }
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/small/${photographer.portrait}`);
@@ -139,6 +140,9 @@ function displayPhotographer() {
   contactTitle.innerHTML = `Contactez-moi </br>${photographer.name}`;
   totalLikes(photographer.media);
 }
+
+// Calcul et affichage du total des "Likes" // ________________________________________________________________
+
 function totalLikes(media) {
   let number = 0;
   for (let i = 0; i < media.length; i++) {
@@ -146,6 +150,7 @@ function totalLikes(media) {
   }
   totalLikesNb.innerHTML = number;
 }
+
 // Display medias - FACTORY METHOD // __________// Display medias - FACTORY METHOD // ______________________________________________________
 
 class MediaFactory {
@@ -188,6 +193,7 @@ class Video {
     icone.setAttribute("src", "./images/play.png");
     icone.classList.add('logoPlay');
     let image = document.createElement('img');
+    icone.setAttribute('alt', 'icone de lecture de la video');
     anchorMedia.appendChild(image);
     let captureImage = medium.video.replace('mp4', 'jpg');
     image.setAttribute("src", `./images/sample_photos/${nickName}/light/${captureImage}`); 
@@ -197,7 +203,9 @@ class Video {
     image.setAttribute('height', `300`);
   }
 }
+
 const factory = new MediaFactory();
+
 function testFactory(media) {
   sectionMedia.innerHTML = '';
   for (medium of media) {
@@ -210,6 +218,7 @@ function testFactory(media) {
     }
   }
 }
+
 function createDOMElements() {
   let article = document.createElement('article');
   sectionMedia.appendChild(article);
@@ -253,7 +262,8 @@ function createDOMElements() {
   divLikes.appendChild(heart);
   heart.classList.add('heart', 'fas', 'fa-heart');
   heart.setAttribute('id', `heart${medium.id}`);
-  // heart.setAttribute('onclick', `addLikes(medium)`);
+  heart.setAttribute('aria-label', `likes`);
+
   heart.addEventListener('click', () => addLikes());
 }
 
@@ -284,16 +294,14 @@ function addLikes() {
 }
 
 // LIGHTBOX // ___________// LIGHTBOX // _____________// LIGHTBOX // _______________// LIGHTBOX // _____________________________________
-let lightBox = document.querySelector('.lightbox'); // la lightbox
+
+let lightBox = document.querySelector('.lightbox-background'); // la lightbox
 let ulMedias = document.querySelector('.lightbox__container'); // le conteneur d'image de la lightbox
 let body = document.querySelector('.bodyPhotographer');
 let anchorMedia = document.querySelectorAll('article__link');
 let closeLightbox = document.getElementById('closeLightbox'); // le bouton de fermeture de la lightbox
 let prev = document.getElementById('left'); // bouton "précédent"
 let next = document.getElementById('right'); // buoton "suivant"
-
-
-let carouselInterval;
 
 function lightbox(e) {
   e.preventDefault();
@@ -316,7 +324,6 @@ function lightbox(e) {
     item.classList.add(`item-${items.indexOf(item)}`);
   })
   let currentItem = document.getElementById(`item${id}`);
-  let position;
   researchPosition(currentItem);
   currentItem.style.display = 'flex';
   currentItem.setAttribute('aria-hidden', 'false');
@@ -343,8 +350,6 @@ function goToNextSlide(items) {
   }
 }
 function goToPreviousSlide(items) {
-  console.log(position);
-
   if (position - 1 >= 0) {
       position -= 1;
       const currentItem = document.querySelector(`.item-${position}`);
@@ -364,6 +369,7 @@ const setNodeAttributes = (lastItem, currentItem) => {
   lastItem.setAttribute('aria-hidden', 'true');
   currentItem.setAttribute('aria-hidden', 'false');
 }
+// Factory Method pour la lightbox ------------------------
 class LightboxFactory {
   constructor() {
     this.createPicture = (type) => {
@@ -434,9 +440,10 @@ function FactoryLightbox(media) {
     picture.createAVideo(media);
   }
 }
-
+// Ecoute des évènements ----------------------------------
 closeLightbox.addEventListener('click', () => closeBox());
 document.addEventListener('keyup', (e) => onKeyUp(e));
+// Gestion de la lightbox au clavier -----------------------
 function onKeyUp(e) {
   let keynum;
   if (window.event) {
@@ -451,6 +458,7 @@ function onKeyUp(e) {
     goToPreviousSlide();
   }
 }
+// Fermeture de la lightbox --------------------------------
 function closeBox() {
   lightBox.style.display = 'none';
   lightBox.setAttribute('aria-hidden', 'true');
@@ -507,13 +515,13 @@ function dateSort(media) {
   testFactory(media);
 }
 // titre ________________________________________________________________________ 
-let title = document.getElementById('option3');
-title.addEventListener('click', () => titleSort(photographer.media));
+let titre = document.getElementById('option3');
+titre.addEventListener('click', () => titleSort(photographer.media));
 function titleSort(media) {
   function tri(a,b) {
-    titleA = a.title.split(" ").join('');
+    titleA = a.alt.split(" ").join('');
     a = titleA.toLowerCase();
-    titleB = b.title.split(" ").join('');
+    titleB = b.alt.split(" ").join('');
     b = titleB.toLowerCase();
     return (a < b) ? -1 : 1;
   }
@@ -631,9 +639,9 @@ message.addEventListener("blur", testMessage);
 goButton.addEventListener("mousedown", testMessage);
 
 function testMessage() {
-  if (/*(message.value.length < 20) || 
+  if ((message.value.length < 20) || 
      (message.value.length >= 250) ||
-     */(message.value == "")) {
+    (message.value == "")) {
     message.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
     pErrorMessage.textContent = "Veuillez saisir votre message"; // message d'erreur sur paragraphe pError;
     message.focus();
@@ -668,7 +676,7 @@ const scroll = document.querySelector('.up');
 let y = window.scrollY;
 window.addEventListener('scroll', () => content());
 function content() {
-  if ( window.scrollY > 250 ) {
+  if ( window.scrollY > 350 ) {
     scroll.style.display = 'block';
   } else {
     scroll.style.display = 'none';

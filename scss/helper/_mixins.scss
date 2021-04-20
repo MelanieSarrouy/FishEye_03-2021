@@ -6,6 +6,11 @@
       @content;
     }
   }
+  @if $media == mobile-screen {
+    @media all and (max-width: $mobile-screen) {
+      @content;
+    }
+  }
   @if $media == small-screen {
     @media all and (max-width: $small-screen) {
       @content;

@@ -23,8 +23,8 @@
 
       <header class="header2">
 
-        <a href="index.html" class="header2__link" aria-label="Fishey Home page">
-          <img class="header2__img" src="./images/logoFisheye.svg" alt="logo Fisheye renvoi page d'accueil" width="200" height="52"/>
+        <a href="index.html" class="header2__link" aria-label="Page d'accueil de Fisheye">
+          <img class="header2__img" src="./images/logoFisheye.svg" alt="logo Fisheye" width="200" height="52"/>
         </a>
         <a href="#" class="header2__anchor" aria-label="remonter au début de la page">
           <i class="up fas fa-arrow-circle-up"></i>
@@ -42,7 +42,7 @@
             <ul class="tags">
             </ul>
           </div>
-          <button class="button__contact" title="Contactez-moi">Contactez-moi</button>
+          <button class="button__contact" title="Contactez-moi" type="button">Contactez-moi</button>
           <picture class="photographer__picture">
             <img class="photographer__picture__img" src="./images/sample_photos/photographers_ID_photos/MimiKeel.jpg" alt="photo portrait du photographe"/>
           </picture>
@@ -51,16 +51,22 @@
         <div class="filters">
           <p>Trier par</p>
           
-          <div class="dropdown" id="dropdown">
-            <span class="dropdown__option" id="option1">&ensp;Popularité
-            </span>
-            <span class="dropdown__option" id="option2">&ensp;Date</span>
-            <span class="dropdown__option" id="option3">&ensp;Titre</span>
-            <div class="arrows">
-              <i class="fas fa-chevron-down"></i>
-              <i class="fas fa-chevron-up"></i>
-            </div>
-
+          <div class="divDropdown">
+            <ul role="listbox" tabindex="0" class="dropdown" id="dropdown" aria-label="liste de filtres" aria-activedescendant="option1">
+              <li role="option" class="dropdown__option" id="option1" tabindex="-1">
+                <span>&ensp;Popularité</span>
+              </li>
+              <li role="option" class="dropdown__option" id="option2" tabindex="-1">
+                <span>&ensp;Date</span>
+              </li>
+              <li role="option" class="dropdown__option" id="option3" tabindex="-1">
+                <span>&ensp;Titre</span>
+              </li>
+              <button role="button" aria-haspopup="listbox" class="arrows arrow__down">
+                <i class="fas fa-chevron-down"></i> 
+                <i class="fas fa-chevron-up"></i>
+              </button>
+            </ul>
           </div>        
         </div>
         
@@ -77,7 +83,7 @@
         </div>
     
       </main>
-      <div class="modal-background" role="dialog" aria-hidden="true">
+      <div class="modal-background" role="dialog" aria-modal="true" aria-label="formulaire de contact" aria-hidden="true">
         <div class="modal-content">
           <span class="close closeModal" id="closeModal"></span>
           <div class="modal">
@@ -107,18 +113,22 @@
         </div>
       </div>
 
-      <div class="lightbox" role="dialog" aria-hidden="true">
-        <button class="lightbox__close" id="closeLightbox">
-          <p class="sr-only">fermer</p>
-        </button>
-        <button class="lightbox__next" id="right">
-          <p class="sr-only">Suivant</p>
-        </button>
-        <button class="lightbox__prev" id="left">
-          <p class="sr-only">Précédent</p>
-        </button>
-        <ul class="lightbox__container">
-        </ul>
+      <div class="lightbox-background" aria-modal="true" role="dialog" aria-label="images en gros plan" aria-hidden="true">
+        <div class="lightbox-content">
+          <button role="button" class="lightbox__prev" id="left" type="button" aria-label="image précédente">
+            <p class="sr-only">Précédent</p>
+          </button>
+          <div class="lightbox">
+            <button role="button" class="lightbox__close" id="closeLightbox" type="button" aria-label="fermeture de la modale">
+              <p class="sr-only">fermer</p>
+            </button>
+            <ul class="lightbox__container">
+            </ul>
+          </div>
+          <button role="button" class="lightbox__next" id="right" type="button" aria-label="image suivante">
+            <p class="sr-only">Suivant</p>
+          </button>
+        </div>
       </div>
 
 

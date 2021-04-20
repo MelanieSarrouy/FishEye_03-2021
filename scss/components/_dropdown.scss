@@ -1,3 +1,9 @@
+.divDropdown {
+  position: absolute;
+  top: .6rem;
+  left: 6rem;
+  z-index: 3;
+}
 .dropdown {
   display: flex;
   flex-direction: column;
@@ -14,6 +20,17 @@
     align-items: center;
     height: 2rem;
     width: 9.25rem;
+    transform: scale(1);
+    transition: transform .2s;
+    & span:hover {
+      transform-origin: 0% 50%;
+      transform: scale(1.08);
+      transition: transform .2s;
+    }
+    &:focus {
+      border: none;
+      outline: none;
+    }
     &:nth-child(2) {
       border-bottom: solid 0.05rem white;
       border-top: solid 0.05rem white;
@@ -22,18 +39,24 @@
 }
 .arrows {
   position: absolute;
-  top: 1.2rem;
+  top: .7rem;
   right: 0.6rem;
+  border: none;
+  outline: none;
+  background-color: $color-primary;
+  cursor: pointer;
+  padding: .5rem;
 }
 #option2, #option3 {
   display: none;
 }
 .fa-chevron-down {
   color: white;
-  padding: 0 0.5rem 0 1.5rem;
+  padding: 0 0.5rem 0 .5rem;
 }
 .fa-chevron-up {
   color: white;
-  padding: 0 0.5rem 0 1.5rem;
+  padding: 0 0.5rem 0 .5rem;
   display: none;
 }
+

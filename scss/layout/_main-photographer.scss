@@ -12,6 +12,11 @@
     padding: 0rem 0rem 2.5rem;
     justify-content: space-between;
   }
+  @include respond-to(verysmall-screen) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    justify-content: space-between;
+  }
   &__informations {
     display: flex;
     flex-direction: column;
@@ -66,11 +71,19 @@
     @include respond-to(small-screen) {
       align-self: baseline;
       position: static;
-      max-height: 6.2rem;
-      max-width: 6.2rem;
+      width: 6.2rem;
+      height: 6.2rem;
       top: 0rem;
       right: 0rem;
     }
+    & img {
+      @include respond-to(small-screen) {
+        width: 100px;
+        height: auto;
+      }
+
+    }
+
 
   }
 }
@@ -84,12 +97,12 @@
     padding-top: 0.5rem;
   }
   &__tag {
-    padding: 0rem 0.2rem 1rem;
+    padding: 0rem 0.3rem 1rem;
     &__link {
       color: $color-primary;
       font-weight: 500;
       font-size: 1.12rem;
-      padding: 0.15rem 0.3rem;
+      padding: 0.15rem 0.5rem;
       border: solid 0.05rem #c4c4c4 ;
       border-radius: 1.5rem;
       @include respond-to(small-screen) {
@@ -120,6 +133,13 @@
   justify-content: center;
   align-items: center;
   margin-left: 2rem;
+  &:hover, &:focus {
+    background-color: $color-secondary-bg;
+    color: black;
+    font-weight: 700;
+    font-family: $font-family-texte;
+    letter-spacing: -0.6px;
+  }
   @include respond-to(large-screen) {
     font-size: 1rem;
     height: 59px;
@@ -138,8 +158,9 @@
 .filters {
   display: flex;
   align-items: baseline;
-  padding: 2.5rem 0 2.5rem;
+  padding: 2.5rem 0 3.5rem;
   font-size: 1.12rem;
+  position: relative;
   @include respond-to(small-screen) {
     display: none;
   }

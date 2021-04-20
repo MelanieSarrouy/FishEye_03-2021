@@ -116,6 +116,8 @@ function displayTags(photographer) {
     document.querySelector("#id" + photographer.id).innerHTML += `
     <li class="list__item" role="listitem">
       <a class="list__link" href="index.html#${photographer.tags[tag]}">#${photographer.tags[tag]}</a>
+      <span class="sr-only">Tag ${photographer.tags[tag]}</span>
+
     </li>`;
   }
 }

@@ -22,37 +22,46 @@
 
       <header role="banner">
         <div class="contenu">
-          <a href="#photographersCards" class="contenu__link" title="Passer au contenu">Passer au contenu</a>
+          <a href="#photographersCards" role="link" class="contenu__link" title="Passer au contenu">Passer au contenu</a>
         </div>
         <div class="header">
-          <a href="index.html" class="header__link" alt="Fishey Home page">
-            <img class="header__img" src="./images/logoFisheye.svg" alt="logo Fisheye"/>
+          <a href="index.html" role="link" class="header__link" alt="Fishey page d'accueil">
+            <img class="header__img" src="./images/logoFisheye.svg" alt="logo Fisheye" width="200" height="52"/>
           </a>
           <nav class="nav" role="navigation" aria-label="catégories de photographes">
-            <ul class="nav__liste" role="list">
-              <li class="nav__liste__item" role="listitem">
+            <span class="sr-only">Filtrer par catégorie de photographe</span>
+            <ul class="nav__liste" role="menubar">
+              <li class="nav__liste__item" role="menuitemcheckbox">
                 <a class="nav__liste__link" id="portrait" href="index.html#portrait" aria-label="tag portrait">#Portrait</a>
+                <span class="sr-only">Tag portrait</span>
               </li>
-              <li class="nav__liste__item" role="listitem">
+              <li class="nav__liste__item" role="menuitemcheckbox">
                 <a class="nav__liste__link" id="art" href="#art" aria-label="tag art">#Art</a>
+                <span class="sr-only">Tag art</span>
               </li>
-              <li class="nav__liste__item" role="listitem">
+              <li class="nav__liste__item" role="menuitemcheckbox">
                 <a class="nav__liste__link" id="mode" href="#mode" aria-label="tag mode">#Mode</a>
+                <span class="sr-only">Tag mode</span>
               </li>
-              <li class="nav__liste__item" role="listitem">
+              <li class="nav__liste__item" role="menuitemcheckbox">
                 <a class="nav__liste__link" id="architecture" href="#architecture" aria-label="tag architecture">#Architecture</a>
+                <span class="sr-only">Tag architecture</span>
               </li>
-              <li class="nav__liste__item" role="listitem">
+              <li class="nav__liste__item" role="menuitemcheckbox">
                 <a class="nav__liste__link" id="voyage" href="#voyage" aria-label="tag voyage">#Voyage</a>
+                <span class="sr-only">Tag voyage</span>
               </li>
-              <li class="nav__liste__item" role="listitem">
+              <li class="nav__liste__item" role="menuitemcheckbox">
                 <a class="nav__liste__link" id="sport" href="#sport" aria-label="tag sport">#Sport</a>
+                <span class="sr-only">Tag sport</span>
               </li>
-              <li class="nav__liste__item" role="listitem">
-                <a class="nav__liste__link" id="animaux" href="#animaux" aria-label="tag animaux">#Animaux</a
-                  ></li>
-              <li class="nav__liste__item" role="listitem">
+              <li class="nav__liste__item" role="menuitemcheckbox">
+                <a class="nav__liste__link" id="animaux" href="#animaux" aria-label="tag animaux">#Animaux</a>
+                <span class="sr-only">Tag animaux</span>
+              </li>
+              <li class="nav__liste__item" role="menuitemcheckbox">
                 <a class="nav__liste__link" id="evenements" href="#evenements" aria-label="tag évènements">#Évènements</a>
+                <span class="sr-only">Tag évènements</span>
               </li>
             </ul>
           </nav>
