@@ -104,10 +104,11 @@
               <div class="modal__form__formData">
                 <label for="message" class="modal__form__formData__labelArea">Votre message</label>
                 <textarea name="message" id="message" class="modal__form__formData__textarea"
-                minlength="10" maxlength="200" required>
-                </textarea>
+                minlength="5" maxlength="200" required></textarea>
               </div>
-              <input id="button" class="buttonSend" type="submit" value="Envoyer" />
+              <div class="divButton">
+                <input id="button" class="buttonSend" type="submit" value="Envoyer" aria-label="soumettre"/>
+              </div>
             </form>
           </div>
         </div>
@@ -115,19 +116,21 @@
 
       <div class="lightbox-background" aria-modal="true" role="dialog" aria-label="images en gros plan" aria-hidden="true">
         <div class="lightbox-content">
-          <button role="button" class="lightbox__prev" id="left" type="button" aria-label="image précédente">
-            <p class="sr-only">Précédent</p>
-          </button>
           <div class="lightbox">
-            <button role="button" class="lightbox__close" id="closeLightbox" type="button" aria-label="fermeture de la modale">
-              <p class="sr-only">fermer</p>
+            <button role="button" class="lightbox__prev" id="left" type="button" aria-label="image précédente">
+              <p class="sr-only">Précédent</p>
             </button>
-            <ul class="lightbox__container">
-            </ul>
+            <div class="divLightbox">
+              <ul class="lightbox__container">
+              </ul>
+              <button role="button" class="lightbox__close" id="closeLightbox" type="button" aria-label="fermeture de la modale">
+                <p class="sr-only">fermer</p>
+              </button>
+              </div>
+            <button role="button" class="lightbox__next" id="right" type="button" aria-label="image suivante" >
+              <p class="sr-only">Suivant</p>
+            </button>
           </div>
-          <button role="button" class="lightbox__next" id="right" type="button" aria-label="image suivante">
-            <p class="sr-only">Suivant</p>
-          </button>
         </div>
       </div>
 

@@ -74,6 +74,7 @@ let str = window.location.href;
 let url = new URL(str);
 let login = url.searchParams.get('id');
 
+
 // Récupération du photographe de la page // ___________________________________________________________________________
 
 class Photographer {
@@ -538,6 +539,7 @@ function launchModal() {
   modal.setAttribute('aria-hidden', 'false');
   contact.style.display = 'none';
   main2.setAttribute('aria-hidden', 'true');
+  body.classList.add('no-scroll');
 }
 
 closeContact.addEventListener('click', () => closeModal());
@@ -546,6 +548,8 @@ function closeModal() {
   modal.setAttribute('aria-hidden', 'true')
   contact.style.display = 'block';
   main2.setAttribute('aria-hidden', 'false');
+  body.classList.remove('no-scroll');
+
 }
 
 // function testFirstName ______________________________________________
@@ -561,19 +565,18 @@ let goButton = document.getElementById("button"); // bouton validation
 const form = document.getElementById("form"); // le formulaire
 const message = document.getElementById('message');
 
-
 formData[0].appendChild(pErrorFirstName);
 pErrorFirstName.classList.add("pError");
-let regexFirstName = /^[a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ]+([ \-'][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ]+)?$/;
+let regexName = /^[a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ]+([ \-'][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ]+)?$/;
 
 firstName.addEventListener("blur", testFirstName);
-goButton.addEventListener("mousedown", testFirstName);
 
 function testFirstName() {
   if ((firstName.value.length < 2) || 
      (firstName.value.length >= 30) ||
-     (!regexFirstName.test(firstName.value)) || 
+     (!regexName.test(firstName.value)) || 
      (firstName.value == "")) {
+    
     firstName.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
     pErrorFirstName.textContent = "Veuillez saisir votre prénom (min 2 caractères)"; // message d'erreur sur paragraphe pError;
     firstName.addEventListener("input", testFirstName);
@@ -588,15 +591,13 @@ function testFirstName() {
 
 formData[1].appendChild(pErrorLastName);
 pErrorLastName.classList.add("pError");
-let regexLastName = regexFirstName;
 
 lastName.addEventListener("blur", testLastName);
-goButton.addEventListener("mousedown", testLastName);
 
 function testLastName() {
   if ((lastName.value.length < 2) || 
      (lastName.value.length >= 30) ||
-     (!regexLastName.test(lastName.value)) || 
+     (!regexName.test(lastName.value)) || 
      (lastName.value == "")) {
     lastName.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
     pErrorLastName.textContent = "Veuillez saisir votre nom (min 2 caractères)"; // message d'erreur sur paragraphe pError;
@@ -614,7 +615,6 @@ pErrorEmail.classList.add("pError");
 let regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 eMail.addEventListener("blur", testEmail);
-goButton.addEventListener("mousedown", testEmail);
 
 function testEmail() {
   if ((eMail.value.length < 5) || 
@@ -634,17 +634,12 @@ function testEmail() {
 // function testMessage __________________________________________________
 formData[3].appendChild(pErrorMessage);
 pErrorMessage.classList.add("pError");
-
 message.addEventListener("blur", testMessage);
-goButton.addEventListener("mousedown", testMessage);
-
 function testMessage() {
-  if ((message.value.length < 20) || 
-     (message.value.length >= 250) ||
-    (message.value == "")) {
+  if ((message.value) == "") {
     message.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
     pErrorMessage.textContent = "Veuillez saisir votre message"; // message d'erreur sur paragraphe pError;
-    message.focus();
+    message.addEventListener("input", testMessage);
     return false;
   } else {
     message.classList.remove("inputError");
@@ -654,18 +649,16 @@ function testMessage() {
 }
 
 // function submit __________________________________________________
-// form.addEventListener("submit", validate);
 
 function validate() {
   if ((testFirstName() === true) && 
       (testLastName() === true) && 
       (testEmail() === true) && 
       (testMessage() === true)) {
-    console.log(firstName.value);
-    console.log(lastName.value);
-    console.log(eMail.value);
-    console.log(message.value);
-    goButton.addEventListener("click", closeModal);    
+    console.log('Prénom : ' + firstName.value);
+    console.log('Nom : ' + lastName.value);
+    console.log('email : ' + eMail.value);
+    console.log('message : ' + message.value);
     closeModal();
     return false;
   }

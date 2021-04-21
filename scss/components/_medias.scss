@@ -33,7 +33,6 @@
     flex-direction: column;
   }
   &__link {
-    max-height: 300px;
     border-radius: 0.5rem;
     overflow: hidden;
     display: flex;
@@ -42,9 +41,6 @@
     cursor: pointer;
     @include respond-to(mobile-screen) {
       height: 190px;
-    }
-    @include respond-to(verysmall-screen) {
-      max-width: 335px;
     }
   }
   &__informations {
@@ -65,10 +61,6 @@
     @include respond-to(small-screen) {
       font-weight: 400;
       font-size: 1rem;
-      max-width: 335px;
-    }
-    @include respond-to(verysmall-screen) {
-      max-width: 260px;
     }
     &__likes {
       display: flex;
@@ -80,6 +72,11 @@
       }
       & .fa-heart {
         cursor: pointer;
+        transform: scale(1);
+        transition: transform 0.4s ease-in-out;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
   }
@@ -89,7 +86,7 @@
   width: 5rem;
   top: 32%;
   z-index: 3;
-  @include respond-to(small-screen) {
+  @include respond-to(mobile-screen) {
     top: 22%;
   }
 }

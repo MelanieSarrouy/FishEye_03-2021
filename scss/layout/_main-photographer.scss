@@ -141,6 +141,7 @@
     letter-spacing: -0.6px;
   }
   @include respond-to(large-screen) {
+    padding: 0;
     font-size: 1rem;
     height: 59px;
     width: 150px;
