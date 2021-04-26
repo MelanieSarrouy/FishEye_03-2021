@@ -1,35 +1,41 @@
-.divDropdown {
-  position: absolute;
-  top: .6rem;
-  left: 6rem;
-  z-index: 3;
+.select-filters {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  &__button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    background-color: $color-primary;
+    font-family: $font-family-texte;
+    color: white;
+    font-size: 1.15rem;
+    padding: 0.9rem 0.5rem;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+  }
 }
 .dropdown {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   background-color: $color-primary;
-  color: white;
   border-radius: 0.3rem;
-  padding: 0 0.7rem;
-  margin-top: 0.8rem;
+  padding: 0 0.6rem;
   cursor: pointer;
-  position: relative;
+  position: absolute;
+  z-index: 3;
   &__option {
-    padding: 0.6rem 0;
     display: flex;
     align-items: center;
-    height: 2rem;
-    width: 9.25rem;
-    transform: scale(1);
-    transition: transform .2s;
-    & span:hover {
-      transform-origin: 0% 50%;
-      transform: scale(1.08);
-      transition: transform .2s;
-    }
-    &:focus {
-      border: none;
-      outline: none;
+    width: 9.5rem;
+    height: 3.2rem;
+    color: white;
+    &:first-child {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     &:nth-child(2) {
       border-bottom: solid 0.05rem white;
@@ -38,25 +44,26 @@
   }
 }
 .arrows {
-  position: absolute;
-  top: .7rem;
-  right: 0.6rem;
-  border: none;
-  outline: none;
-  background-color: $color-primary;
   cursor: pointer;
   padding: .5rem;
-}
-#option2, #option3 {
-  display: none;
+  // z-index: 3;
 }
 .fa-chevron-down {
   color: white;
-  padding: 0 0.5rem 0 .5rem;
+  padding: 0 .9rem 0 1.7rem;
 }
 .fa-chevron-up {
   color: white;
-  padding: 0 0.5rem 0 .5rem;
+  padding: 0 .6rem 0 1rem;
+}
+.container {
+  position: absolute;
   display: none;
 }
+#button-dropup {
+  position: absolute;
+  left: 6.7rem;
+  z-index: 3;
+}
+
 

@@ -21,47 +21,38 @@
     <div class="bloc_page">
 
       <header role="banner">
-        <div class="contenu">
-          <a href="#photographersCards" role="link" class="contenu__link" title="Passer au contenu">Passer au contenu</a>
+        <div class="contenu" role="button">
+          <a href="#photographersCards" class="contenu__link" >Passer au contenu</a>
         </div>
         <div class="header">
-          <a href="index.html" role="link" class="header__link" alt="Fishey page d'accueil">
-            <img class="header__img" src="./images/logoFisheye.svg" alt="logo Fisheye" width="200" height="52"/>
+          <a href="index.html" class="header__link" aria-label="Fishey page d'accueil">
+            <img class="header__img" src="./images/logoFisheye.svg" alt="logo de Fisheye" width="200" height="52"/>
           </a>
-          <nav class="nav" role="navigation" aria-label="catégories de photographes">
-            <span class="sr-only">Filtrer par catégorie de photographe</span>
-            <ul class="nav__liste" role="menubar">
-              <li class="nav__liste__item" role="menuitemcheckbox">
+          <nav class="nav" role="navigation">
+            <ul class="nav__liste" aria-label="catégories de photographe">
+              <li class="nav__liste__item">
                 <a class="nav__liste__link" id="portrait" href="index.html#portrait" aria-label="tag portrait">#Portrait</a>
-                <span class="sr-only">Tag portrait</span>
               </li>
-              <li class="nav__liste__item" role="menuitemcheckbox">
+              <li class="nav__liste__item">
                 <a class="nav__liste__link" id="art" href="#art" aria-label="tag art">#Art</a>
-                <span class="sr-only">Tag art</span>
               </li>
-              <li class="nav__liste__item" role="menuitemcheckbox">
+              <li class="nav__liste__item">
                 <a class="nav__liste__link" id="mode" href="#mode" aria-label="tag mode">#Mode</a>
-                <span class="sr-only">Tag mode</span>
               </li>
-              <li class="nav__liste__item" role="menuitemcheckbox">
+              <li class="nav__liste__item">
                 <a class="nav__liste__link" id="architecture" href="#architecture" aria-label="tag architecture">#Architecture</a>
-                <span class="sr-only">Tag architecture</span>
               </li>
-              <li class="nav__liste__item" role="menuitemcheckbox">
+              <li class="nav__liste__item">
                 <a class="nav__liste__link" id="voyage" href="#voyage" aria-label="tag voyage">#Voyage</a>
-                <span class="sr-only">Tag voyage</span>
               </li>
-              <li class="nav__liste__item" role="menuitemcheckbox">
+              <li class="nav__liste__item">
                 <a class="nav__liste__link" id="sport" href="#sport" aria-label="tag sport">#Sport</a>
-                <span class="sr-only">Tag sport</span>
               </li>
-              <li class="nav__liste__item" role="menuitemcheckbox">
+              <li class="nav__liste__item">
                 <a class="nav__liste__link" id="animaux" href="#animaux" aria-label="tag animaux">#Animaux</a>
-                <span class="sr-only">Tag animaux</span>
               </li>
-              <li class="nav__liste__item" role="menuitemcheckbox">
+              <li class="nav__liste__item">
                 <a class="nav__liste__link" id="evenements" href="#evenements" aria-label="tag évènements">#Évènements</a>
-                <span class="sr-only">Tag évènements</span>
               </li>
             </ul>
           </nav>
@@ -72,7 +63,7 @@
 
         <h1>Nos Photographes</h1>
 
-        <section id="photographersCards" role="region" aria-label="photographes"></section>
+        <section id="photographersCards" aria-label="tous les photographes" role="region"></section>
         
       </main>
     

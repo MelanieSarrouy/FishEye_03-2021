@@ -38,13 +38,20 @@ header {
     object-fit: contain;
     display: flex;
     align-self: start;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+
     @include respond-to(small-screen) {
       max-width: 9.4rem;
       padding-bottom: 1rem;
     }
     @include respond-to(verysmall-screen) {
       max-width: 6.4rem;
-      padding-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      padding-top: 0.2rem;
     }
   }
 }

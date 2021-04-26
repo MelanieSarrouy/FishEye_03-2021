@@ -1,8 +1,9 @@
 .media {
   max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 350px));
-  column-gap: 2rem;
+  grid-template-columns: 350px 350px 350px;
+  column-gap: 1rem;
+  grid-auto-flow: row;
   justify-content: space-between;
   & img {
     transform: scale(1);
@@ -12,14 +13,29 @@
       opacity: 0.9;
     }
   }
+  @include respond-to(large-screen) {
+    grid-template-columns: 300px 300px 300px;
+  }
   @include respond-to(medium-screen) {
-    justify-content: space-around;
+    grid-template-columns: 250px 250px 250px;
+  }
+  @include respond-to(small-screen) {
+    grid-template-columns: 335px 335px;
   }
   @include respond-to(mobile-screen) {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 335px));
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // grid-template-columns: 335px;
     padding-bottom: 3.5rem;
+    // justify-content: center;
   }
+  @include respond-to(verysmall-screen) {
+    display: grid;
+    grid-template-columns: 100%;
+    justify-content: center;
+  }
+
 }
 
 // classes ajoutées avec js
@@ -29,6 +45,10 @@
   display: flex;
   justify-content: center;
   box-sizing: border-box;
+  flex-direction: column;
+  @include respond-to(mobile-screen) {
+    padding-bottom: 0.7rem;
+  }
   @include respond-to(verysmall-screen) {
     flex-direction: column;
   }
@@ -39,20 +59,43 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    max-width: 350px;
+    max-height: 300px;
+    box-sizing: border-box;
+    @include respond-to(large-screen) {
+      max-width: 300px;
+      max-height: 257px;
+    }
+    @include respond-to(medium-screen) {
+      max-width: 250px;
+      max-height: 214.5px;
+    }
+    @include respond-to(small-screen) {
+      max-width: 335px;
+      max-height: 300px;
+    }
     @include respond-to(mobile-screen) {
       height: 190px;
+    }
+    & img {
+      height: auto;
+      object-fit: cover;
     }
   }
   &__informations {
     display: flex;
     justify-content: space-between;
-    padding: 0.8rem 0 0.4rem;
+    align-items: center;
+    padding: 0.6rem 0 0.4rem;
     height: 1.5rem;
     color: $color-primary; 
     font-weight: 500;
     font-size: 1.2rem;
     max-width: 350px;
     overflow: hidden;
+    @include respond-to(small-screen) {
+      padding: 0.4rem 0 0.2rem;
+    }
     & p:first-child {
       text-overflow: ellipsis;
       overflow: hidden;
@@ -73,9 +116,13 @@
       & .fa-heart {
         cursor: pointer;
         transform: scale(1);
-        transition: transform 0.4s ease-in-out;
-        &:hover {
+        transform-origin: 100% 50%;
+        transition: transform 0.2s ease-in-out;
+        &:hover, &:focus {
           transform: scale(1.1);
+          color: rgba($color: #901c1c, $alpha: 0.8);
+          padding-right: 0.02rem;
+          padding-left: 0.05rem;
         }
       }
     }
@@ -86,6 +133,15 @@
   width: 5rem;
   top: 32%;
   z-index: 3;
+  @include respond-to(large-screen) {
+    top: 28%;
+  }
+  @include respond-to(medium-screen) {
+    top: 25%;
+  }
+  @include respond-to(small-screen) {
+    top: 32%;
+  }
   @include respond-to(mobile-screen) {
     top: 22%;
   }

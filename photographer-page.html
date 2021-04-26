@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="./images/favicon.ico" />
     
     <!-- Informations pour le SEO -->
-    <title>Fisheye - Photographe</title>
+    <title>Fisheye - page photographe</title>
     <meta name="description" content="photographes freelances" />
             
     <!-- Feuiles de styles -->
@@ -21,115 +21,122 @@
 
     <div class="bloc_page-photographer">
 
-      <header class="header2">
+      <header class="header2" role="banner">
 
-        <a href="index.html" class="header2__link" aria-label="Page d'accueil de Fisheye">
-          <img class="header2__img" src="./images/logoFisheye.svg" alt="logo Fisheye" width="200" height="52"/>
+        <a href="index.html" class="header2__link" aria-label="Page d'accueil de Fisheye" lang="en-GB">
+          <img class="header2__img" src="./images/logoFisheye.svg" alt="logo Fisheye" lang="en-GB" width="200" height="52"/>
         </a>
-        <a href="#" class="header2__anchor" aria-label="remonter au début de la page">
+        <a href="#" class="header2__anchor" aria-label="remonter au début de la page" tabindex="1" role="button">
           <i class="up fas fa-arrow-circle-up"></i>
         </a>
 
       </header>
 
-      <main class="main2" id="main2" role="main" aria-hidden="false">
-
-        <aside class="photographer">
-          <div class="photographer__informations">
-            <h1 class="photographer__informations__name"></h1>
-            <p class="photographer__informations__location" id="location"></p>
-            <p class="photographer__informations__tagline" id="tagline"></p>
-            <ul class="tags">
-            </ul>
-          </div>
-          <button class="button__contact" title="Contactez-moi" type="button">Contactez-moi</button>
-          <picture class="photographer__picture">
-            <img class="photographer__picture__img" src="./images/sample_photos/photographers_ID_photos/MimiKeel.jpg" alt="photo portrait du photographe"/>
-          </picture>
-        </aside>
-
-        <div class="filters">
-          <p>Trier par</p>
-          
-          <div class="divDropdown">
-            <ul role="listbox" tabindex="0" class="dropdown" id="dropdown" aria-label="liste de filtres" aria-activedescendant="option1">
-              <li role="option" class="dropdown__option" id="option1" tabindex="-1">
-                <span>&ensp;Popularité</span>
-              </li>
-              <li role="option" class="dropdown__option" id="option2" tabindex="-1">
-                <span>&ensp;Date</span>
-              </li>
-              <li role="option" class="dropdown__option" id="option3" tabindex="-1">
-                <span>&ensp;Titre</span>
-              </li>
-              <button role="button" aria-haspopup="listbox" class="arrows arrow__down">
-                <i class="fas fa-chevron-down"></i> 
-                <i class="fas fa-chevron-up"></i>
-              </button>
-            </ul>
-          </div>        
+      <aside class="photographer" role="complementary">
+        <div class="photographer__informations">
+          <h1 class="photographer__informations__name">Nom du photographe</h1>
+          <p class="photographer__informations__location" id="location"></p>
+          <p class="photographer__informations__tagline" id="tagline"></p>
+          <ul class="tags">
+          </ul>
         </div>
+        <button class="button__contact" type="button" role="button" tabindex="0">Contactez-moi</button>
+        <picture class="photographer__picture">
+          <img class="photographer__picture__img" src="./images/sample_photos/photographers_ID_photos/MimiKeel.jpg" alt="photo portrait du photographe"/>
+        </picture>
+      </aside>
+
+      <main class="main2" id="main2" role="main">
+
+
+        <aside class="filters" role="complementary">
+          <label class="filters__title" id="filters-label">Trier par</label>
+          <div class="select-filters" id="select-filters">
+            <button type="button" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="filters-label" class="select-filters__button" id="button-dropdown">
+              <span class="option1">&ensp;Popularité</span>
+              <i class="arrows fas fa-chevron-down"></i> 
+            </button>
+            <div class="container" id="container">
+              <ul role="menu" aria-expanded="true" class="dropdown" id="dropdown" aria-activedescendant="option1" tabindex="0">
+                <li class="dropdown__option" id="option1" role="option" aria-label="trier par popularité" tabindex="1"> 
+                  &ensp;Popularité
+                </li>
+                <li class="dropdown__option" id="option2" role="option" aria-label="trier par date" tabindex="2">
+                  &ensp;Date
+                </li>
+                <li class="dropdown__option" id="option3" role="option" aria-label="trier par titre" tabindex="3">
+                  &ensp;Titre
+                </li> 
+              </ul> 
+              <button type="button" role="button" aria-haspopup="true" aria-expanded="true" tabindex="4" aria-label="fermer le choix de filtres" class="select-filters__button" id="button-dropup">
+                <i class="arrows fas fa-chevron-up"></i>   
+              </button>
+            </div>     
+          </div>
+        </aside>
         
         <section class="media" id="media">
         </section>
 
 
-        <div class="infos">
+        <aside class="infos" role="complementary">
           <div class="infos__likes">
             <p class="infos__likes__number"></p>
             <i class="infos__likes__icone fas fa-heart"></i>
           </div>
           <p class="infos__price"></p>
-        </div>
+        </aside>
     
-      </main>
-      <div class="modal-background" role="dialog" aria-modal="true" aria-label="formulaire de contact" aria-hidden="true">
-        <div class="modal-content">
-          <span class="close closeModal" id="closeModal"></span>
-          <div class="modal">
-            <h2 class="modal__title">Contactez-moi</br>Nom du Photographe</h2>
-            <form name="contact" method="GET" action="#" class="modal__form" id="form" onsubmit="return validate()">
-              <div class="modal__form__formData">
-                <label for="firstname" class="modal__form__formData__label">Prénom</label>
-                <input type="text" class="modal__form__formData__input" id="firstname" required />
-              </div>
-              <div class="modal__form__formData">
-                <label for="lastname" class="modal__form__formData__label">Nom</label>
-                <input type="text" class="modal__form__formData__input" id="lastname" required />
-              </div>
-              <div class="modal__form__formData">
-                <label for="email" class="modal__form__formData__label">Email</label>
-                <input type="email" class="modal__form__formData__input" id="email" required />
-              </div>
-              <div class="modal__form__formData">
-                <label for="message" class="modal__form__formData__labelArea">Votre message</label>
-                <textarea name="message" id="message" class="modal__form__formData__textarea"
-                minlength="5" maxlength="200" required></textarea>
-              </div>
-              <div class="divButton">
-                <input id="button" class="buttonSend" type="submit" value="Envoyer" aria-label="soumettre"/>
-              </div>
-            </form>
-          </div>
+      </main>     
+      <div class="modal-background">
+        <div class="modal" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="form">
+          <span class="close closeModal" id="closeModal" aria-label="fermer" tabindex="1"></span>
+          <h2 class="modal__title">Contactez-moi<br>Nom du Photographe</h2>
+          <form name="contact" method="GET" action="#" class="modal__form" id="form" aria-label="formulaire de contact" onsubmit="return validate()">
+            <div class="modal__form__formData">
+              <label for="firstname" class="modal__form__formData__label">Prénom</label>
+              <input type="text" class="modal__form__formData__input" id="firstname" tabindex="0" aria-labelledby="message-firstname" aria-required="true" required />
+              <span class="pError sr-only" id="message-firstname">Veuillez saisir votre prénom (minimum 2 caractères)</span>
+            </div>
+            <div class="modal__form__formData">
+              <label for="lastname" class="modal__form__formData__label">Nom</label>
+              <input type="text" class="modal__form__formData__input" id="lastname" tabindex="0" aria-labelledby="message-lastname" aria-required="true" required />
+              <span class="pError sr-only" id="message-lastname">Veuillez saisir votre nom (minimum 2 caractères)</span>
+            </div>
+            <div class="modal__form__formData">
+              <label for="email" class="modal__form__formData__label">Email</label>
+              <input type="email" class="modal__form__formData__input" id="email" tabindex="0" aria-labelledby="message-email" aria-required="true" required />
+              <span class="pError sr-only" id="message-email">Veillez saisir une adresse email correcte : exemple@gmail.com</span>
+            </div>
+            <div class="modal__form__formData">
+              <label for="message" class="modal__form__formData__labelArea">Votre message</label>
+              <textarea name="message" id="message" class="modal__form__formData__textarea"
+              minlength="5" maxlength="200" tabindex="0" aria-labelledby="message-message" aria-required="true" required></textarea>
+              <span class="pError sr-only" id="message-message">Veuillez saisir votre message</span>
+            </div>
+            <div class="divButton">
+              <input id="button" class="buttonSend" type="submit" value="Envoyer" aria-label="soumettre"/>
+            </div>
+          </form>
         </div>
       </div>
 
-      <div class="lightbox-background" aria-modal="true" role="dialog" aria-label="images en gros plan" aria-hidden="true">
-        <div class="lightbox-content">
-          <div class="lightbox">
-            <button role="button" class="lightbox__prev" id="left" type="button" aria-label="image précédente">
-              <p class="sr-only">Précédent</p>
+      <div class="lightbox-background">
+        <div class="lightbox-content" aria-modal="true" role="dialog" aria-label="images en gros plan" tabindex="-1">
+          <div class="lightbox" id="lightbox">
+            <button class="lightbox__prev" id="left" type="button" aria-labelledby="prev" tabindex="0">
             </button>
+            <p class="sr-only" id="prev">image précédente</p>
             <div class="divLightbox">
               <ul class="lightbox__container">
               </ul>
-              <button role="button" class="lightbox__close" id="closeLightbox" type="button" aria-label="fermeture de la modale">
-                <p class="sr-only">fermer</p>
+              <button class="lightbox__close" id="closeLightbox" type="button" aria-labelledby="closeLightbox" tabindex="0">
               </button>
+              <p class="sr-only" id="closeLightbox">fermer la lightbox</p>
               </div>
-            <button role="button" class="lightbox__next" id="right" type="button" aria-label="image suivante" >
-              <p class="sr-only">Suivant</p>
+            <button class="lightbox__next" id="right" type="button" aria-labelledby="next" tabindex="0">
             </button>
+            <p class="sr-only" id="next">image suivante</p>
           </div>
         </div>
       </div>

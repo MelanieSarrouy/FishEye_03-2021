@@ -80,7 +80,6 @@ function createAcard(photographer) {
   pPrice.classList.add("photographer__price");
   let ul = document.createElement("ul");
   ul.classList.add("list");
-  ul.setAttribute("role", "list");
   let anchor = document.createElement("a");
   anchor.classList.add("photographer__link");
   let article = document.createElement("article");
@@ -96,11 +95,12 @@ function createAcard(photographer) {
   photographersCards.appendChild(article);
 
   // Contenu des cartes photographes
-  img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/${photographer.portrait}`);
+  img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/small/${photographer.portrait}`);
   img.setAttribute('alt', `portrait du photographe ${photographer.name}`);
   img.setAttribute('width', `200`);
   img.setAttribute('height', `200`);
   anchor.setAttribute("href", "photographer-page.html?id=" + `${photographer.id}`);
+  anchor.setAttribute("aria-label", `${photographer.name}`);      
   h2.innerHTML = `${photographer.name}`;
   pLocation.innerHTML = `${photographer.city}, ${photographer.country}`;
   pTagline.innerHTML = `${photographer.tagline}`;
@@ -114,12 +114,10 @@ function createAcard(photographer) {
 function displayTags(photographer) {
   for (let tag = 0; tag < photographer.tags.length; tag++) {
     document.querySelector("#id" + photographer.id).innerHTML += `
-    <li class="list__item" role="listitem">
-      <a class="list__link" href="index.html#${photographer.tags[tag]}">#${photographer.tags[tag]}</a>
-      <span class="sr-only">Tag ${photographer.tags[tag]}</span>
-
+    <li class="list__item">
+      <a class="list__link" href="index.html#${photographer.tags[tag]}" aria-label="tag ${photographer.tags[tag]}">#${photographer.tags[tag]}</a>
     </li>`;
-  }
+  } 
 }
 
 // Affichage des photographes par tag _____________________________________________________________________

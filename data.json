@@ -70,7 +70,7 @@
       "likes": 62,
       "date": "2011-12-08",
       "price": 55,
-      "alt": "Ensemble sportswear"
+      "alt": "Ensemble sportswear : femme sur la plage, ensemble jaune, haut court"
     },
     {
       "id": 8520927,
@@ -80,7 +80,7 @@
       "likes": 11,
       "date": "2011-11-06",
       "price": 55,
-      "alt": "Ensemble casual chic"
+      "alt": "Ensemble casual chic : femme sur un pont ensemble léger vert fleuri"
 
     },
     {
@@ -91,7 +91,7 @@
       "likes": 72,
       "date": "2013-08-12",
       "price": 55,
-      "alt": "Style casual chic"
+      "alt": "Style casual chic : cache-coeur coloré et pull jaune sur les épaules"
     },
     {
       "id": 9275938,
@@ -101,7 +101,7 @@
       "likes": 69,
       "date": "2018-02-22",
       "price": 55,
-      "alt": "Autel fleuri"
+      "alt": "Autel fleuri : décoration florale de l'autel avant un mariage"
     },
     {
       "id": 2053494,
@@ -111,7 +111,7 @@
       "likes": 2,
       "date": "2020-05-25",
       "price": 55,
-      "alt": "Réception"
+      "alt": "Réception : photographie nocturne, lumière et ambiance festive"
     },
     {
       "id": 7324238,
@@ -121,7 +121,7 @@
       "likes": 33,
       "date": "2019-06-12",
       "price": 55,
-      "alt": "18ème anniversaire"
+      "alt": "18ème anniversaire : décoration festive et nocturne d'une fête"
     },
     {
       "id": 8328953,
@@ -131,7 +131,7 @@
       "likes": 24,
       "date": "2011-12-08",
       "price": 100,
-      "alt": "Cheval en bois sculpté"
+      "alt": "Cheval en bois sculpté : video d'un cheval en bois sculpté en gros plan"
     },
     {
       "id": 7502053,
@@ -141,7 +141,7 @@
       "likes": 88,
       "date": "2007-05-07",
       "price": 55,
-      "alt": "L'Homme Triangle"
+      "alt": "L'Homme Triangle : peinture murale figurant un homme et un triangle"
     },
     {
       "id": 8523492,
@@ -151,7 +151,7 @@
       "likes": 24,
       "date": "2018-05-05",
       "price": 55,
-      "alt": "Lumière violette"
+      "alt": "Lumière violette : art urbain dans un passage souterrain"
     },
     {
       "id": 75902334,
@@ -161,7 +161,7 @@
       "likes": 75,
       "date": "2019-11-25",
       "price": 55,
-      "alt": "Oeil de pigeon"
+      "alt": "Oeil de pigeon : peinture murale de pigeons colorés"
     },
 
     {
@@ -172,7 +172,7 @@
       "likes": 52,
       "date": "2013-02-30",
       "price": 70,
-      "alt": "Aviron symétrique"
+      "alt": "Aviron symétrique : vue en plongée sur des avironneurs en action"
     },
     {
       "id": 92758372,
@@ -182,7 +182,7 @@
       "likes": 58,
       "date": "2018-07-17",
       "price": 70,
-      "alt": "Danse et contraste"
+      "alt": "Danse et contraste : danse contemporaine, un homme et une femme"
     },
     {
       "id": 32958383,
@@ -192,7 +192,7 @@
       "likes": 11,
       "date": "2019-08-12",
       "price": 70,
-      "alt": "La robe rouge"
+      "alt": "La robe rouge : femme descendant des escaliers de rue dans une robe rouge chic"
     },
     {
       "id": 928587383,
@@ -202,7 +202,7 @@
       "likes": 2,
       "date": "2019-01-02",
       "price": 70,
-      "alt": "Réunion d'entreprise"
+      "alt": "Réunion d'entreprise : photo d'employés participants à une réunion"
     },
     {
       "id": 725639493,
@@ -212,7 +212,7 @@
       "likes": 3,
       "date": "2019-05-20",
       "price": 70,
-      "alt": "Discours de vente"
+      "alt": "Discours de vente : photo d'un homme devant un auditoire"
     },
     {
       "id": 23394384,
@@ -222,7 +222,7 @@
       "likes": 52,
       "date": "2019-07-18",
       "price": 70,
-      "alt": "Artiste au piano"
+      "alt": "Artiste au piano : photo noir et blanc d'une femme assise devant un piano"
     },
     {
       "id": 87367293,
@@ -232,7 +232,7 @@
       "likes": 23,
       "date": "2018-02-22",
       "price": 70,
-      "alt": "Animatrice"
+      "alt": "Animatrice : femme se tenant debout sur scène avec un micro"
     },
     {
       "id": 593834784,
@@ -242,7 +242,7 @@
       "likes": 52,
       "date": "2017-03-13",
       "price": 70,
-      "alt": "Animal majestueux"
+      "alt": "Animal majestueux : photo en gros plan d'un majestueux cerf dans son milieu naturel"
     },
     {
       "id": 83958935,
@@ -252,7 +252,7 @@
       "likes": 52,
       "date": "2016-06-12",
       "price": 70,
-      "alt": "Chiot sur la plage"
+      "alt": "Chiot sur la plage : video d'unh chiot jouant au coucher de soleil sur la plage"
     },
 
     {
@@ -263,7 +263,7 @@
       "likes": 23,
       "date": "2017-03-18",
       "price": 45,
-      "alt": "La montagne rocheuse"
+      "alt": "La montagne rocheuse : video de la crête d'une montagne escarpée"
     },
     {
       "id": 343423425,
@@ -273,7 +273,7 @@
       "likes": 101,
       "date": "2017-04-03",
       "price": 45,
-      "alt": "Bains exterieurs"
+      "alt": "Bains exterieurs : touristes profitants de bains chauds naturels en extérieur"
     },
     {
       "id": 73434243,
@@ -283,7 +283,7 @@
       "likes": 99,
       "date": "2018-04-30",
       "price": 45,
-      "alt": "Route sinueuse"
+      "alt": "Route sinueuse : photo d'une route mouillée, sinueuse au milieu de la steppe"
     },
     {
       "id": 23425523,
@@ -293,7 +293,7 @@
       "likes": 34,
       "date": "2016-04-05",
       "price": 45,
-      "alt": "Pont dans la forêt"
+      "alt": "Pont dans la forêt : photo prise sur un pont arqué en bois dans une forêt"
     },
     {
       "id": 23134513,
@@ -303,7 +303,7 @@
       "likes": 23,
       "date": "2017-03-18",
       "price": 45,
-      "alt": "Embarcation"
+      "alt": "Embarcation : photo prise sur un lac face à une montagne dans une ambarcation"
     },
     {
       "id": 92352352,
@@ -313,7 +313,7 @@
       "likes": 66,
       "date": "2018-05-24",
       "price": 45,
-      "alt": "Portrait doré"
+      "alt": "Portrait doré : portrait couleur d'une jeune femme rousse souriante"
     },
     {
       "id": 34513453,
@@ -323,7 +323,7 @@
       "likes": 52,
       "date": "2017-04-21",
       "price": 45,
-      "alt": "Portrait de Shaw"
+      "alt": "Portrait de Shaw : portrait en noir et blanc d'un jeune homme avec un collier"
     },
     {
       "id": 23523533,
@@ -333,7 +333,7 @@
       "likes": 95,
       "date": "2018-11-02",
       "price": 45,
-      "alt": "Portrait d'Alexandra"
+      "alt": "Portrait d'Alexandra : portrait en noir et blanc en plan rapproché d'une jeune femme"
     },
     {
       "id": 525834234,
@@ -343,7 +343,7 @@
       "likes": 25,
       "date": "2019-01-02",
       "price": 45,
-      "alt": "Portrait de travailleur"
+      "alt": "Portrait de travailleur : portrait en nior et blanc d'un homme qui fume"
     },
 
     {
@@ -354,7 +354,7 @@
       "likes": 88,
       "date": "2019-02-03",
       "price": 45,
-      "alt": "Seul dans les montagnes"
+      "alt": "Seul dans les montagnes : nature, montagnes, lumière douce, homme debout"
     },
     {
       "id": 625025343,
@@ -364,7 +364,7 @@
       "likes": 85,
       "date": "2019-04-03",
       "price": 45,
-      "alt": "La colline colorée"
+      "alt": "La colline colorée : village aux murs colorés sur flan de colline en bord de mer"
     },
     {
       "id": 2525345343,
@@ -374,7 +374,7 @@
       "likes": 34,
       "date": "2019-04-07",
       "price": 45,
-      "alt": "Portrait d'enfant"
+      "alt": "Portrait d'enfant : photo en noir et blanc d'une enfant grimaçant "
     },
     {
       "id": 2523434634,
@@ -384,7 +384,7 @@
       "likes": 63,
       "date": "2019-04-07",
       "price": 45,
-      "alt": "Portrait de Nora"
+      "alt": "Portrait de Nora : portrait couleur d'une jeune femme à lunettes"
     },
     {
       "id": 398847109,
@@ -394,7 +394,7 @@
       "likes": 55,
       "date": "2019-06-20",
       "price": 45,
-      "alt": "Portrait de femme"
+      "alt": "Portrait de femme : portrait noir et blanc d'une jeune femme"
     },
     {
       "id": 2534342,
@@ -404,7 +404,7 @@
       "likes": 25,
       "date": "2019-06-21",
       "price": 45,
-      "alt": "Mariage sur la plage"
+      "alt": "Mariage sur la plage : table de réception sur la plage"
     },
     {
       "id": 65235234,
@@ -414,7 +414,7 @@
       "likes": 52,
       "date": "2019-06-25",
       "price": 45,
-      "alt": "Le rocher des mariés"
+      "alt": "Le rocher des mariés : mariés s'enlaçant au milieu des rochers"
     },
     {
       "id": 23523434,
@@ -424,7 +424,7 @@
       "likes": 77,
       "date": "2019-06-28",
       "price": 45,
-      "alt": "Danse des mariés"
+      "alt": "Danse des mariés : mariés s'enlaçant devant l'autel"
     },
     {
       "id": 5234343,
@@ -434,7 +434,7 @@
       "likes": 142,
       "date": "2019-08-23",
       "price": 60,
-      "alt": "Chevaux sauvages"
+      "alt": "Chevaux sauvages : video de chevaux sauvages se déplaçant"
     },
     {
       "id": 95234343,
@@ -444,7 +444,7 @@
       "likes": 59,
       "date": "2019-07-02",
       "price": 60,
-      "alt": "L'oiseau arc-en-ciel"
+      "alt": "L'oiseau arc-en-ciel : gros plan d'un oiseau arc-en-ciel"
     },
 
     {
@@ -455,7 +455,7 @@
       "likes": 25,
       "date": "2019-04-03",
       "price": 60,
-      "alt": "La Tour"
+      "alt": "La Tour : cuocher de soleil, ruelle et architecture asiatique"
     },
     {
       "id": 2523434,
@@ -465,7 +465,7 @@
       "likes": 53,
       "date": "2019-05-06",
       "price": 60,
-      "alt": "Le canal"
+      "alt": "Le canal : gondoles et coucher de soleil sur le canal"
     },
     {
       "id": 95293534,
@@ -475,7 +475,7 @@
       "likes": 33,
       "date": "2019-05-12",
       "price": 60,
-      "alt": "Lac et montagne"
+      "alt": "Lac et montagne : reflets des montagnes et de la forêt sur le lac"
     },
     {
       "id": 356234343,
@@ -485,7 +485,7 @@
       "likes": 53,
       "date": "2019-06-20",
       "price": 60,
-      "alt": "Le vélo et l'escalier"
+      "alt": "Le vélo et l'escalier : velo avec panier contre escalier en pierre et lampadaire"
     },
     {
       "id": 235234343,
@@ -495,7 +495,7 @@
       "likes": 63,
       "date": "2019-06-26",
       "price": 60,
-      "alt": "La porte"
+      "alt": "La porte : photo d'une porte orientale avec vue sur l'extérieur"
     },
     {
       "id": 6234234343,
@@ -505,7 +505,7 @@
       "likes": 52,
       "date": "2019-06-30",
       "price": 60,
-      "alt": "Architecture et contraste"
+      "alt": "Architecture et contraste : richesse de l'architecture d'Europe de l'est"
     },
     {
       "id": 6525666253,
@@ -515,7 +515,7 @@
       "likes": 63,
       "date": "2019-07-20",
       "price": 60,
-      "alt": "Village sur une colline"
+      "alt": "Village sur une colline : villages aux murs blancs sur colline escarpée"
     },
     {
       "id": 98252523433,
@@ -535,7 +535,7 @@
       "likes": 57,
       "date": "2020-01-20",
       "price": 65,
-      "alt": "Boucles d'infrastuctures"
+      "alt": "Boucles d'infrastuctures : video d'un réseau routier urbain vu du ciel"
     },
     {
       "id": 3523523534,
@@ -545,7 +545,7 @@
       "likes": 54,
       "date": "2020-05-05",
       "price": 60,
-      "alt": "Chambre d'angle"
+      "alt": "Chambre d'angle : gros plan du haut d'un bêtimant d'angle type parisien"
     },
 
     {
@@ -556,7 +556,7 @@
       "likes": 150,
       "date": "2018-02-30",
       "price": 70,
-      "alt": "Danse dans les airs"
+      "alt": "Danse dans les airs : video d'une femme pratiquant la danse aérienne dans un gymnase"
     },
     {
       "id": 235234343,
@@ -566,7 +566,7 @@
       "likes": 101,
       "date": "2018-03-05",
       "price": 65,
-      "alt": "La prochaine prise"
+      "alt": "La prochaine prise : femme escaladant une falaise, vue en plongée"
     },
     {
       "id": 235343222,
@@ -576,7 +576,7 @@
       "likes": 103,
       "date": "2018-03-10",
       "price": 70,
-      "alt": "Surfeur dans le rouleau"
+      "alt": "Surfeur dans le rouleau : homme surfant dans le rouleau d'une vague"
     },
     {
       "id": 7775342343,
@@ -586,7 +586,7 @@
       "likes": 77,
       "date": "2018-04-16",
       "price": 50,
-      "alt": "Saut de Ski"
+      "alt": "Saut de Ski : vue en contre-plongée d'un skieur sautant avec les skis croisés"
     },
     {
       "id": 9253445784,
@@ -596,7 +596,7 @@
       "likes": 88,
       "date": "2018-04-22",
       "price": 65,
-      "alt": "Course feminine"
+      "alt": "Course feminine : compétition sportive féminine sur un stade"
     },
     {
       "id": 22299394,
@@ -606,7 +606,7 @@
       "likes": 95,
       "date": "2018-04-27",
       "price": 70,
-      "alt": "Skate sur la plage"
+      "alt": "Skate sur la plage : skateur effectuant un saut sur une rampe en bord de mer"
     },
     {
       "id": 3452342633,
@@ -616,7 +616,7 @@
       "likes": 52,
       "date": "2018-05-03",
       "price": 75,
-      "alt": "Lumière blanche"
+      "alt": "Lumière blanche : architecture moderne, intérieur d'un grand bâtiment blanc"
     },
     {
       "id": 939234243,
@@ -626,7 +626,7 @@
       "likes": 55,
       "date": "2018-05-10",
       "price": 72,
-      "alt": "La vague"
+      "alt": "La vague : architecture moderne, bâtiment en forme de vague"
     },
     {
       "id": 222959233,
@@ -636,7 +636,7 @@
       "likes": 85,
       "date": "2018-05-15",
       "price": 71,
-      "alt": "Fer à cheval"
+      "alt": "Fer à cheval : architecture moderne, bâtiment en forme de fer à cheval"
     },
     {
       "id": 965933434,
@@ -646,7 +646,7 @@
       "likes": 66,
       "date": "2018-05-20",
       "price": 58,
-      "alt": "Lignes croisées"
+      "alt": "Lignes croisées : architecture moderne, bâtiments vitrés, jaunes, créant un jeu de lignes croisées"
     },
     {
       "id": 777723343,
@@ -656,7 +656,7 @@
       "likes": 79,
       "date": "2018-05-21",
       "price": 80,
-      "alt": "Courbes"
+      "alt": "Courbes bleues : architecture moderne, bâtiment aux courbes prononcées et bleues"
     }
   ]
 }

@@ -1,7 +1,7 @@
 // DOM // ______________________________________________________________________________________________________________
 
 const h1 = document.querySelector('h1');
-const pLocation = document.querySelector('h1 + p');
+const pLocation = document.querySelector('#location');
 const listTags = document.querySelector('.tags');
 const pTagline = document.querySelector('#tagline');
 const button = document.querySelector('aside > button');
@@ -9,12 +9,15 @@ const img = document.querySelector('aside > picture > img');
 const sectionMedia = document.querySelector('.media');
 const rate = document.querySelector('.infos__price');
 const totalLikesNb = document.querySelector('.infos__likes__number');
-const modal = document.querySelector('.modal-background');
+const modalBg = document.querySelector('.modal-background');
+const modal = document.querySelector('.modal');
 const contact = document.querySelector('.button__contact');
 const contactTitle = document.querySelector('.modal__title');
 const closeContact = document.querySelector('#closeModal');
 const main = document.getElementById('main2');
 const blocPage = document.querySelector('.bloc_page-photographer');
+const aside = document.querySelector('.photographer');
+const header = document.querySelector('.header2');
 
 // Requête objet JSON __________________________________________________________________________________________________
 
@@ -119,6 +122,13 @@ function folderName(photographer) {
   return nickName;
 }
 
+function title(alt) {
+  let str = alt;
+  let i = str.indexOf(':');
+  titre = i == -1 ? str : str.substring(0, i);
+  return titre;
+}
+
 // Affichage de la "carte d'identité" du photographe // ________________________________________________________________
 
 function displayPhotographer() {
@@ -130,8 +140,7 @@ function displayPhotographer() {
   for (tag of tags) {
     listTags.innerHTML += `
     <li class="tags__tag" role="listitem">
-      <a class="tags__tag__link" href="index.html#${tag}">#${tag}</a>
-      <span class="sr-only">Tag ${tag}</span>
+      <a class="tags__tag__link" href="index.html#${tag}" aria-label"tag ${tag}">#${tag}</a>
     </li>`;
   }
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/small/${photographer.portrait}`);
@@ -174,14 +183,15 @@ class Image {
     let anchorMedia = document.getElementById(`idImage${medium.id}`);
     let image = document.createElement('img');
     anchorMedia.appendChild(image);
-    anchorMedia.setAttribute('href', `./images/sample_photos/${nickName}/${medium.image}`);
-
+    anchorMedia.setAttribute('href', `javascript:void(0);`);
     image.setAttribute("src", `./images/sample_photos/${nickName}/light/${medium.image}`); 
-    image.setAttribute("alt", `${medium.alt}`);
+    image.setAttribute("alt", `${titre}`);
     image.setAttribute("id", `id${medium.id}`);
+    image.setAttribute("aria-label", `ouverture de la lightbox, image en plan rapproché de ${titre}`);
     image.setAttribute('width', `350`);
     image.setAttribute('height', `300`);
-  
+    image.setAttribute('tabindex', `-1`);
+    anchorMedia.addEventListener('click', (e) => lightbox(e)); 
   }
 }
 class Video {
@@ -189,19 +199,22 @@ class Video {
     let anchorMedia = document.getElementById(`idImage${medium.id}`)
     let icone = document.createElement('img');
     anchorMedia.appendChild(icone);
-    anchorMedia.setAttribute('href', `./images/sample_photos/${nickName}/${medium.video}`);
-
+    anchorMedia.setAttribute('href', `javascript:void(0);`);
     icone.setAttribute("src", "./images/play.png");
     icone.classList.add('logoPlay');
+    icone.setAttribute('alt', '');
+    icone.setAttribute('tabindex', `-1`);
     let image = document.createElement('img');
-    icone.setAttribute('alt', 'icone de lecture de la video');
     anchorMedia.appendChild(image);
     let captureImage = medium.video.replace('mp4', 'jpg');
     image.setAttribute("src", `./images/sample_photos/${nickName}/light/${captureImage}`); 
-    image.setAttribute("alt", `Video ${medium.alt}`);
+    image.setAttribute("alt", `${titre}`);
     image.setAttribute("id", `id${medium.id}`);
+    image.setAttribute("aria-label", `ouverture de la lightbox, video de ${titre}`);
     image.setAttribute('width', `350`);
     image.setAttribute('height', `300`);
+    image.setAttribute('tabindex', `-1`);
+    anchorMedia.addEventListener('click', (e) => lightbox(e)); 
   }
 }
 
@@ -210,6 +223,7 @@ const factory = new MediaFactory();
 function testFactory(media) {
   sectionMedia.innerHTML = '';
   for (medium of media) {
+    let titre = title(medium.alt);
     if (medium.image !== undefined) {
       let card = factory.createMedia('image');
       card.createAnImageCard();
@@ -225,6 +239,7 @@ function createDOMElements() {
   sectionMedia.appendChild(article);
   article.classList.add('article');
   article.setAttribute('id', `${medium.id}`);
+
   // DOM élément <figure> - conteneur
   let figure = document.createElement('figure');
   article.appendChild(figure);
@@ -232,9 +247,9 @@ function createDOMElements() {
   let anchorMedia = document.createElement('a');
   figure.appendChild(anchorMedia);
   anchorMedia.classList.add('article__link');
-  anchorMedia.setAttribute('id', `idImage${medium.id}`)
+  anchorMedia.setAttribute('id', `idImage${medium.id}`);
+  anchorMedia.setAttribute('aria-labbeledby', `lightbox`);
 
-  anchorMedia.addEventListener('click', (e) => lightbox(e)); 
 
   let figcaption = document.createElement('figcaption');
   figure.appendChild(figcaption);
@@ -242,7 +257,8 @@ function createDOMElements() {
   // DOM élément <p> - titre de l'image
   let pTitle = document.createElement('p');
   figcaption.appendChild(pTitle);
-  pTitle.innerHTML = `${medium.alt}`;
+  // title(medium.alt);
+  pTitle.innerHTML = `${titre}`;
   pTitle.setAttribute('id', `title${medium.id}`);
   // DOM élément <div> - conteneur prix et likes
   let divLikes = document.createElement('div');
@@ -264,7 +280,8 @@ function createDOMElements() {
   heart.classList.add('heart', 'fas', 'fa-heart');
   heart.setAttribute('id', `heart${medium.id}`);
   heart.setAttribute('aria-label', `likes`);
-
+  heart.setAttribute('role', `button`);
+  anchorMedia.setAttribute('tabindex', `0`);
   heart.addEventListener('click', () => addLikes());
 }
 
@@ -296,47 +313,55 @@ function addLikes() {
 
 // LIGHTBOX // ___________// LIGHTBOX // _____________// LIGHTBOX // _______________// LIGHTBOX // _____________________________________
 
-let lightBox = document.querySelector('.lightbox-background'); // la lightbox
+let lightBoxBg = document.querySelector('.lightbox-background'); // lightbox background
 let ulMedias = document.querySelector('.lightbox__container'); // le conteneur d'image de la lightbox
 let body = document.querySelector('.bodyPhotographer');
 let anchorMedia = document.querySelectorAll('article__link');
 let closeLightbox = document.getElementById('closeLightbox'); // le bouton de fermeture de la lightbox
 let prev = document.getElementById('left'); // bouton "précédent"
-let next = document.getElementById('right'); // buoton "suivant"
+let next = document.getElementById('right'); // bouton "suivant"
+
+let position = 0;
+
 
 function lightbox(e) {
   e.preventDefault();
+  let media = photographer.media;
+  body.classList.add('no-scroll');
   ulMedias.innerHTML = '';
-  lightBox.style.display = 'flex';
-  lightBox.setAttribute('aria-hidden', 'false');
+  lightBoxBg.style.display = 'flex';
+  lightBoxBg.setAttribute('aria-hidden', 'false');
   main2.setAttribute('aria-hidden', 'true');
   let picture = window.event.target;
   let divMedia = picture.parentNode;
   let idDivMedia = divMedia.getAttribute('id');
   let id = idDivMedia.replace('idImage', '');
-  let media = photographer.media;
-  body.classList.add('no-scroll');
 
   for (med of media) {
+    let titre = title(med.alt);
     FactoryLightbox(med);
   }
-  let items = Array.from(document.querySelectorAll('.lightbox-item'));
+  let items = Array.from(document.querySelectorAll('.lightboxItem'));
   items.forEach((item) => {
     item.classList.add(`item-${items.indexOf(item)}`);
   })
   let currentItem = document.getElementById(`item${id}`);
-  researchPosition(currentItem);
+  let currentItemPosition = 0;
+  // researchPosition(currentItem);
   currentItem.style.display = 'flex';
   currentItem.setAttribute('aria-hidden', 'false');
+
   next.addEventListener('click', () => goToNextSlide(items));
   prev.addEventListener('click', () => goToPreviousSlide(items));
 }
-function researchPosition(currentItem) {
-  let cName = currentItem.className;
-  let i = cName.lastIndexOf("-");
-  position = cName.substr(i+1);
-  return position;
-}
+
+// function researchPosition(currentItem) {
+//   let cName = currentItem.className;
+//   let i = cName.lastIndexOf("-");
+//   position = cName.substr(i+1);
+//   return position;
+// }
+
 function goToNextSlide(items) {
   if (position + 1 >=  items.length) {
       const lastItem = document.querySelector(`.item-${position}`);
@@ -350,6 +375,7 @@ function goToNextSlide(items) {
       setNodeAttributes(lastItem, currentItem);
   }
 }
+
 function goToPreviousSlide(items) {
   if (position - 1 >= 0) {
       position -= 1;
@@ -359,17 +385,19 @@ function goToPreviousSlide(items) {
 
   } else {
       const lastItem = document.querySelector(`.item-${position}`);
-      position = items.length - 1;
+      position = items.length;
       const currentItem = document.querySelector(`.item-${position}`);
       setNodeAttributes(lastItem, currentItem);
   }
 }
+
 const setNodeAttributes = (lastItem, currentItem) => {
   lastItem.style.display = 'none';
   currentItem.style.display = 'flex';
   lastItem.setAttribute('aria-hidden', 'true');
   currentItem.setAttribute('aria-hidden', 'false');
 }
+
 // Factory Method pour la lightbox ------------------------
 class LightboxFactory {
   constructor() {
@@ -387,7 +415,7 @@ class LightboxFactory {
 class ImageLightbox {
   createAnImage(media) {
     let li = document.createElement('li');
-    li.classList.add('lightbox-item');
+    li.classList.add('lightboxItem');
     li.style.display = 'none';
     li.setAttribute('id', `item${media.id}`);
     li.setAttribute('aria-hidden', 'true');
@@ -398,17 +426,18 @@ class ImageLightbox {
     let image = document.createElement('img');
     figure.appendChild(image);
     image.setAttribute('src', `../images/sample_photos/${nickName}/${media.image}`)
+    image.setAttribute('alt', `${medium.alt}`);
     image.classList.add('imageLightbox');
     let figcaption = document.createElement('figcaption');
     figure.appendChild(figcaption);
     figcaption.classList.add('titleLightbox');
-    figcaption.innerText = `${media.alt}`;
+    figcaption.innerText = `${titre}`;
   }
 }
 class VideoLightbox {
   createAVideo(media) {
     let li = document.createElement('li');
-    li.classList.add('lightbox-item');
+    li.classList.add('lightboxItem');
     li.style.display = 'none';
     li.setAttribute('id', `item${media.id}`);
     li.setAttribute('aria-hidden', 'true');
@@ -428,7 +457,7 @@ class VideoLightbox {
     let pInfos = document.createElement('p');
     li.appendChild(pInfos);
     pInfos.classList.add('titleLightbox');
-    pInfos.innerText = `${media.alt}`;
+    pInfos.innerText = `${titre}`;
   }
 }
 const factoryLigthbox = new LightboxFactory();
@@ -453,16 +482,13 @@ function onKeyUp(e) {
     keynum = e.which
   } if (keynum == 27) {
     closeBox();
-  } if (keynum == 39) {
-    goToNextSlide();
-  } if (keynum == 37) {
-    goToPreviousSlide();
+    closeModal();
   }
 }
 // Fermeture de la lightbox --------------------------------
 function closeBox() {
-  lightBox.style.display = 'none';
-  lightBox.setAttribute('aria-hidden', 'true');
+  lightBoxBg.style.display = 'none';
+  lightBoxBg.setAttribute('aria-hidden', 'true');
   main2.setAttribute('aria-hidden', 'false');
   body.classList.remove('no-scroll');
   document.removeEventListener('keyup', onKeyUp);
@@ -470,32 +496,37 @@ function closeBox() {
 
 // DROPDOWN // _____// DROPDOWN //__________// DROPDOWN //________// DROPDOWN //________________________________________________________
 
-let dropDown = document.getElementById('dropdown');
-let arrowDown = document.querySelector('.fa-chevron-down');
-let arrowUp = document.querySelector('.fa-chevron-up');
-let options = document.getElementsByClassName('dropdown__option');
-let arrows = document.querySelector('.arrows');
+let dropDown = document.getElementById('container');
+let down = document.querySelector('#button-dropdown');
+let up = document.querySelector('#button-dropup');
+let popularity = document.getElementById('option1');
+let date = document.getElementById('option2');
+let tiTre = document.getElementById('option3');
+// let options = document.getElementsByClassName('dropdown__option');
+// let arrows = document.querySelector('.arrows');
 
-arrows.addEventListener('click', () => drop());
-function drop() {
-  if (arrowDown.style.display !== 'none') {
-    arrowDown.style.display = 'none';
-    arrowUp.style.display = 'flex';
-    options[1].style.display = 'flex';
-    options[2].style.display = 'flex';
-  } else {
-    arrowDown.style.display = 'flex';
-    arrowUp.style.display = 'none';
-    options[1].style.display = 'none';
-    options[2].style.display = 'none';
-  }
+down.addEventListener('click', () => openDropdown());
+
+function openDropdown() {
+  dropDown.style.display = 'flex';
+  popularity.focus();
+}
+up.addEventListener('click', () => closeDropdown());
+
+function closeDropdown() {
+  dropDown.style.display = 'none';
+  down.focus();
 }
 
 // TRI // _______// TRI //______// TRI //_________// TRI //__________// TRI //____________// TRI //______________________________________________
 
 // popularité ________________________________________________________________________ 
-let popularity = document.getElementById('option1');
 popularity.addEventListener('click', () => popularitySort(photographer.media));
+popularity.addEventListener('keypress', (e) => {
+  if (e.keyCode === 13) {
+    popularitySort(photographer.media);
+  }
+})
 function popularitySort(media) {
   function tri(a,b) {
     return ((a.likes < b.likes) ? 1 : (a.likes == b.likes) ? 0 : -1);
@@ -504,8 +535,12 @@ function popularitySort(media) {
   testFactory(media);
 // date ________________________________________________________________________ 
 }
-let date = document.getElementById('option2');
 date.addEventListener('click', () => dateSort(photographer.media));
+date.addEventListener('keypress', (e) => {
+  if (e.keyCode === 13) {
+    dateSort(photographer.media);
+  }
+})
 function dateSort(media) {
   function tri(a,b) {
     dateA = new Date(a.date);
@@ -516,8 +551,12 @@ function dateSort(media) {
   testFactory(media);
 }
 // titre ________________________________________________________________________ 
-let titre = document.getElementById('option3');
-titre.addEventListener('click', () => titleSort(photographer.media));
+tiTre.addEventListener('click', () => titleSort(photographer.media));
+tiTre.addEventListener('keypress', (e) => {
+  if (e.keyCode === 13) {
+    titleSort(photographer.media);
+  }
+})
 function titleSort(media) {
   function tri(a,b) {
     titleA = a.alt.split(" ").join('');
@@ -530,43 +569,54 @@ function titleSort(media) {
   testFactory(media);
 }
 
-// MODALE // _____// MODALE //_______// MODALE //______// MODALE // _________________________________
+// DOM pour modale ______________________________________________
 
-contact.addEventListener('click', () => launchModal());
-
-function launchModal() {
-  modal.style.display = 'block';
-  modal.setAttribute('aria-hidden', 'false');
-  contact.style.display = 'none';
-  main2.setAttribute('aria-hidden', 'true');
-  body.classList.add('no-scroll');
-}
-
-closeContact.addEventListener('click', () => closeModal());
-function closeModal() {
-  modal.style.display = 'none';
-  modal.setAttribute('aria-hidden', 'true')
-  contact.style.display = 'block';
-  main2.setAttribute('aria-hidden', 'false');
-  body.classList.remove('no-scroll');
-
-}
-
-// function testFirstName ______________________________________________
+const pErrorFirstName = document.getElementById("message-firstname"); // creation du p error FirstName
+const pErrorLastName = document.getElementById("message-lastname"); // creation du p error LastName
+const pErrorEmail = document.getElementById("message-email"); // creation du p error Email
+const pErrorMessage = document.getElementById("message-message"); // creation du p error Message
 const formData = document.getElementsByClassName("modal__form__formData"); // Toutes les div formData avec input
-const pErrorFirstName = document.createElement("p"); // creation du p error FirstName
-const pErrorLastName = document.createElement("p"); // creation du p error LastName
-const pErrorEmail = document.createElement("p"); // creation du p error Email
-const pErrorMessage = document.createElement("p"); // creation du p error Message
+// const pErrorFirstName = document.createElement("span"); // creation du p error FirstName
+// const pErrorLastName = document.createElement("span"); // creation du p error LastName
+// const pErrorEmail = document.createElement("span"); // creation du p error Email
+// const pErrorMessage = document.createElement("span"); // creation du p error Message
 const firstName = document.getElementById("firstname"); // ajout input firstname dans le DOM
 const lastName = document.getElementById("lastname"); // ajout input lastname dans le DOM
 const eMail = document.getElementById("email"); // ajout input email dans le DOM
 let goButton = document.getElementById("button"); // bouton validation
 const form = document.getElementById("form"); // le formulaire
 const message = document.getElementById('message');
-
 formData[0].appendChild(pErrorFirstName);
-pErrorFirstName.classList.add("pError");
+formData[1].appendChild(pErrorLastName);
+formData[2].appendChild(pErrorEmail);
+formData[3].appendChild(pErrorMessage);
+
+// MODALE // _____// MODALE //_______// MODALE //______// MODALE // _________________________________
+
+contact.addEventListener('click', () => launchModal());
+
+function launchModal() {
+  modalBg.style.display = 'block';
+  modalBg.setAttribute('aria-hidden', 'false');
+  contact.style.display = 'none';
+  main2.setAttribute('aria-hidden', 'true');
+  body.classList.add('no-scroll');
+  modal.focus();
+  modal.setAttribute('tabindex', '0');
+}
+
+closeContact.addEventListener('click', () => closeModal());
+function closeModal() {
+  modalBg.style.display = 'none';
+  modalBg.setAttribute('aria-hidden', 'true')
+  contact.style.display = 'block';
+  main2.setAttribute('aria-hidden', 'false');
+  body.classList.remove('no-scroll');
+  modal.setAttribute('tabindex', '-1');
+  contact.focus();      
+}
+
+// function testFirstName ______________________________________________
 let regexName = /^[a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ]+([ \-'][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ][a-zA-ZéèêëîïÈÉÊËÎÏÀÁÂ]+)?$/;
 
 firstName.addEventListener("blur", testFirstName);
@@ -576,22 +626,17 @@ function testFirstName() {
      (firstName.value.length >= 30) ||
      (!regexName.test(firstName.value)) || 
      (firstName.value == "")) {
-    
     firstName.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
-    pErrorFirstName.textContent = "Veuillez saisir votre prénom (min 2 caractères)"; // message d'erreur sur paragraphe pError;
+    pErrorFirstName.classList.remove('sr-only');
     firstName.addEventListener("input", testFirstName);
     return false;
   } else {
     firstName.classList.remove("inputError");
-    pErrorFirstName.textContent = "";
+    pErrorFirstName.classList.add('sr-only');
     return true;
   }
 }
 // function testLastName _______________________________________________
-
-formData[1].appendChild(pErrorLastName);
-pErrorLastName.classList.add("pError");
-
 lastName.addEventListener("blur", testLastName);
 
 function testLastName() {
@@ -600,18 +645,16 @@ function testLastName() {
      (!regexName.test(lastName.value)) || 
      (lastName.value == "")) {
     lastName.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
-    pErrorLastName.textContent = "Veuillez saisir votre nom (min 2 caractères)"; // message d'erreur sur paragraphe pError;
+    pErrorLastName.classList.remove('sr-only');
     lastName.addEventListener("input", testLastName);
     return false;
   } else {
     lastName.classList.remove("inputError");
-    pErrorLastName.textContent = "";
+    pErrorLastName.classList.add('sr-only');
     return true;
   }
 }
 // function testEmail __________________________________________________
-formData[2].appendChild(pErrorEmail);
-pErrorEmail.classList.add("pError");
 let regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 eMail.addEventListener("blur", testEmail);
@@ -622,34 +665,40 @@ function testEmail() {
      (!regexEmail.test(eMail.value)) || 
      (eMail.value == "")) {
     eMail.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
-    pErrorEmail.textContent = "Adresse mail incorrecte"; // message d'erreur sur paragraphe pError;
+    pErrorEmail.classList.remove('sr-only');
     eMail.addEventListener("input", testEmail);
     return false;
   } else {
     eMail.classList.remove("inputError");
-    pErrorEmail.textContent = "";
+    pErrorEmail.classList.add('sr-only');
     return true;
   }
 }
 // function testMessage __________________________________________________
-formData[3].appendChild(pErrorMessage);
-pErrorMessage.classList.add("pError");
 message.addEventListener("blur", testMessage);
+let regexMessage = /[a-z]/;
 function testMessage() {
-  if ((message.value) == "") {
+  if (((message.value) == "") ||
+      (!regexMessage.test(message.value))) {
     message.classList.add("inputError"); // attribution de la classe "inputError" à firstName(input)
-    pErrorMessage.textContent = "Veuillez saisir votre message"; // message d'erreur sur paragraphe pError;
+    pErrorMessage.classList.remove('sr-only');
     message.addEventListener("input", testMessage);
     return false;
   } else {
     message.classList.remove("inputError");
-    pErrorMessage.textContent = "";
+    pErrorMessage.classList.add('sr-only');
     return true;
   }
 }
-
 // function submit __________________________________________________
 
+modal.addEventListener('keypress', runValidate);
+
+function runValidate(e) {
+  if (e.keyCode == 13) {
+    validate();
+  }
+}
 function validate() {
   if ((testFirstName() === true) && 
       (testLastName() === true) && 
@@ -661,6 +710,11 @@ function validate() {
     console.log('message : ' + message.value);
     closeModal();
     return false;
+  } else {
+    testFirstName();
+    testLastName();
+    testEmail();
+    testMessage();
   }
 }
 // UP // ________// UP // _________// UP // _________// UP // _________// UP // _________// UP // ________________________________________

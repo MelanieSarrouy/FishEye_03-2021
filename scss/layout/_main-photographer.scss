@@ -4,10 +4,13 @@
 
 .photographer {
   background-color: $color-tertiary-bg;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  // display: flex;
   padding: 3rem 2.5rem;
   position: relative;
   @include respond-to(small-screen) {
+    display: flex;
     background-color: white;
     padding: 0rem 0rem 2.5rem;
     justify-content: space-between;
@@ -77,14 +80,10 @@
       right: 0rem;
     }
     & img {
-      @include respond-to(small-screen) {
-        width: 100px;
+      @include respond-to(large-screen) {
         height: auto;
       }
-
     }
-
-
   }
 }
 .tags {
@@ -133,6 +132,7 @@
   justify-content: center;
   align-items: center;
   margin-left: 2rem;
+  z-index: 5;
   &:hover, &:focus {
     background-color: $color-secondary-bg;
     color: black;
@@ -153,20 +153,22 @@
     margin-left: -85px;
     height: 35px;
     width: 170px;
-    z-index: 3;
+    z-index: 5;
   }
 }
 .filters {
   display: flex;
   align-items: baseline;
   padding: 2.5rem 0 3.5rem;
-  font-size: 1.12rem;
+  font-size: 1.15rem;
   position: relative;
   @include respond-to(small-screen) {
     display: none;
   }
-  & > p {
+  &__title {
     font-weight: bold;
     padding-right: 2rem;
+    color: black;
+    font-size: 1.15rem;
   } 
 }

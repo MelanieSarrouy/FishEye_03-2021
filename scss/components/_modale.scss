@@ -13,23 +13,23 @@
   animation: lightbox2In 0.5s;
   justify-content: center;
 }
-.modal-content {
-  margin: 4% auto;
-  max-width: 700px;
-  max-height: 900px;
-  background: $color-secondary-bg;
-  border-radius: 0.5rem;
-  position: relative;
-  box-shadow: -.5rem 1rem 2rem rgba(0, 0, 0, 0.35);
-  @include respond-to(small-screen) {
-    width: 75%;
-  }
-  @include respond-to(mobile-screen) {
-    margin: auto;
-    width: 100vw;
-    height: auto;
-  }
-}
+// .modal-content {
+//   margin: 4% auto;
+//   max-width: 700px;
+//   max-height: 900px;
+//   background: $color-secondary-bg;
+//   border-radius: 0.5rem;
+//   position: relative;
+//   box-shadow: -.5rem 1rem 2rem rgba(0, 0, 0, 0.35);
+//   @include respond-to(small-screen) {
+//     width: 75%;
+//   }
+//   @include respond-to(mobile-screen) {
+//     margin: auto;
+//     width: 100vw;
+//     height: auto;
+//   }
+// }
 .close:before,
 .close:after {
   position: absolute;
@@ -62,8 +62,25 @@
   }
 }
 .modal {
+  margin: 4% auto;
+  width: 45%;
+  // max-height: 900px;
+  background: $color-secondary-bg;
+  border-radius: 0.5rem;
+  position: relative;
+  box-shadow: -.5rem 1rem 2rem rgba(0, 0, 0, 0.35);
   padding: 1.5rem 2rem 2rem;
+  box-sizing: border-box;
+  height: auto;
+  @include respond-to(small-screen) {
+    width: 75%;
+  }
   @include respond-to(mobile-screen) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
     padding: 1.5rem 1.5rem 3rem;
   }
   &__title {
@@ -78,11 +95,6 @@
   }
   &__form {
     color: #312e2e;  
-    // @include respond-to(mobile-screen) {
-    //   display: flex;
-    //   flex-direction: column;
-    // }
-
     &__formData {
       display: flex;
       flex-direction: column;
@@ -128,14 +140,15 @@
           font-size: 1.2rem;
           height: 11.5rem;
         }
-
       }
     }
   }
 }
 .divButton {
   display: flex;
-  justify-content: center;
+  @include respond-to(mobile-screen) {
+    justify-content: center;
+  }
 }
 .buttonSend {
   background-color: $color-primary;
@@ -153,9 +166,12 @@
   border: $color-primary solid 0.15rem;
 }
 .pError {
-  color:$color-primary;
+  color:white;
   font-size: 1.2rem;
   margin: 0.3rem 0 0 0;
+  background-color: $color-primary;
+  padding: .2rem;
+  border: .2rem;
   @include respond-to(mobile-screen) {
     font-size: 1rem;
     margin-bottom: 0.2rem;

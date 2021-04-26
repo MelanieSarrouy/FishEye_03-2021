@@ -2,15 +2,16 @@
   font-family: $font-family-texte;
   max-width: 1440px;
   margin: auto;
-  
 }
 .no-scroll {
   overflow: hidden;
 }
 
 .bloc_page-photographer {
-  padding: 0.5rem 7vw 2.5rem;
-  max-width: 1240px;
+  padding: 0.5rem 6.25rem 2.5rem;
+  max-width: 1440px;
+  // margin: auto;
+  // box-sizing: border-box;
   @include respond-to(small-screen) {
     padding: 0rem 7vw 0rem;
   }
