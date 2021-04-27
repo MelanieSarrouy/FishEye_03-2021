@@ -12,7 +12,6 @@
   }
   &__img {
     max-width: 12.5rem;
-    // object-fit: contain;
     display: flex;
     align-self: start;
     object-fit: contain;
@@ -25,21 +24,5 @@
     @include respond-to(small-screen) {
       max-width: 9.4rem;
     }
-  }
-}
-.up {
-  color: #c4c4c4;
-  font-size: 2rem;
-  cursor: pointer;
-  position: fixed;
-  bottom: 50vh;
-  right: 2rem;
-  z-index: 3;
-  &:hover, &:focus {
-    color: $color-primary;
-  }
-  @include respond-to(small-screen) {
-    bottom: 2.7rem;
-    right: 0.5rem;
   }
 }

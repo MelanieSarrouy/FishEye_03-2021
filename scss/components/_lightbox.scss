@@ -43,7 +43,6 @@
   @include respond-to(mobile-screen) {
     padding: 1rem 0.3rem;
   }
-
   &__close {
     width: 2rem;
     height: 2rem;
@@ -81,7 +80,7 @@
   margin: 0 1.5rem;
   padding: 0 1rem;
   @include respond-to(mobile-screen) {
-    background: url(../../images/chevron-left-solid.svg) center center / 1rem 1.6rem no-repeat;
+    background: url(../../images/chevron-left-solid.svg) center center / .8rem 1.3rem no-repeat;
     width: 1rem;
     margin: .6rem;
     padding: 0.6rem;
@@ -99,22 +98,11 @@
 .lifhtbox__container li img {
   animation: lightbox2In 1s;
 }
-// .lightbox__container {
-//   display: flex;
-//   margin: auto;
-//   min-height: 100%;
-//   position: relative;
-//   @include respond-to(small-screen) {
-//     align-items: baseline;
-//   }
-
-// }
 .lightboxItem {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-
 .titleLightbox {
   color: $color-primary;
   padding: 1rem 0;
@@ -126,14 +114,12 @@
     padding: 0.6rem 0;
   }
 }
-
 .imageLightbox {
   border-radius: 0.5rem;
   overflow: hidden;
   @include respond-to(mobile-screen) {
     border-radius: 0.3rem;
   }
-
 }
 .videoLightbox {
   max-width: 100%;
@@ -142,5 +128,4 @@
   @include respond-to(mobile-screen) {
     border-radius: 0.3rem;
   }
-
 }
