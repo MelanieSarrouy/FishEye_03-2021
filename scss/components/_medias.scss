@@ -112,7 +112,6 @@
     @include respond-to(mobile-screen) {
       font-size: 1rem;
     }
-
     &__likes {
       display: flex;
       padding-top: 0.1rem;
@@ -126,9 +125,13 @@
         cursor: pointer;
         font-size: 1rem;
         transform: scale(1.1);
-        transform-origin: 100% 50%;
+        transform-origin: center right;
         transition: transform 0.2s ease-in-out;
+        @include respond-to(small-screen) {
+          padding-top: 0.1rem;
+        }
         @include respond-to(mobile-screen) {
+          padding-top: 0rem;
           transform: scale(1);
         }
         &:hover, &:focus {
@@ -137,7 +140,6 @@
           @include respond-to(mobile-screen) {
             transform: scale(1.1);
           }
-  
         }
       }
     }
@@ -165,8 +167,11 @@
   border: none;
   background-color: white;
   color: $color-primary;
-  padding-top: 0.1rem;
+  padding-right: 0.1rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  @include respond-to(mobile-screen) {
+    padding-top: 0rem;
+  }
 }
