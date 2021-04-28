@@ -121,6 +121,10 @@ function displayTags(photographer) {
 }
 
 // Affichage des photographes par tag _____________________________________________________________________
+const navTags = Array.from(document.querySelectorAll('.nav__liste__link'));
+navTags.forEach((tag) => {
+  tag.setAttribute('aria-current', 'false');
+});
 const arrayTags = [
   "portrait",
   "art",
@@ -135,6 +139,11 @@ window.addEventListener('hashchange', () => hashChanged(photographers));
 function hashChanged() {
   for (tag of arrayTags) {
     if (location.hash === `#${tag}`) {
+      navTags.forEach((tag) => {
+        tag.setAttribute('aria-current', 'false');
+      });
+      let targetTag = document.getElementById(`${tag}`);
+      targetTag.setAttribute('aria-current', 'page');
       for (let i = 0; i < photographers.length; i++) {
         let article = document.getElementById(`${photographers[i].id}`);
         const arrayTagPhotographer = photographers[i].tags;

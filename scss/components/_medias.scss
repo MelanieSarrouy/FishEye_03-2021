@@ -36,7 +36,6 @@
     justify-content: center;
   }
 }
-
 // classes ajoutées avec js
 .article {
   position: relative;
@@ -95,18 +94,28 @@
     overflow: hidden;
     @include respond-to(small-screen) {
       padding: 0.4rem 0 0.2rem;
+      max-width: 335px;
+    }
+    @include respond-to(mobile-screen) {
+      padding: 0.6rem 0 0.2rem;
     }
     & p:first-child {
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      height: 1.5rem;
     }
     @include respond-to(small-screen) {
       font-weight: 400;
+      font-size: 1.2rem;
+    }
+    @include respond-to(mobile-screen) {
       font-size: 1rem;
     }
+
     &__likes {
       display: flex;
+      padding-top: 0.1rem;
       & p:first-child {
         padding: 0 0.7rem;
       }
@@ -115,14 +124,20 @@
       }
       & .fa-heart {
         cursor: pointer;
-        transform: scale(1);
+        font-size: 1rem;
+        transform: scale(1.1);
         transform-origin: 100% 50%;
         transition: transform 0.2s ease-in-out;
+        @include respond-to(mobile-screen) {
+          transform: scale(1);
+        }
         &:hover, &:focus {
-          transform: scale(1.1);
+          transform: scale(1.2);
           color: rgba($color: #901c1c, $alpha: 0.8);
-          padding-right: 0.02rem;
-          padding-left: 0.05rem;
+          @include respond-to(mobile-screen) {
+            transform: scale(1.1);
+          }
+  
         }
       }
     }
@@ -145,4 +160,13 @@
   @include respond-to(mobile-screen) {
     top: 22%;
   }
+}
+.buttonHeart {
+  border: none;
+  background-color: white;
+  color: $color-primary;
+  padding-top: 0.1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }

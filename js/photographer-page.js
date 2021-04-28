@@ -5,7 +5,7 @@ const pLocation = document.querySelector('#location');
 const listTags = document.querySelector('.tags');
 const pTagline = document.querySelector('#tagline');
 const button = document.querySelector('aside > button');
-const img = document.querySelector('aside > picture > img');
+const img = document.querySelector('.photographer__picture__img');
 const sectionMedia = document.querySelector('.media');
 const rate = document.querySelector('.infos__price');
 const totalLikesNb = document.querySelector('.infos__likes__number');
@@ -134,6 +134,7 @@ function title(alt) {
 
 function displayPhotographer() {
   h1.innerHTML = photographer.name;
+  h1.setAttribute('aria-label', `${photographer.name}`);
   pLocation.innerHTML = photographer.city + ', ' + photographer.country;
   pTagline.innerHTML = photographer.tagline;
   let tags = photographer.tags;
@@ -141,7 +142,7 @@ function displayPhotographer() {
   for (tag of tags) {
     listTags.innerHTML += `
     <li class="tags__tag" role="listitem">
-      <a class="tags__tag__link" href="index.html#${tag}" aria-label"tag ${tag}">#${tag}</a>
+      <a class="tags__tag__link" href="index.html#${tag}" aria-label="tag ${tag}">#${tag}</a>
     </li>`;
   }
   img.setAttribute("src", `./images/sample_photos/photographers_ID_photos/small/${photographer.portrait}`);
@@ -204,6 +205,8 @@ class Image {
     ulMedias.appendChild(li);
     let figure = document.createElement('figure');
     figure.classList.add('figureLightbox');
+    figure.setAttribute('role', 'figure');
+    figure.setAttribute('aria-label', `${titre}`);
     li.appendChild(figure);
     let image = document.createElement('img');
     figure.appendChild(image);
@@ -236,7 +239,6 @@ class Video {
     image.setAttribute('width', `350`);
     image.setAttribute('height', `300`);
     image.setAttribute('tabindex', `-1`);
-
     anchorMedia.addEventListener('click', (e) => lightbox(e)); 
   }
   createAVideo() {
@@ -259,7 +261,20 @@ class Video {
     source.setAttribute("type", "video/mp4");
     source.classList.add('imageLightbox');
     let pInfos = document.createElement('p');
-    li.appendChild(pInfos);
+    let divControls = document.createElement('div');
+    li.appendChild(divControls);
+    divControls.setAttribute('id', 'video-controls');
+    divControls.classList.add('controls');
+    divControls.setAttribute('data-state', 'hidden');
+    divControls.appendChild(pInfos);
+    let playButton = document.createElement('button');
+    divControls.appendChild(playButton);
+    playButton.setAttribute('id', 'playpause');
+    playButton.setAttribute('type', 'button');
+    playButton.setAttribute('role', 'button');
+    playButton.setAttribute('aria-label', 'lecture ou pause');
+    playButton.setAttribute('data-state', 'play');
+    playButton.innerHTML = '<i class="fas fa-play"></i>';
     pInfos.classList.add('titleLightbox');
     pInfos.innerText = `${titre}`;
   }
@@ -297,12 +312,14 @@ function createDOMElements() {
   // DOM élément <figure> - conteneur
   let figure = document.createElement('figure');
   article.appendChild(figure);
+  figure.setAttribute('role', 'figure');
+  figure.setAttribute('aria-labelledby', `title${medium.id}`);
   // DOM élément <div> - conteneur du media
   let anchorMedia = document.createElement('a');
   figure.appendChild(anchorMedia);
   anchorMedia.classList.add('article__link');
   anchorMedia.setAttribute('id', `idImage${medium.id}`);
-  anchorMedia.setAttribute('aria-labbeledby', `lightbox`);
+  anchorMedia.setAttribute('aria-labelledby', `lightbox`);
   let figcaption = document.createElement('figcaption');
   figure.appendChild(figcaption);
   figcaption.classList.add('article__informations');
@@ -327,12 +344,17 @@ function createDOMElements() {
   pNumberLikes.setAttribute('id', `likes${medium.id}`);
   pNumberLikes.classList.add('likes');
   // DOM élément <i> - coeur
+  let buttonHeart = document.createElement('button');
+  divLikes.append(buttonHeart);
   let heart = document.createElement('i');
-  divLikes.appendChild(heart);
+  buttonHeart.appendChild(heart);
+  buttonHeart.classList.add('buttonHeart');
+  buttonHeart.setAttribute('role', `button`);
+
   heart.classList.add('heart', 'fas', 'fa-heart');
   heart.setAttribute('id', `heart${medium.id}`);
-  heart.setAttribute('aria-label', `likes`);
-  heart.setAttribute('role', `button`);
+  buttonHeart.setAttribute('aria-label', `coeur, ajouter, enlever 1 like`);
+
   anchorMedia.setAttribute('tabindex', `0`);
 
   heart.addEventListener('click', () => addLikes());
@@ -373,6 +395,7 @@ let closeLightbox = document.getElementById('closeLightbox'); // le bouton de fe
 let prev = document.getElementById('left'); // bouton "précédent"
 let next = document.getElementById('right'); // bouton "suivant"
 let position;
+let lightBox = document.querySelector('.lightbox-content');
 
 
 function lightbox(e) {
@@ -381,6 +404,7 @@ function lightbox(e) {
   lightBoxBg.style.display = 'flex';
   lightBoxBg.setAttribute('aria-hidden', 'false');
   main2.setAttribute('aria-hidden', 'true');
+  lightBox.setAttribute('tabindex', '0');
   let picture = window.event.target;
   let id = searchId(picture);
   let firstItem = document.getElementById(`item${id}`);
@@ -388,7 +412,30 @@ function lightbox(e) {
   console.log(position);
   firstItem.style.display = 'flex';
   firstItem.setAttribute('aria-hidden', 'false');
+  let myVideo = document.querySelector('.videoLightbox');
+  let playPause = document.getElementById('playpause');
+  myVideo.setAttribute('controls', 'false');
+  playPause.addEventListener('click', () => switchState());
 }
+function switchState() {
+  let myVideo = document.querySelector('.videoLightbox');
+  let playPause = document.getElementById('playpause');
+  if (myVideo.paused == true) {
+    myVideo.play();
+    playPause.innerHTML = '<i class="fas fa-pause"></i>';
+  } else {
+    myVideo.pause();
+    playPause.innerHTML = '<i class="fas fa-play"></i>';
+  }
+}
+document.addEventListener('keydown', (e) => {
+  const keyCode = e.code;
+  if (keyCode === 'Space') {
+    switchState();
+  }
+})
+
+
 function searchId(picture) {
   if (picture.tagName !== 'A') {
     let divMedia = picture.parentNode;
@@ -475,6 +522,8 @@ function closeBox() {
   main2.setAttribute('aria-hidden', 'false');
   body.classList.remove('no-scroll');
   document.removeEventListener('keydown', onKeyUp);
+  lightBox.setAttribute('tabindex', '-1');
+
   
   let allItems = document.querySelectorAll('.lightboxItem');
   let items = Array.from(allItems);
@@ -608,7 +657,8 @@ function closeModal() {
   body.classList.remove('no-scroll');
   modal.setAttribute('tabindex', '-1');
   contact.focus(); 
-  document.removeEventListener('keydown', onKey)  ;   
+  document.removeEventListener('keydown', onKey);
+  form.removeEventListener('keydown', runValidate);
 }
 
 // function testFirstName ______________________________________________
@@ -687,10 +737,11 @@ function testMessage() {
 }
 // function submit __________________________________________________
 
-modal.addEventListener('keydown', runValidate);
+form.addEventListener('keydown', runValidate);
 
 function runValidate(e) {
   if (e.key == 'Enter') {
+    e.preventDefault();
     validate();
   }
 }

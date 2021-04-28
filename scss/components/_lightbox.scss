@@ -27,7 +27,6 @@
   }
   & button {
     border: none;
-    outline: none;
     cursor: pointer;
   }
 }
@@ -61,7 +60,7 @@
   }
   & button {
     border: none;
-    outline: none;
+    // outline: none;
     cursor: pointer;
   }
 }
@@ -125,7 +124,24 @@
   max-width: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
+  position: relative;
   @include respond-to(mobile-screen) {
     border-radius: 0.3rem;
   }
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#playpause {
+    font-size:1.5rem;
+    font-weight:bold;
+    color: $color-primary;
+    background:white;
+    padding: 0 1rem;
+    @include respond-to(verysmall-screen) {
+      font-size: 1rem;
+      padding: 0 .5rem;
+    }
 }
