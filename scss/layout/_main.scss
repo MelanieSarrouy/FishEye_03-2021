@@ -35,7 +35,7 @@ h2 {
   @include respond-to(mobile-screen) {
     display: flex;
     flex-wrap: wrap;
-    padding-top: 0.5rem;
+    padding-top: 1.5rem;
   }
   @include respond-to(verysmall-screen) {
     padding-top: 4rem;

@@ -63,9 +63,6 @@ header {
     align-items: flex-start;
     padding-top: 0.5rem;
     height: 75px;
-    // @include respond-to(small-screen) {
-    //   height: auto;
-    // }
     &__item {
       margin: 0.7rem 0.25rem 0.7rem;
       @include respond-to(small-screen) {

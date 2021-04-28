@@ -210,7 +210,7 @@ class Image {
     li.appendChild(figure);
     let image = document.createElement('img');
     figure.appendChild(image);
-    image.setAttribute('src', `../images/sample_photos/${nickName}/${medium.image}`)
+    image.setAttribute('src', `./images/sample_photos/${nickName}/${medium.image}`)
     image.setAttribute('alt', `${medium.alt}`);
     image.classList.add('imageLightbox');
     let figcaption = document.createElement('figcaption');
