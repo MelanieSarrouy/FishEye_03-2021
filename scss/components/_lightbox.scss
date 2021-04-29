@@ -124,7 +124,6 @@
   max-width: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
-  position: relative;
   @include respond-to(mobile-screen) {
     border-radius: 0.3rem;
   }
@@ -144,4 +143,16 @@
       font-size: 1rem;
       padding: 0 .5rem;
     }
+}
+video::cue {
+  color: white;
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  font-size: 1.5rem;
+  left: 1.5rem;
+  text-shadow: 0 0 10px black;
+  // position: relative;
+  // top: 0rem;
+  @include respond-to(mobile-screen) {
+    font-size: 1rem;
+  }
 }

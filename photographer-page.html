@@ -29,11 +29,11 @@
 
       </header>
 
-      <main class="main2" id="main2" role="main">
+      <main class="main2" id="main2" role="presentation">
 
         <header class="photographer" role="banner">
           <div class="photographer__informations">
-            <h1 class="photographer__informations__name"></h1>
+            <h1 class="photographer__informations__name">Nom du photographe</h1>
             <p class="photographer__informations__location" id="location"></p>
             <p class="photographer__informations__tagline" id="tagline"></p>
             <ul class="tags" role="list">
@@ -50,10 +50,10 @@
           <div class="select-filters" id="select-filters">
             <button type="button" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-label="trier par filtres" class="select-filters__button" id="button-dropdown">
               <span class="option1">&ensp;Popularité</span>
-              <i class="arrows fas fa-chevron-down"></i> 
+              <span class="arrows fas fa-chevron-down"></span> 
             </button>
             <div class="container" id="container">
-              <ul role="menu" aria-expanded="true" class="dropdown" id="dropdown" aria-activedescendant="option1" tabindex="0">
+              <ul role="listbox" aria-expanded="true" class="dropdown" id="dropdown" aria-activedescendant="option1" tabindex="0">
                 <li class="dropdown__option" id="option1" role="option" aria-label="trier par popularité" tabindex="0"> 
                   &ensp;Popularité
                 </li>
@@ -65,19 +65,19 @@
                 </li> 
               </ul> 
               <button type="button" role="button" aria-haspopup="true" aria-expanded="true" tabindex="0" aria-label="fermer le choix de filtres" class="select-filters__button" id="button-dropup">
-                <i class="arrows fas fa-chevron-up"></i>   
+                <span class="arrows fas fa-chevron-up"></span>   
               </button>
             </div>     
           </div>
         </aside>
         
-        <section class="media" id="media">
+        <section class="media" id="media" role="region" aria-label="ensemble des réalisations du photographe">
         </section>
 
-        <footer class="infos" role="complementary">
+        <footer class="infos" role="contentinfo">
           <div class="infos__likes">
             <p class="infos__likes__number" aria-label="nombre total de like du photographe"></p>
-            <i class="infos__likes__icone fas fa-heart"></i>
+            <span class="infos__likes__icone fas fa-heart"></span>
           </div>
           <p class="infos__price" aria-label="tarif journalier du photographe"></p>
         </footer>
@@ -86,7 +86,7 @@
 
       <div class="modal-background">
         <div class="modal" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="form">
-          <span class="close closeModal" id="closeModal" aria-label="fermer" tabindex="1"></span>
+          <span class="close closeModal" id="closeModal" aria-label="fermer" tabindex="0"></span>
           <h2 class="modal__title">Contactez-moi<br>Nom du Photographe</h2>
           <form name="contact" method="GET" action="#" class="modal__form" id="form" aria-label="formulaire de contact" onsubmit="return validate()">
             <div class="modal__form__formData">
@@ -107,7 +107,7 @@
             <div class="modal__form__formData">
               <label for="message" class="modal__form__formData__labelArea">Votre message</label>
               <textarea name="message" id="message" class="modal__form__formData__textarea"
-              minlength="5" maxlength="200" tabindex="0" aria-labelledby="message-message" aria-required="true" required></textarea>
+              minlength="5" maxlength="200" tabindex="0" aria-labelledby="message-message" required></textarea>
               <span class="pError sr-only" id="message-message">Veuillez saisir votre message</span>
             </div>
             <div class="divButton">
@@ -118,20 +118,16 @@
       </div>
 
       <div class="lightbox-background">
-        <div class="lightbox-content" aria-modal="true" role="dialog" aria-label="images en gros plan" tabindex="-1">
+        <div class="lightbox-content" aria-modal="true" role="dialog" id="lightbox-content" aria-label="lightbox, images en gros plan" tabindex="-1">
           <div class="lightbox" id="lightbox">
-            <button class="lightbox__prev" id="left" type="button" aria-labelledby="prev" tabindex="0">
-            </button>
+            <button class="lightbox__prev" id="left" type="button" aria-labelledby="prev" tabindex="0"></button>
             <p class="sr-only" id="prev">image précédente</p>
             <div class="divLightbox">
-              <ul class="lightbox__container">
-              </ul>
-              <button class="lightbox__close" id="closeLightbox" type="button" aria-labelledby="closeLightBox" tabindex="0">
-              </button>
-              <p class="sr-only" id="closeLightBox">fermer la lightbox</p>
+              <ul class="lightbox__container"></ul>
+              <button class="lightbox__close" id="closeLightbox" type="button" aria-labelledby="close-lightbox" tabindex="0"></button>
+              <p class="sr-only" id="close-lightbox">fermer la lightbox</p>
               </div>
-            <button class="lightbox__next" id="right" type="button" aria-labelledby="next" tabindex="0">
-            </button>
+            <button class="lightbox__next" id="right" type="button" aria-labelledby="next" tabindex="0"></button>
             <p class="sr-only" id="next">image suivante</p>
           </div>
         </div>
