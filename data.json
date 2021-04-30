@@ -245,6 +245,16 @@
       "alt": "Animal majestueux : photo en gros plan d'un majestueux cerf dans son milieu naturel"
     },
     {
+      "id": 593834783,
+      "photographerId": 925,
+      "image": "Sport_Butterfly.jpg",
+      "tags": ["sport"],
+      "likes": 25,
+      "date": "2017-03-12",
+      "price": 70,
+      "alt": "Nageur : nage papillon dans une piscine"
+    },
+    {
       "id": 83958935,
       "photographerId": 925,
       "video": "Animals_Puppiness.mp4",
@@ -284,6 +294,16 @@
       "date": "2018-04-30",
       "price": 45,
       "alt": "Route sinueuse : photo d'une route mouillée, sinueuse au milieu de la steppe"
+    },
+    {
+      "id": 73434242,
+      "photographerId": 527,
+      "image": "Travel_On_the_Road.jpg",
+      "tags": ["travel"],
+      "likes": 102,
+      "date": "2018-04-29",
+      "price": 45,
+      "alt": "On the road : voyage en combi dans le Grand Canyon"
     },
     {
       "id": 23425523,

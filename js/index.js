@@ -1,6 +1,8 @@
 // DOM ___________________________________________________________________________________________________
 let photographersCards = document.getElementById('photographersCards')
 
+export { photographersCards }
+
 // Requête objet JSON ____________________________________________________________________________________
 const source = './data.json'
 
@@ -17,6 +19,7 @@ function myFetch() {
   })
 }
 myFetch()
+
 // Récupération des données // ___________________________________________________________________________
 let photographers = []
 let media = []
@@ -36,8 +39,6 @@ function getPhotographersWithMedia(json) {
       }
     }
   }
-  // console.log(photographers);
-  // creatAPhotographer(photographers);
 }
 
 function getPhotographers(json) {
@@ -53,6 +54,7 @@ function getMedia(json) {
     media.push(medium)
   }
 }
+console.log(photographers)
 
 // Affichage des photographes // _________________________________________________________________________
 function showPhotographers(photographers) {
@@ -62,27 +64,34 @@ function showPhotographers(photographers) {
   }
   hashChanged(photographers)
 }
+class Element {
+  constructor(name, element, classname) {
+    this.name = name
+    this.element = element
+    this.classname = classname
+  }
+  get elem() {
+    return this.creatEl()
+  }
+  creatEl() {
+    this.name = document.createElement(this.element)
+    this.name.classList.add(this.classname)
+    return this.name
+  }
+}
+
 
 // Création d'une carte photographe ______________________________________________________________________
 function createAcard(photographer) {
-  let img = document.createElement('img')
-  img.classList.add('photographer__img')
-  let picture = document.createElement('picture')
-  picture.classList.add('photographer__figure')
-  let h2 = document.createElement('h2')
-  h2.classList.add('photographer__name')
-  let pLocation = document.createElement('p')
-  pLocation.classList.add('photographer__location')
-  let pTagline = document.createElement('p')
-  pTagline.classList.add('photographer__tagline')
-  let pPrice = document.createElement('p')
-  pPrice.classList.add('photographer__price')
-  let ul = document.createElement('ul')
-  ul.classList.add('list')
-  let anchor = document.createElement('a')
-  anchor.classList.add('photographer__link')
-  let article = document.createElement('article')
-  article.classList.add('photographer')
+  let img = new Element('img', 'img', 'photographer__img', 'picture').elem
+  let picture = new Element('picture', 'picture', 'photographer__figure').elem
+  let h2 = new Element('h2', 'h2', 'photographer__name', 'anchor').elem
+  let pLocation = new Element('pLocation', 'p', 'photographer__location').elem
+  let pTagline = new Element('pTagline', 'p', 'photographer__tagline').elem
+  let pPrice = new Element('pPrice', 'p', 'photographer__price').elem
+  let ul = new Element('ul', 'ul', 'list', 'article').elem
+  let anchor = new Element('anchor', 'a', 'photographer__link').elem
+  let article = new Element('article', 'article', 'photographer').elem
   picture.appendChild(img)
   anchor.appendChild(picture)
   anchor.appendChild(h2)
@@ -112,18 +121,20 @@ function createAcard(photographer) {
 // Affichage des tags de chaque photographe ______________________________________________________________
 function displayTags(photographer) {
   for (let tag = 0; tag < photographer.tags.length; tag++) {
-    document.querySelector('#id' + photographer.id).innerHTML += `
+    document.getElementById('id' + photographer.id).innerHTML += `
     <li class="list__item">
       <a class="list__link" href="index.html#${photographer.tags[tag]}" aria-label="tag ${photographer.tags[tag]}">#${photographer.tags[tag]}</a>
     </li>`
   } 
 }
 
-// Affichage des photographes par tag _____________________________________________________________________
-const navTags = Array.from(document.querySelectorAll('.nav__liste__link'))
+// Affichage des photographes par tag ____________________________________________________________________
+const navTags = Array.from(document.querySelectorAll('.nav__liste__link')) // tous les tags du nav
+
 navTags.forEach((tag) => {
-  tag.setAttribute('aria-current', 'false')
+  tag.setAttribute('aria-current', 'false') 
 })
+
 const arrayTags = [
   'portrait',
   'art',
@@ -157,9 +168,12 @@ function hashChanged() {
   }
 }
 
-// Page photographer ! gerer les imports exports !!!
-const scrollPage = document.querySelector('.contenu__link')
-window.addEventListener('scroll', () => content())
+// Bouton 'passer au contenu' ____________________________________________________________________________
+
+const scrollPage = document.querySelector('.contenu__link') // le bouton
+window.addEventListener('scroll', () => content()) // ecoute de l'evenement scrollY
+
+//fonction
 function content() {
   if ( window.scrollY > 250 ) {
     scrollPage.style.display = 'flex'

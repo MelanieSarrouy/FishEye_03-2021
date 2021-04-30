@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // DOM // ______________________________________________________________________________________________________________
 
 const h1 = document.querySelector('h1')
@@ -24,7 +23,7 @@ const source = './data.json'
 fetch(source).then(async (res) => {
   if (res.ok) {
     const json = await res.json()
-    getPhotographersWithMedia(json)
+    getData(json)
   } else {
     console.log('erreur')
   }
@@ -36,10 +35,10 @@ let photographers = []
 let media = []
 let photographer
 
-function getPhotographersWithMedia(json) {
+function getData(json) {
   getPhotographers(json)
   getMedia(json)
-  for (photographer of photographers) {
+  for (let photographer of photographers) {
     let mediaList = []
     Object.defineProperty(photographer, 'media', {
       value: mediaList,
@@ -51,12 +50,14 @@ function getPhotographersWithMedia(json) {
       }
     }
   }
-  getPhotographer(photographers)
+  getPhotographer(json.photographers)
 }
+
+export { getData }
 
 function getPhotographers(json) {
   const PHOTOGRAPHERS = json.photographers
-  for (photographer of PHOTOGRAPHERS) {
+  for (let photographer of PHOTOGRAPHERS) {
     photographers.push(photographer)
   }
 }
@@ -164,7 +165,6 @@ function totalLikes(media) {
 class MediaFactory {
   constructor() {
     this.createMedia = (type) => {
-      createDOMElements()
       let med
       if (type === 'image') {
         med = new Image()
@@ -176,7 +176,7 @@ class MediaFactory {
   }
 }
 class Image {
-  createAnImageCard() {
+  createAnImageCard(medium) {
     let anchorMedia = document.getElementById(`idImage${medium.id}`)
     let image = document.createElement('img')
     anchorMedia.appendChild(image)
@@ -190,7 +190,7 @@ class Image {
 
     anchorMedia.addEventListener('click', (e) => lightbox(e))
   }
-  createAnImage() {
+  createAnImage(medium) {
     let li = document.createElement('li')
     li.classList.add('lightboxItem')
     li.style.display = 'none'
@@ -216,7 +216,7 @@ class Image {
   }
 }
 class Video {
-  createAVideoCard() {
+  createAVideoCard(medium) {
     let anchorMedia = document.getElementById(`idImage${medium.id}`)
     let icone = document.createElement('img')
     anchorMedia.appendChild(icone)
@@ -236,7 +236,7 @@ class Video {
     image.setAttribute('tabindex', '-1')
     anchorMedia.addEventListener('click', (e) => lightbox(e))
   }
-  createAVideo() {
+  createAVideo(medium) {
     let li = document.createElement('li')
     li.classList.add('lightboxItem')
     li.style.display = 'none'
@@ -292,19 +292,19 @@ const factory = new MediaFactory()
 let titre
 function testFactory(media) {
   sectionMedia.innerHTML = ''
-
-  for (medium of media) {
+  media.forEach(medium => {
     titre = title(medium.alt)
+    createDOMElements(medium)
     if (medium.image !== undefined) {
       let card = factory.createMedia('image')
-      card.createAnImageCard()
-      card.createAnImage()
+      card.createAnImageCard(medium)
+      card.createAnImage(medium)
     } else {
       let card = factory.createMedia('video')
-      card.createAVideoCard()
-      card.createAVideo()
+      card.createAVideoCard(medium)
+      card.createAVideo(medium)
     }
-  }
+  })
   let allItems = document.querySelectorAll('.lightboxItem')
   let items = Array.from(allItems)
   items.forEach((item) => {
@@ -312,7 +312,7 @@ function testFactory(media) {
   })
 }
 
-function createDOMElements() {
+function createDOMElements(medium) {
   let article = document.createElement('article')
   sectionMedia.appendChild(article)
   article.classList.add('article')
@@ -520,13 +520,14 @@ function onKeyUp(e) {
   }
 }
 function closeBox() {
+  sectionMedia.setAttribute('tabindex', '0')
+  sectionMedia.focus()
   lightBoxBg.style.display = 'none'
   lightBoxBg.setAttribute('aria-hidden', 'true')
   main.setAttribute('aria-hidden', 'false')
   body.classList.remove('no-scroll')
   lightBox.removeEventListener('keydown', onKeyUp)
   lightBox.setAttribute('tabindex', '-1')
-  sectionMedia.focus()
   let allItems = document.querySelectorAll('.lightboxItem')
   let items = Array.from(allItems)
   items.forEach((item) => {
@@ -581,8 +582,8 @@ date.addEventListener('keydown', (e) => {
 })
 function dateSort(media) {
   function tri(a,b) {
-    dateA = new Date(a.date)
-    dateB = new Date(b.date)
+    let dateA = new Date(a.date)
+    let dateB = new Date(b.date)
     return ((dateA < dateB) ? 1 : (dateA == dateB) ? 0 : -1)
   }
   media.sort(tri)
@@ -597,9 +598,9 @@ tiTre.addEventListener('keydown', (e) => {
 })
 function titleSort(media) {
   function tri(a,b) {
-    titleA = a.alt.split(' ').join('')
+    let titleA = a.alt.split(' ').join('')
     a = titleA.toLowerCase()
-    titleB = b.alt.split(' ').join('')
+    let titleB = b.alt.split(' ').join('')
     b = titleB.toLowerCase()
     return (a < b) ? -1 : 1
   }
