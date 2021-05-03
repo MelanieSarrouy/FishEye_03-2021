@@ -10,7 +10,8 @@
 .bloc_page-photographer {
   padding: 0.5rem 6.25rem 2.5rem;
   max-width: 1440px;
-  // margin: auto;
+  position: relative;
+  margin: auto;
   // box-sizing: border-box;
   @include respond-to(small-screen) {
     padding: 0rem 7vw 0rem;

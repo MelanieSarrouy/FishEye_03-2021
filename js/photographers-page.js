@@ -5,7 +5,7 @@ const pLocation = document.querySelector('#location')
 const listTags = document.querySelector('.tags')
 const pTagline = document.querySelector('#tagline')
 const img = document.querySelector('.photographer__picture__img')
-const sectionMedia = document.querySelector('.media')
+const sectionMedia = document.querySelector('#media')
 const rate = document.querySelector('.infos__price')
 const totalLikesNb = document.querySelector('.infos__likes__number')
 const modalBg = document.querySelector('.modal-background')
@@ -17,17 +17,18 @@ const main = document.getElementById('main2')
 let body = document.querySelector('.bodyPhotographer')
 
 // Requête objet JSON __________________________________________________________________________________________________
+import { myFetch2 } from './modules/fetch2.js'
+// const source = './data.json'
 
-const source = './data.json'
-
-fetch(source).then(async (res) => {
-  if (res.ok) {
-    const json = await res.json()
-    getData(json)
-  } else {
-    console.log('erreur')
-  }
-})
+// fetch(source).then(async (res) => {
+//   if (res.ok) {
+//     const json = await res.json()
+//     getData(json)
+//   } else {
+//     console.log('erreur')
+//   }
+// })
+myFetch2()
 
 // Récupération des données // _________________________________________________________________________________________
 

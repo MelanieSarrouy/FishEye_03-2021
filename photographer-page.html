@@ -20,7 +20,7 @@
   <body class="bodyPhotographer">
 
     <div class="bloc_page-photographer">
-
+      <!-- header -->
       <header class="header2" role="banner">
 
         <a href="index.html" class="header2__link" aria-label="Page d'accueil de Fisheye" lang="en-GB">
@@ -28,9 +28,9 @@
         </a>
 
       </header>
-
+      <!-- main -->
       <main class="main2" id="main2" role="presentation">
-
+        <!-- header du main -->
         <header class="photographer" role="banner">
           <div class="photographer__informations">
             <h1 class="photographer__informations__name">Nom du photographe</h1>
@@ -44,7 +44,7 @@
             <img class="photographer__picture__img" src="./images/sample_photos/photographers_ID_photos/MimiKeel.jpg" alt="photo portrait du photographe"/>
           </picture>
         </header>
-
+        <!-- aside pour les filtres-->
         <aside class="filters" role="complementary">
           <label class="filters__title" id="filters-label">Trier par</label>
           <div class="select-filters" id="select-filters">
@@ -70,10 +70,11 @@
             </div>     
           </div>
         </aside>
-        
-        <section class="media" id="media" role="region" aria-label="ensemble des réalisations du photographe">
+        <!-- section medias-->
+        <section class="media" id="media" role="region" aria-label="ensemble des réalisations du photographe" tabindex="-1">
+          
         </section>
-
+        <!-- header du main -->
         <footer class="infos" role="contentinfo">
           <div class="infos__likes">
             <p class="infos__likes__number" aria-label="nombre total de like du photographe"></p>
@@ -88,7 +89,7 @@
         <div class="modal" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="form">
           <span class="close closeModal" id="closeModal" aria-label="fermer" tabindex="0"></span>
           <h2 class="modal__title">Contactez-moi<br>Nom du Photographe</h2>
-          <form name="contact" method="GET" action="#" class="modal__form" id="form" aria-label="formulaire de contact" onsubmit="return validate()">
+          <form name="contact" method="GET" action="#" class="modal__form" id="form" aria-label="formulaire de contact">
             <div class="modal__form__formData">
               <label for="firstname" class="modal__form__formData__label">Prénom</label>
               <input type="text" class="modal__form__formData__input" id="firstname" tabindex="0" aria-labelledby="message-firstname" aria-required="true" required />
@@ -137,7 +138,7 @@
     </div>
 
     
-    <script type="module" src="js/photographers-page.js"></script>
+    <script type="module" src="js/photographer-page.js"></script>
 
   </body>
 

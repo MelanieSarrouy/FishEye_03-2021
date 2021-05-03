@@ -12,12 +12,13 @@
   border-radius: 0.5rem 0.5rem 0 0;
   box-sizing: border-box;
   @include respond-to(small-screen) {
-    position: absolute;
-    right: -7vw;
-    width: 11.5rem;
+    width: 12.5rem;
     font-size: 1rem;
-    padding: 0.6rem 0.6rem 0.5rem;
+    padding: 0.8rem 1rem 0.7rem;
     font-weight: 400;
+  }
+  @include respond-to(mobile-screen) {
+    display: none;
   }
   &__likes{
     display: flex;

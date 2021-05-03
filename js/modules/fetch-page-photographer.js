@@ -1,8 +1,8 @@
-import { getData } from '../photographers-page'
+import { getData } from '../photographer-page.js'
 
 // Requête objet JSON __________________________________________________________________________________________________
 
-function myOtherFetch() {
+function myFetch2() {
   let source = './data.json'
   fetch(source).then(async (res) => {
     if (res.ok) {
@@ -13,5 +13,5 @@ function myOtherFetch() {
     }
   })
 }
-
-export { myOtherFetch }
+//_____________________________________________________________________________________________________________
+export { myFetch2 }

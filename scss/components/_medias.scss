@@ -20,7 +20,7 @@
     grid-template-columns: 260px 260px 260px;
   }
   @include respond-to(small-screen) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 200px 200px 200px;
   }
   @include respond-to(mobile-screen) {
     display: flex;
@@ -68,7 +68,7 @@
       max-height: 214.5px;
     }
     @include respond-to(small-screen) {
-      max-width: 335px;
+      max-width: 350px;
       max-height: 300px;
     }
     @include respond-to(mobile-screen) {
@@ -93,7 +93,7 @@
     overflow: hidden;
     @include respond-to(small-screen) {
       padding: 0.4rem 0 0.2rem;
-      max-width: 335px;
+      max-width: 350px;
     }
     @include respond-to(mobile-screen) {
       padding: 0.6rem 0 0.2rem;
