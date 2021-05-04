@@ -52,7 +52,7 @@ class Image {
     li.appendChild(figure)
     let image = new Element('image', 'img', 'imageLightbox').elem
     figure.appendChild(image)
-    image.setAttribute('src', `../../images/sample_photos/${nickName}/${medium.image}`)
+    image.setAttribute('src', `./images/sample_photos/${nickName}/${medium.image}`)
     image.setAttribute('alt', `${medium.alt}`)
     image.setAttribute('width', '1050')
     let figcaption = new Element('figcaption', 'figcaption', 'titleLightbox').elem
