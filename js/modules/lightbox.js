@@ -14,6 +14,8 @@ function lightbox(e) {
   lightBoxBg.style.display = 'flex'
   lightBoxBg.setAttribute('aria-hidden', 'false')
   main.setAttribute('aria-hidden', 'true')
+  main.setAttribute('tabindex', '-1')
+
   lightBox.setAttribute('tabindex', '0')
 
   let picture = window.event.target
@@ -138,6 +140,8 @@ function closeBox() {
   lightBoxBg.style.display = 'none'
   lightBoxBg.setAttribute('aria-hidden', 'true')
   main.setAttribute('aria-hidden', 'false')
+  main.setAttribute('tabindex', '0')
+
   body.classList.remove('no-scroll')
   lightBox.removeEventListener('keydown', onKeyUp)
   next.removeEventListener('click', () => goToNextSlide())

@@ -199,13 +199,22 @@ function createDOMElements(medium) {
   pNumberLikes.innerHTML = medium.likes
   pNumberLikes.setAttribute('id', `likes${medium.id}`)
   // DOM élément <button> - coeur
+  let aHeart = new Element('aHeart', 'a', 'heart').elem
+  divLikes.appendChild(aHeart)
+  // heart.setAttribute('role', 'button')
+  aHeart.setAttribute('id', `heart${medium.id}`)
+  aHeart.setAttribute('tabindex', '0')
+  aHeart.setAttribute('aria-label', 'ajouter ou enlever un like')
   let heart = new Element('heart', 'span', 'heart').elem
-  divLikes.appendChild(heart)
-  heart.setAttribute('role', 'button')
   heart.classList.add('fas', 'fa-heart')
-  heart.setAttribute('id', `heart${medium.id}`)
+  aHeart.appendChild(heart)
 
-  heart.addEventListener('click', () => addLikes())
+  aHeart.addEventListener('click', () => addLikes())
+  aHeart.addEventListener('keydown', (e) => {
+    if (e.code == 'Enter') {
+      addLikes()
+    }
+  })
 }
 
 
