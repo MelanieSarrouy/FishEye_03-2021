@@ -11,7 +11,7 @@
     <meta name="description" content="photographes freelances" />
             
     <!-- Feuiles de styles -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">     
     <link rel="stylesheet" href="./css/styles.min.css" />
   </head>
@@ -19,7 +19,7 @@
   <body>
 
     <div class="bloc_page">
-
+      <!-- header -->
       <header role="banner">
         <div class="contenu">
           <a href="#photographersCards" class="contenu__link" aria-label="passer au contenu">Passer au contenu</a>
@@ -28,6 +28,7 @@
           <a href="index.html" class="header__link" aria-label="Fishey page d'accueil">
             <img class="header__img" src="./images/logoFisheye.svg" alt="logo de Fisheye" width="200" height="52"/>
           </a>
+          <!-- nav -->
           <nav class="nav" role="navigation">
             <ul role="list" class="nav__liste" aria-label="catégories de photographe">
               <li class="nav__liste__item" role="listitem">
@@ -58,18 +59,18 @@
           </nav>
         </div>
       </header>
-
+      <!-- main -->
       <main class="main" id="main" role="main">
 
         <h1>Nos Photographes</h1>
-
+        <!-- section : cartes des différents photographes -->
         <section id="photographersCards" aria-label="tous les photographes" role="region"></section>
         
       </main>
     
     </div>
 
-    <script type="module" src="js/index2.js"></script>
+    <script type="module" src="js/index.js"></script>
 
   </body>
 

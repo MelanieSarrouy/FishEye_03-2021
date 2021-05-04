@@ -12,7 +12,7 @@
             
     <!-- Feuiles de styles -->
     <script src="https://kit.fontawesome.com/c97c76d068.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./css/styles.min.css" />
   </head>
@@ -29,9 +29,9 @@
 
       </header>
       <!-- main -->
-      <main class="main2" id="main2" role="presentation">
+      <main class="main2" id="main2" role="main">
         <!-- header du main -->
-        <header class="photographer" role="banner">
+        <header class="photographer" role="presentation">
           <div class="photographer__informations">
             <h1 class="photographer__informations__name">Nom du photographe</h1>
             <p class="photographer__informations__location" id="location"></p>
@@ -44,9 +44,11 @@
             <img class="photographer__picture__img" src="./images/sample_photos/photographers_ID_photos/MimiKeel.jpg" alt="photo portrait du photographe"/>
           </picture>
         </header>
-        <!-- aside pour les filtres-->
-        <aside class="filters" role="complementary">
-          <label class="filters__title" id="filters-label">Trier par</label>
+        <!-- div pour les filtres-->
+        <div class="filters">
+          <h2>
+            <label class="filters__title" id="filters-label">Trier par</label>
+          </h2>
           <div class="select-filters" id="select-filters">
             <button type="button" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-label="trier par filtres" class="select-filters__button" id="button-dropdown">
               <span class="option1">&ensp;Popularité</span>
@@ -69,25 +71,26 @@
               </button>
             </div>     
           </div>
-        </aside>
+        </div>
         <!-- section medias-->
         <section class="media" id="media" role="region" aria-label="ensemble des réalisations du photographe" tabindex="-1">
           
         </section>
-        <!-- header du main -->
-        <footer class="infos" role="contentinfo">
+        <!-- footer du main -->
+        <footer class="infos">
           <div class="infos__likes">
-            <p class="infos__likes__number" aria-label="nombre total de like du photographe"></p>
+            <p class="infos__likes__number"></p>
             <span class="infos__likes__icone fas fa-heart"></span>
           </div>
-          <p class="infos__price" aria-label="tarif journalier du photographe"></p>
+          <p class="infos__price"></p>
         </footer>
     
       </main> 
-
+      <!-- modale formulaire -->
       <div class="modal-background">
         <div class="modal" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="form">
-          <span class="close closeModal" id="closeModal" aria-label="fermer" tabindex="0"></span>
+          <span class="close closeModal" id="closeModal" aria-labelledby="close" tabindex="0"></span>
+          <p class="sr-only" id="close">fermer</p>
           <h2 class="modal__title">Contactez-moi<br>Nom du Photographe</h2>
           <form name="contact" method="GET" action="#" class="modal__form" id="form" aria-label="formulaire de contact">
             <div class="modal__form__formData">
@@ -117,23 +120,22 @@
           </form>
         </div>
       </div>
-
+      <!-- lightbox -->
       <div class="lightbox-background">
         <div class="lightbox-content" aria-modal="true" role="dialog" id="lightbox-content" aria-label="lightbox, images en gros plan" tabindex="-1">
           <div class="lightbox" id="lightbox">
             <button class="lightbox__prev" id="left" type="button" aria-labelledby="prev" tabindex="0"></button>
-            <p class="sr-only" id="prev">image précédente</p>
+            <p class="sr-only" id="prev" aria-hidden="true">image précédente</p>
             <div class="divLightbox">
               <ul class="lightbox__container"></ul>
               <button class="lightbox__close" id="closeLightbox" type="button" aria-labelledby="close-lightbox" tabindex="0"></button>
-              <p class="sr-only" id="close-lightbox">fermer la lightbox</p>
+              <p class="sr-only" id="close-lightbox" aria-hidden="true">fermer la lightbox</p>
               </div>
             <button class="lightbox__next" id="right" type="button" aria-labelledby="next" tabindex="0"></button>
-            <p class="sr-only" id="next">image suivante</p>
+            <p class="sr-only" id="next" aria-hidden="true">image suivante</p>
           </div>
         </div>
       </div>
-
 
     </div>
 

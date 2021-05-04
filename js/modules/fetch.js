@@ -1,4 +1,4 @@
-import { getPhotographersWithMedia } from '../index2.js'
+import { getPhotographersWithMedia } from '../index.js'
 // Requête objet JSON ____________________________________________________________________________________
 
 function myFetch() {

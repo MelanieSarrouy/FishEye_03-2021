@@ -122,6 +122,10 @@
       }
       & .fa-heart {
         cursor: pointer;
+        padding-right: 0.1rem;
+        padding-top: 0.15rem;
+        padding-left: 0.2rem;
+
         font-size: 1rem;
         transform: scale(1.1);
         transform-origin: center right;
@@ -156,21 +160,9 @@
     top: 25%;
   }
   @include respond-to(small-screen) {
-    top: 32%;
-  }
-  @include respond-to(mobile-screen) {
     top: 22%;
   }
-}
-.buttonHeart {
-  border: none;
-  background-color: white;
-  color: $color-primary;
-  padding-right: 0.1rem;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
   @include respond-to(mobile-screen) {
-    padding-top: 0rem;
+    top: 24%;
   }
 }

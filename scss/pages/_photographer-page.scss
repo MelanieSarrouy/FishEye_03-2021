@@ -12,7 +12,6 @@
   max-width: 1440px;
   position: relative;
   margin: auto;
-  // box-sizing: border-box;
   @include respond-to(small-screen) {
     padding: 0rem 7vw 0rem;
   }

@@ -20,7 +20,7 @@ h2 {
 }
 #photographersCards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 2rem 0rem 0;
   column-gap: 12%;
   @include respond-to(medium-screen) {

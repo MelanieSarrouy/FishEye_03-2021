@@ -4,13 +4,10 @@ import { nickName, title } from './photographer.js'
 import { addLikes } from './likes.js'
 import { Element } from './element.js'
 
-
 let ulMedias = document.querySelector('.lightbox__container') // le conteneur d'image de la lightbox
 const sectionMedia = document.querySelector('#media')
 
 let titre
-
-// import { folderName } from './photographer'
 
 class MediaFactory {
   constructor() {
@@ -25,6 +22,7 @@ class MediaFactory {
     }
   }
 }
+// images pour les cartes media
 class Image {
   createAnImageCard(medium) {
     let anchorMedia = document.getElementById(`idImage${medium.id}`)
@@ -36,10 +34,10 @@ class Image {
     image.setAttribute('id', `id${medium.id}`)
     image.setAttribute('width', '350')
     image.setAttribute('height', '300')
-    image.setAttribute('tabindex', '-1')
 
     anchorMedia.addEventListener('click', (e) => lightbox(e))
   }
+  // images HD pour la lightbox
   createAnImage(medium) {
     let li = new Element('li', 'li', 'lightboxItem').elem
     li.style.display = 'none'
@@ -47,19 +45,22 @@ class Image {
     li.setAttribute('aria-hidden', 'true')
     ulMedias.appendChild(li)
     let figure = new Element('figure', 'figure', 'figureLightbox').elem
-    figure.setAttribute('role', 'figure')
-    figure.setAttribute('aria-label', `${titre}`)
+    figure.setAttribute('aria-labelledby', `image${medium.id}`)
+    figure.setAttribute('tabindex', '0')
     li.appendChild(figure)
     let image = new Element('image', 'img', 'imageLightbox').elem
     figure.appendChild(image)
     image.setAttribute('src', `./images/sample_photos/${nickName}/${medium.image}`)
     image.setAttribute('alt', `${medium.alt}`)
+    image.setAttribute('id', `image${medium.id}`)
     image.setAttribute('width', '1050')
     let figcaption = new Element('figcaption', 'figcaption', 'titleLightbox').elem
+    figcaption.setAttribute('aria-hidden', 'true')
     figure.appendChild(figcaption)
     figcaption.innerText = `${titre}`
   }
 }
+// image de la video pour les cartes media
 class Video {
   createAVideoCard(medium) {
     let anchorMedia = document.getElementById(`idImage${medium.id}`)
@@ -77,26 +78,31 @@ class Video {
     image.setAttribute('id', `id${medium.id}`)
     image.setAttribute('width', '350')
     image.setAttribute('height', '300')
-    image.setAttribute('tabindex', '-1')
 
     anchorMedia.addEventListener('click', (e) => lightbox(e))
   }
+  // video pour la lightbox
   createAVideo(medium) {
     let li = new Element('li', 'li', 'lightboxItem').elem
     li.style.display = 'none'
     li.setAttribute('id', `item${medium.id}`)
     li.setAttribute('aria-hidden', 'true')
     ulMedias.appendChild(li)
-    let video = document.createElement('video')
-    li.appendChild(video)
+
+    let figure = new Element('figure', 'figure', 'figureLightbox').elem
+    figure.setAttribute('aria-label', `${medium.alt}`)
+    figure.setAttribute('tabindex', '0')
+    li.appendChild(figure)
+
+    let video = new Element('video', 'video', 'videoLightbox').elem
+    figure.appendChild(video)
     video.setAttribute('controls', 'true')
     video.setAttribute('width', '1050')
-    video.classList.add('videoLightbox')
+    video.setAttribute('aria-label', `${medium.alt}`)
+
     let source = new Element('source', 'source', 'imageLightbox').elem
     video.appendChild(source)
     source.setAttribute('src', `./images/sample_photos/${nickName}/${medium.video}`)
-    source.setAttribute('alt', `${medium.alt}`)
-    source.setAttribute('id', `video${medium.id}`)
     source.setAttribute('type', 'video/mp4')
 
     let track = document.createElement('track')
@@ -105,7 +111,6 @@ class Video {
     track.setAttribute('kind', 'subtitles')
     track.setAttribute('srclang', 'fr')
     track.setAttribute('label', 'francais')
-
     track.setAttribute('default', 'true')
 
     let divCaption = new Element('divCaption', 'div', 'controls').elem
@@ -116,6 +121,8 @@ class Video {
     let pInfos = new Element('pInfos', 'p', 'titleLightbox').elem
     divCaption.appendChild(pInfos)
     pInfos.innerText = `${titre}`
+    pInfos.setAttribute('aria-hidden', 'true')
+
 
     let playButton = document.createElement('button')
     divCaption.appendChild(playButton)
@@ -165,13 +172,12 @@ function createDOMElements(medium) {
   // DOM élément <figure> - conteneur
   let figure = document.createElement('figure')
   article.appendChild(figure)
-  figure.setAttribute('role', 'figure')
-  figure.setAttribute('aria-labelledby', `title${medium.id}`)
   // DOM élément <div> - conteneur du media
   let anchorMedia = new Element('anchorMedia', 'a', 'article__link').elem
   figure.appendChild(anchorMedia)
   anchorMedia.setAttribute('id', `idImage${medium.id}`)
-  anchorMedia.setAttribute('aria-labelledby', 'lightbox-content')
+  // anchorMedia.setAttribute('tabindex', '0')
+  anchorMedia.setAttribute('aria-label', `${titre} gros plan`)
   let figcaption = new Element('figcaption', 'figcaption', 'article__informations').elem
   figure.appendChild(figcaption)
   // DOM élément <p> - titre de l'image
@@ -193,16 +199,15 @@ function createDOMElements(medium) {
   pNumberLikes.innerHTML = medium.likes
   pNumberLikes.setAttribute('id', `likes${medium.id}`)
   // DOM élément <button> - coeur
-  let heart = new Element('heart', 'button', 'buttonHeart').elem
-
-  divLikes.append(heart)
+  let heart = new Element('heart', 'span', 'heart').elem
+  divLikes.appendChild(heart)
   heart.setAttribute('role', 'button')
-  heart.classList.add('heart', 'fas', 'fa-heart')
+  heart.classList.add('fas', 'fa-heart')
   heart.setAttribute('id', `heart${medium.id}`)
-  heart.setAttribute('aria-label', 'coeur, ajouter, enlever 1 like')
 
   heart.addEventListener('click', () => addLikes())
 }
+
 
 //_____________________________________________________________________________________________________________
 export { testFactory }
