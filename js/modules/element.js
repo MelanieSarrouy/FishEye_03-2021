@@ -1,4 +1,4 @@
-// class pour créer de nouveaux element du DOM avec nom, type et classe
+// classe pour créer de nouveaux element du DOM avec nom, type et classe
 
 class Element {
   constructor(name, type, classname) {
@@ -15,4 +15,6 @@ class Element {
     return this.name
   }
 }
+
+//_____________________________________________________________________________________________________________
 export { Element }

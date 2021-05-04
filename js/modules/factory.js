@@ -2,6 +2,8 @@
 import { lightbox } from './lightbox.js'
 import { nickName, title } from './photographer.js'
 import { addLikes } from './likes.js'
+import { Element } from './element.js'
+
 
 let ulMedias = document.querySelector('.lightbox__container') // le conteneur d'image de la lightbox
 const sectionMedia = document.querySelector('#media')
@@ -39,38 +41,32 @@ class Image {
     anchorMedia.addEventListener('click', (e) => lightbox(e))
   }
   createAnImage(medium) {
-    let li = document.createElement('li')
-    li.classList.add('lightboxItem')
+    let li = new Element('li', 'li', 'lightboxItem').elem
     li.style.display = 'none'
     li.setAttribute('id', `item${medium.id}`)
     li.setAttribute('aria-hidden', 'true')
     ulMedias.appendChild(li)
-    let figure = document.createElement('figure')
-    figure.classList.add('figureLightbox')
+    let figure = new Element('figure', 'figure', 'figureLightbox').elem
     figure.setAttribute('role', 'figure')
     figure.setAttribute('aria-label', `${titre}`)
     li.appendChild(figure)
-    let image = document.createElement('img')
+    let image = new Element('image', 'img', 'imageLightbox').elem
     figure.appendChild(image)
     image.setAttribute('src', `../../images/sample_photos/${nickName}/${medium.image}`)
     image.setAttribute('alt', `${medium.alt}`)
     image.setAttribute('width', '1050')
-
-    image.classList.add('imageLightbox')
-    let figcaption = document.createElement('figcaption')
+    let figcaption = new Element('figcaption', 'figcaption', 'titleLightbox').elem
     figure.appendChild(figcaption)
-    figcaption.classList.add('titleLightbox')
     figcaption.innerText = `${titre}`
   }
 }
 class Video {
   createAVideoCard(medium) {
     let anchorMedia = document.getElementById(`idImage${medium.id}`)
-    let icone = document.createElement('img')
+    let icone = new Element('icone', 'img', 'logoPlay').elem
     anchorMedia.appendChild(icone)
     anchorMedia.setAttribute('href', 'javascript:void(0);')
     icone.setAttribute('src', './images/play.png')
-    icone.classList.add('logoPlay')
     icone.setAttribute('alt', '')
     icone.setAttribute('tabindex', '-1')
     let image = document.createElement('img')
@@ -82,11 +78,11 @@ class Video {
     image.setAttribute('width', '350')
     image.setAttribute('height', '300')
     image.setAttribute('tabindex', '-1')
+
     anchorMedia.addEventListener('click', (e) => lightbox(e))
   }
   createAVideo(medium) {
-    let li = document.createElement('li')
-    li.classList.add('lightboxItem')
+    let li = new Element('li', 'li', 'lightboxItem').elem
     li.style.display = 'none'
     li.setAttribute('id', `item${medium.id}`)
     li.setAttribute('aria-hidden', 'true')
@@ -96,13 +92,12 @@ class Video {
     video.setAttribute('controls', 'true')
     video.setAttribute('width', '1050')
     video.classList.add('videoLightbox')
-    let source = document.createElement('source')
+    let source = new Element('source', 'source', 'imageLightbox').elem
     video.appendChild(source)
     source.setAttribute('src', `./images/sample_photos/${nickName}/${medium.video}`)
     source.setAttribute('alt', `${medium.alt}`)
     source.setAttribute('id', `video${medium.id}`)
     source.setAttribute('type', 'video/mp4')
-    source.classList.add('imageLightbox')
 
     let track = document.createElement('track')
     video.appendChild(track)
@@ -113,16 +108,13 @@ class Video {
 
     track.setAttribute('default', 'true')
 
-
-    let divCaption = document.createElement('div')
+    let divCaption = new Element('divCaption', 'div', 'controls').elem
     li.appendChild(divCaption)
     divCaption.setAttribute('id', 'video-controls')
-    divCaption.classList.add('controls')
     divCaption.setAttribute('data-state', 'hidden')
 
-    let pInfos = document.createElement('p')
+    let pInfos = new Element('pInfos', 'p', 'titleLightbox').elem
     divCaption.appendChild(pInfos)
-    pInfos.classList.add('titleLightbox')
     pInfos.innerText = `${titre}`
 
     let playButton = document.createElement('button')
@@ -167,9 +159,8 @@ function testFactory(media) {
 }
 
 function createDOMElements(medium) {
-  let article = document.createElement('article')
+  let article = new Element('article', 'article', 'article').elem
   sectionMedia.appendChild(article)
-  article.classList.add('article')
   article.setAttribute('id', `${medium.id}`)
   // DOM élément <figure> - conteneur
   let figure = document.createElement('figure')
@@ -177,14 +168,12 @@ function createDOMElements(medium) {
   figure.setAttribute('role', 'figure')
   figure.setAttribute('aria-labelledby', `title${medium.id}`)
   // DOM élément <div> - conteneur du media
-  let anchorMedia = document.createElement('a')
+  let anchorMedia = new Element('anchorMedia', 'a', 'article__link').elem
   figure.appendChild(anchorMedia)
-  anchorMedia.classList.add('article__link')
   anchorMedia.setAttribute('id', `idImage${medium.id}`)
   anchorMedia.setAttribute('aria-labelledby', 'lightbox-content')
-  let figcaption = document.createElement('figcaption')
+  let figcaption = new Element('figcaption', 'figcaption', 'article__informations').elem
   figure.appendChild(figcaption)
-  figcaption.classList.add('article__informations')
   // DOM élément <p> - titre de l'image
   let pTitle = document.createElement('p')
   figcaption.appendChild(pTitle)
@@ -192,24 +181,23 @@ function createDOMElements(medium) {
   pTitle.innerHTML = `${titre}`
   pTitle.setAttribute('id', `title${medium.id}`)
   // DOM élément <div> - conteneur prix et likes
-  let divLikes = document.createElement('div')
+  let divLikes = new Element('divLikes', 'div', 'article__informations__likes').elem
   figcaption.appendChild(divLikes)
-  divLikes.classList.add('article__informations__likes')
   // DOM élément <p> - prix
   let pPrice = document.createElement('p')
   divLikes.appendChild(pPrice)
   pPrice.innerHTML = `${medium.price} €`
   // DOM élément <p> - nombre de likes
-  let pNumberLikes = document.createElement('p')
+  let pNumberLikes = new Element('pNumberLikes', 'p', 'likes').elem
   divLikes.appendChild(pNumberLikes)
   pNumberLikes.innerHTML = medium.likes
   pNumberLikes.setAttribute('id', `likes${medium.id}`)
-  pNumberLikes.classList.add('likes')
   // DOM élément <button> - coeur
-  let heart = document.createElement('button')
+  let heart = new Element('heart', 'button', 'buttonHeart').elem
+
   divLikes.append(heart)
   heart.setAttribute('role', 'button')
-  heart.classList.add('buttonHeart', 'heart', 'fas', 'fa-heart')
+  heart.classList.add('heart', 'fas', 'fa-heart')
   heart.setAttribute('id', `heart${medium.id}`)
   heart.setAttribute('aria-label', 'coeur, ajouter, enlever 1 like')
 
