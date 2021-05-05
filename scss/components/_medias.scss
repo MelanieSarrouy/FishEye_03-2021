@@ -59,6 +59,8 @@
     max-width: 350px;
     max-height: 300px;
     box-sizing: border-box;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
     @include respond-to(large-screen) {
       max-width: 300px;
       max-height: 257px;
@@ -78,6 +80,11 @@
     & img {
       height: auto;
       object-fit: cover;
+    }
+    &:focus {
+      opacity: 0.6;    
+      outline: solid #901c1c;
+      border-radius: 0;
     }
   }
   &__informations {
@@ -113,7 +120,6 @@
     }
     &__likes {
       display: flex;
-      padding-top: 0.1rem;
       & p:first-child {
         padding: 0 0.7rem;
       }
@@ -124,26 +130,10 @@
         cursor: pointer;
         color: $color-primary;
         padding-right: 0.1rem;
-        padding-top: 0.15rem;
         padding-left: 0.2rem;
-
-        font-size: 1rem;
-        transform: scale(1.1);
-        transform-origin: center right;
-        transition: transform 0.2s ease-in-out;
-        @include respond-to(small-screen) {
-          padding-top: 0.1rem;
-        }
-        @include respond-to(mobile-screen) {
-          padding-top: 0rem;
-          transform: scale(1);
-        }
+        font-size: 1.1rem;
         &:hover, &:focus {
-          transform: scale(1.2);
-          color: rgba($color: #901c1c, $alpha: 0.8);
-          @include respond-to(mobile-screen) {
-            transform: scale(1.1);
-          }
+          color: $color-secondary-txt;
         }
       }
     }
@@ -165,5 +155,14 @@
   }
   @include respond-to(mobile-screen) {
     top: 24%;
+  }
+}
+.heart {
+  transform: rotate(0turn) scale(1);
+  &:focus {
+    padding-right: 0.15rem;
+    transform: rotate(1turn) scale(1.2);
+    transition: transform 0.2s ease-in-out;
+    outline: none;
   }
 }

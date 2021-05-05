@@ -32,11 +32,6 @@
     width: 9.5rem;
     height: 3.2rem;
     color: white;
-    &:first-child {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
     &:nth-child(2) {
       border-bottom: solid 0.05rem white;
       border-top: solid 0.05rem white;

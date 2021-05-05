@@ -14,7 +14,6 @@ const formData = document.getElementsByClassName('modal__form__formData') // Tou
 const firstName = document.getElementById('firstname') // ajout input firstname dans le DOM
 const lastName = document.getElementById('lastname') // ajout input lastname dans le DOM
 const eMail = document.getElementById('email') // ajout input email dans le DOM
-const form = document.getElementById('form') // le formulaire
 const message = document.getElementById('message')
 const submit = document.getElementById('button')
 formData[0].appendChild(pErrorFirstName)
@@ -56,7 +55,6 @@ function closeModal() {
   modal.setAttribute('tabindex', '-1')
   contact.focus()
   modal.removeEventListener('keydown', onKey)
-  form.removeEventListener('keydown', runValidate)
 }
 
 // function testFirstName ______________________________________________
@@ -136,13 +134,9 @@ function testMessage() {
 }
 // function submit __________________________________________________
 
-form.addEventListener('keydown', runValidate)
-submit.addEventListener('click', validate)
-function runValidate(e) {
-  if (e.key == 'Enter') {
-    validate()
-  }
-}
+submit.addEventListener('click', (event) => {
+  validate(event)
+})
 
 function validate(event) {
   event.preventDefault()
