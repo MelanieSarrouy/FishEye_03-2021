@@ -30,7 +30,7 @@ function launchModal() {
   contact.style.display = 'none'
   main.setAttribute('aria-hidden', 'true')
   body.classList.add('no-scroll')
-  modal.focus()
+  firstName.focus()
   modal.setAttribute('tabindex', '0')
 }
 

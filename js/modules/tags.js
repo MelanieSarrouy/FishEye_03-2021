@@ -28,7 +28,7 @@ function hashChanged(photographers) {
       targetTag.setAttribute('aria-current', 'page')
       // affichage des photographes avec le bon tag et dissimulation des autres
       for (let i = 0; i < photographers.length; i++) {
-        let article = document.getElementById(`${photographers[i].id}`)
+        let article = document.getElementById(`article${photographers[i].id}`)
         const arrayTagPhotographer = photographers[i].tags
         const index = arrayTagPhotographer.indexOf(tag)
         if ((index < 0)) {

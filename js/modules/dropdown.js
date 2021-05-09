@@ -7,12 +7,14 @@ let popularity = document.getElementById('option1')
 // Ouverture de la dropdown
 function openDropdown() {
   dropDown.style.display = 'flex'
+  down.setAttribute('aria-expanded', 'true')
   popularity.focus()
 }
 
 // Fermeture de la dropdown
 function closeDropdown() {
   dropDown.style.display = 'none'
+  down.setAttribute('aria-expanded', 'false')
   down.focus()
 }
 

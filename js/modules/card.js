@@ -36,7 +36,7 @@ function createAcard(photographer) {
   pPrice.innerHTML = `${photographer.price}€/jour`
   pPrice.innerHTML = `${photographer.price}€/jour`
   ul.setAttribute('id', `id${photographer.id}`)
-  article.setAttribute('id', `${photographer.id}`)
+  article.setAttribute('id', `article${photographer.id}`)
 }
 
 // Affichage des tags de chaque photographe 

@@ -158,10 +158,9 @@
   }
 }
 .heart {
-  transform: rotate(0turn) scale(1);
-  &:focus {
-    padding-right: 0.15rem;
-    transform: rotate(1turn) scale(1.2);
+  transform: rotate(0turn);
+  &:focus, &:hover {
+    transform: rotate(1turn);
     transition: transform 0.2s ease-in-out;
     outline: none;
   }
